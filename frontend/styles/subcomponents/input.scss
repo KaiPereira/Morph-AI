@@ -1,25 +1,23 @@
 .input-container {
-    input {
-        display: flex;
-        align-items: center;
-        border-radius: 7px 0px 0px 7px;
-        height: 45px;
-        background: $light-white-bg;
-        text-indent: 15px;
+    p {
         font-weight: 600;
-        font-size: 15px;
-        color: $light-black;
+        font-size: 17px;
+        color: $black-text;
     }
-
-    div {
-        display: flex;
-        align-items: center;
-        padding-right: 15px;
-        border-radius: 0px 7px 7px 0px;
-        height: 45px;
-        background: $light-white-bg;
-        font-weight: 900;
+    
+    input {
+        margin-top: 9px;
+        height: 50px;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid $card-stroke;
+        text-indent: 24px;
+        font-weight: 600;
         font-size: 16px;
         color: $light-black;
+
+        &::placeholder {
+            color: #D1D0D5;
+        }
     }
 }

@@ -6,18 +6,33 @@ import type { AppProps } from 'next/app'
 import Head from "next/head"
 
 // Functions
-import { updateLoginDate } from "../api/user"
+import { updateLoginDate, fetchProfileDetails } from "../api/user"
 
 // States
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [profileDetails, changeProfileDetails] = useState<any>()
+  const [loading, changeLoading] = useState(true)
 
   useEffect(() => {
-    updateLoginDate()
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+    fetchProfileDetails()
+      .then(data => {
+        changeProfileDetails(data)
+        changeLoading(false)
+        
+        updateLoginDate()
+          .then(data => {
+            console.log(data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+      }) 
   }, [])
 
   return (
@@ -25,7 +40,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </Head>
-      <Component {...pageProps} />
+      <Component {...pageProps} 
+        profileDetails={profileDetails} 
+        loading={loading} 
+      />
     </>
   )
 }

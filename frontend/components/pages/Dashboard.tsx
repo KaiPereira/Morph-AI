@@ -61,9 +61,13 @@ const CoursesFormat = ({
     )
 }
 
+type DashboardProps = {
+    profileDetails: any
+}
 
-
-const Dashboard = () => {
+const Dashboard = ({
+    profileDetails
+}: DashboardProps) => {
     return (
         <main className="dashboard-container">
             <div className="dashboard">

@@ -6,13 +6,16 @@ import { fetchProfileDetails } from "../api/user"
 // States
 import { useEffect, useState } from "react"
 
-const Signin = () => {
+const Signin = ({
+  profileDetails,
+  loading
+}: any) => {
+
   useEffect(() => {
-    fetchProfileDetails()
-      .then((data) => {
-        window.location.href = "/"
-      })
-  }, [])
+    if (profileDetails) {
+      window.location.href = "/"
+    }
+  }, [profileDetails])
 
   return (
     <>
