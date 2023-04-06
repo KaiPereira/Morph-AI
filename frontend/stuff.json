@@ -1,0 +1,613 @@
+{
+    "pageProps": {
+        "courseId": "COa1f5d67d-7261-4b20-8f67-35e873627c72",
+        "courseSlug": "build-ai-writing-assistant-gpt3",
+        "__APOLLO_STATE__": {
+            "CohortLiveKickoff:CHaab23108-6af9-4770-bff3-a6aeb760bcaf-live": {
+                "__typename": "CohortLiveKickoff",
+                "id": "CHaab23108-6af9-4770-bff3-a6aeb760bcaf-live",
+                "startDate": "2021-01-01T00:00:00.000Z",
+                "passed": true,
+                "googleCalendarUrl": null
+            },
+            "Cohort:CHaab23108-6af9-4770-bff3-a6aeb760bcaf": {
+                "__typename": "Cohort",
+                "id": "CHaab23108-6af9-4770-bff3-a6aeb760bcaf",
+                "startDate": "2022-11-15T21:14:45.156Z",
+                "liveKickoff": {
+                    "__ref": "CohortLiveKickoff:CHaab23108-6af9-4770-bff3-a6aeb760bcaf-live"
+                }
+            },
+            "UserProfile:cl6qa6p5i1412zasdu0hvjyfb": {
+                "__typename": "UserProfile",
+                "id": "cl6qa6p5i1412zasdu0hvjyfb",
+                "ethAddress": null,
+                "ethAddressPublic": false,
+                "solAddress": null,
+                "solAddressPublic": false,
+                "ownerId": "0cca4801-a728-41e2-bfd7-0fdcf57eb116",
+                "avatarUrl": "https://cdn.buildspace.so/users/0cca4801-a728-41e2-bfd7-0fdcf57eb116/avatars/471c46c1-aa4d-4310-a80f-70a56dc9da2c.jpeg",
+                "vibe": "builder",
+                "bio": "Product manager",
+                "firstName": "Trezi",
+                "github": "",
+                "twitter": "",
+                "linkedin": "",
+                "websiteUrl": "",
+                "preferredLanguage": "en",
+                "location": null,
+                "locationPublic": false,
+                "seoIndexed": true,
+                "updatedAt": "2023-04-02T05:00:51.226Z",
+                "place": null,
+                "discord": null
+            },
+            "User:0cca4801-a728-41e2-bfd7-0fdcf57eb116": {
+                "__typename": "User",
+                "createdAt": "2022-08-12T09:42:45.989Z",
+                "id": "0cca4801-a728-41e2-bfd7-0fdcf57eb116",
+                "username": null,
+                "state": "complete",
+                "tags": [],
+                "profile": {
+                    "__ref": "UserProfile:cl6qa6p5i1412zasdu0hvjyfb"
+                }
+            },
+            "UserProfile:cl6ro6enf5945lusdg8wezbj8": {
+                "__typename": "UserProfile",
+                "id": "cl6ro6enf5945lusdg8wezbj8",
+                "ethAddress": "0x92EC268D3DcAF985201f4dd42c1023909604Fc52",
+                "ethAddressPublic": true,
+                "solAddress": null,
+                "solAddressPublic": false,
+                "ownerId": "17f59402-b26e-4c49-8b2b-d53954cb7c2c",
+                "avatarUrl": "https://cdn.buildspace.so/users/17f59402-b26e-4c49-8b2b-d53954cb7c2c/avatars/d3e19e22-d16d-4d83-b13a-1a1a7ee1a486.png",
+                "vibe": null,
+                "bio": "Software Engineer @ Venngage, building Game-Fi @ Movens",
+                "firstName": "Haruna Salami",
+                "github": "samlak",
+                "twitter": "devsamlak",
+                "linkedin": "devsamlak",
+                "websiteUrl": "https://devsamlak.netlify.app/",
+                "preferredLanguage": "en",
+                "location": null,
+                "locationPublic": false,
+                "seoIndexed": true,
+                "updatedAt": "2022-12-10T12:48:47.946Z",
+                "place": null,
+                "discord": null
+            },
+            "User:17f59402-b26e-4c49-8b2b-d53954cb7c2c": {
+                "__typename": "User",
+                "createdAt": "2022-05-30T06:43:59.859Z",
+                "id": "17f59402-b26e-4c49-8b2b-d53954cb7c2c",
+                "username": "devsamlak",
+                "state": "complete",
+                "tags": [],
+                "profile": {
+                    "__ref": "UserProfile:cl6ro6enf5945lusdg8wezbj8"
+                }
+            },
+            "UserProfile:cldhb012f000wplr6rh2wvxu1": {
+                "__typename": "UserProfile",
+                "id": "cldhb012f000wplr6rh2wvxu1",
+                "ethAddress": null,
+                "ethAddressPublic": false,
+                "solAddress": null,
+                "solAddressPublic": false,
+                "ownerId": "3c3e5407-545e-4b01-a594-4ef288ebe592",
+                "avatarUrl": "https://pbs.twimg.com/profile_images/1563927928836333569/auu7iK_c.jpg",
+                "vibe": null,
+                "bio": null,
+                "firstName": "cultivate88",
+                "github": null,
+                "twitter": null,
+                "linkedin": null,
+                "websiteUrl": null,
+                "preferredLanguage": "en",
+                "location": null,
+                "locationPublic": false,
+                "seoIndexed": true,
+                "updatedAt": "2023-04-06T07:00:13.730Z",
+                "place": null,
+                "discord": null
+            },
+            "User:3c3e5407-545e-4b01-a594-4ef288ebe592": {
+                "__typename": "User",
+                "createdAt": "2023-01-29T11:33:38.467Z",
+                "id": "3c3e5407-545e-4b01-a594-4ef288ebe592",
+                "username": null,
+                "state": "complete",
+                "tags": [],
+                "profile": {
+                    "__ref": "UserProfile:cldhb012f000wplr6rh2wvxu1"
+                }
+            },
+            "LessonRequirement:clazkvnmb27377o1qqot667ab5": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvnmb27377o1qqot667ab5",
+                "title": "Submit requirement",
+                "type": "text",
+                "description": "Why are you interested in building this? ML/AI is a space that’s been around for a while but is recently blowing up like crazy. So, you’re definitely making a solid call haha. But, I’m curious what your motivations are!",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #1",
+                    "title": "Welcome to the world of ML/AI",
+                    "subtitle": "This is a magical space to be building in! Tell the world you're up to!",
+                    "content": "Today%2C%20I%27m%20working%20on%20building%20my%20own%20AI%20writing%20assistant%20w%2F%20GPT-3%20%E2%9C%A8%0A%0AHere%27s%20the%20plan%3A%0A%0A-%20Explore%20OpenAI%20%2B%20Playground%0A-%20Connect%20to%20GPT-3s%20API%0A-%20Ship%20a%20web%20app%20%2B%20Chrome%20extension%0A%0AIf%20this%20seems%20cool%20and%20you%20also%20wanna%20build%20it%2C%20check%20out%20%40_buildspace%3A%0A%0Ahttps%3A%2F%2Fbuildspace.so%2Fbuilds%2Fai-writer"
+                }
+            },
+            "Lesson:LE253c5e50-3642-421e-9f38-f814b17fe7a5": {
+                "__typename": "Lesson",
+                "id": "LE253c5e50-3642-421e-9f38-f814b17fe7a5",
+                "title": "Wtf is this",
+                "slug": "wtf-is-this",
+                "position": 0,
+                "sectionId": "clazdyx0n189776mbscnghesjz5",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvnmb27377o1qqot667ab5"
+                }
+            },
+            "Section:clazdyx0n189776mbscnghesjz5": {
+                "__typename": "Section",
+                "id": "clazdyx0n189776mbscnghesjz5",
+                "categoryId": null,
+                "title": "Let's do this",
+                "position": 0,
+                "lessons": [
+                    {
+                        "__ref": "Lesson:LE253c5e50-3642-421e-9f38-f814b17fe7a5"
+                    }
+                ]
+            },
+            "LessonRequirement:clazkvo3027432o1qq0qmumfsm": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvo3027432o1qq0qmumfsm",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Go ahead and take a screenshot of your story in Playground and upload it here.",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #2",
+                    "title": "GPT-3 kinda wild, right?",
+                    "subtitle": "If you're feeling the magic, share your progress. If you're not feeling it yet, no worries -- let's keep building.",
+                    "content": "Playing%20around%20w%2F%20GPT-3%2C%20it%27s%20insane%20%F0%9F%A4%AF%0A%0AIt%20generated%20an%20entire%20story%20for%20me%20from%20just%20a%20few%20lines%20I%20gave%20it%20at%20the%20top%20--%20everything%20in%20green%20is%20AI-generated.%0A%0Acc%3A%20%40_buildspace"
+                }
+            },
+            "Lesson:LE7284004c-3d1e-4165-88bd-b734831e6c86": {
+                "__typename": "Lesson",
+                "id": "LE7284004c-3d1e-4165-88bd-b734831e6c86",
+                "title": "Write your first few prompts",
+                "slug": "write-your-first-few-prompts",
+                "position": 1,
+                "sectionId": "clazdyxc6189842mbscdqw1bna2",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvo3027432o1qq0qmumfsm"
+                }
+            },
+            "LessonRequirement:clazkvo9k27455o1qqpbwh5gbk": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvo9k27455o1qqpbwh5gbk",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of Playground with your latest story, song, or whatever else you’re excited about and upload it here.",
+                "twitterMessage": null
+            },
+            "Lesson:LE78e9fb79-39cd-42bf-b798-d1491ec55382": {
+                "__typename": "Lesson",
+                "id": "LE78e9fb79-39cd-42bf-b798-d1491ec55382",
+                "title": "Meta-learning, bow to our AI overlords",
+                "slug": "meta-learning-bow-to-our-ai-overlords",
+                "position": 2,
+                "sectionId": "clazdyxc6189842mbscdqw1bna2",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvo9k27455o1qqpbwh5gbk"
+                }
+            },
+            "Lesson:LE9770f667-20ef-494a-aa53-0516fb2ef550": {
+                "__typename": "Lesson",
+                "id": "LE9770f667-20ef-494a-aa53-0516fb2ef550",
+                "title": "ML 101 -- okay how tf does all this shit work",
+                "slug": "ml-101-okay-how-tf-does-all-this-shit-work",
+                "position": 3,
+                "sectionId": "clazdyxc6189842mbscdqw1bna2",
+                "requirement": null
+            },
+            "LessonRequirement:clazkvnwg27410o1qqwwi5z853": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvnwg27410o1qqwwi5z853",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot from Playground with your favorite conversational prompt + output you’ve had so far and upload it here.",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #3",
+                    "title": "Have a good conversation?",
+                    "subtitle": "When I first saw conversation prompts, I couldn't believe they were real lol. Share your progress and blow someone else's mind!",
+                    "content": "Okay%2C%20now%20this%20is%20too%20crazy%20%F0%9F%98%85%0A%0AGPT-3%20is%20trained%20on%20a%20massive%20amount%20of%20text%20from%20the%20internet%20--%20which%20means%20I%20can%20talk%20to%20literally%20anyone%20I%20want.%0A%0AHere%27s%20me%20having%20a%20convo%20with%20%3Cinsert%20who%20you%27re%20talking%20to%20here%3E.%0A%0Acc%3A%20buildspace"
+                }
+            },
+            "Lesson:LE713f469d-c815-4735-84b2-af9a8917d034": {
+                "__typename": "Lesson",
+                "id": "LE713f469d-c815-4735-84b2-af9a8917d034",
+                "title": "Revive someone and have a convo with them",
+                "slug": "revive-someone-and-have-a-convo-with-them",
+                "position": 4,
+                "sectionId": "clazdyxc6189842mbscdqw1bna2",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvnwg27410o1qqwwi5z853"
+                }
+            },
+            "LessonRequirement:clazkvofk27475o1qqr6jindod": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvofk27475o1qqr6jindod",
+                "title": "Submit requirement",
+                "type": "text",
+                "description": "Drop one idea you have around something random/cool you’d wanna build with GPT-3.",
+                "twitterMessage": null
+            },
+            "Lesson:LE8cde7249-7158-474d-98e7-0d691f8cd051": {
+                "__typename": "Lesson",
+                "id": "LE8cde7249-7158-474d-98e7-0d691f8cd051",
+                "title": "Secret advanced GPT-3 shit shhh",
+                "slug": "secret-advanced-gpt-3-shit-shhh",
+                "position": 5,
+                "sectionId": "clazdyxc6189842mbscdqw1bna2",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvofk27475o1qqr6jindod"
+                }
+            },
+            "Section:clazdyxc6189842mbscdqw1bna2": {
+                "__typename": "Section",
+                "id": "clazdyxc6189842mbscdqw1bna2",
+                "categoryId": null,
+                "title": "Program your ML Model",
+                "position": 1,
+                "lessons": [
+                    {
+                        "__ref": "Lesson:LE7284004c-3d1e-4165-88bd-b734831e6c86"
+                    },
+                    {
+                        "__ref": "Lesson:LE78e9fb79-39cd-42bf-b798-d1491ec55382"
+                    },
+                    {
+                        "__ref": "Lesson:LE9770f667-20ef-494a-aa53-0516fb2ef550"
+                    },
+                    {
+                        "__ref": "Lesson:LE713f469d-c815-4735-84b2-af9a8917d034"
+                    },
+                    {
+                        "__ref": "Lesson:LE8cde7249-7158-474d-98e7-0d691f8cd051"
+                    }
+                ]
+            },
+            "LessonRequirement:clazkvp6r27567o1qqjj4tcpjm": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvp6r27567o1qqjj4tcpjm",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of your GPT-3 writer with your fancy new headline and subtitle, and upload it here.",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #4",
+                    "title": "You're building something pretty awesome.",
+                    "subtitle": "Not many people even know about this tech -- and here you are hacking together a full product with it! Share what you're working on and get feedback.",
+                    "content": "Working%20on%20the%20idea%20%2B%20frontend%20for%20my%20GPT-3%20writer%20now%20%E2%9C%A8%0A%0AThoughts%3F%0A%0Acc%3A%20%40_buildspace"
+                }
+            },
+            "Lesson:LE96b5a996-0886-4db6-8296-2754b05da456": {
+                "__typename": "Lesson",
+                "id": "LE96b5a996-0886-4db6-8296-2754b05da456",
+                "title": "Clone repo + settle on an idea",
+                "slug": "clone-repo-settle-on-an-idea",
+                "position": 6,
+                "sectionId": "clazdyxto189891mbscu4vqwt9j",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvp6r27567o1qqjj4tcpjm"
+                }
+            },
+            "LessonRequirement:clazkvotc27521o1qqgmnsf357": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvotc27521o1qqgmnsf357",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Go ahead and take a screenshot of your web app showing off a prompt + an example output, upload it here.",
+                "twitterMessage": null
+            },
+            "Lesson:LE29ae9686-f7ac-4d34-898d-c35dd88a2176": {
+                "__typename": "Lesson",
+                "id": "LE29ae9686-f7ac-4d34-898d-c35dd88a2176",
+                "title": "Add in the OpenAI API",
+                "slug": "add-in-the-openai-api",
+                "position": 7,
+                "sectionId": "clazdyxto189891mbscu4vqwt9j",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvotc27521o1qqgmnsf357"
+                }
+            },
+            "LessonRequirement:clazkvozx27544o1qqyxosqll9": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvozx27544o1qqyxosqll9",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of your web app with one of your favorite prompts + outputs, and upload it here.",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #5",
+                    "title": "It's coming together.",
+                    "subtitle": "Lots of progress! Hopefully, you have a pretty cool feeling product now. Explain to others how it works, see what they think.",
+                    "content": "Got%20my%20web%20app%20hooked%20up%20w%2F%20%40OpenAI.%0A%0A%3Cexplain%20what%20you%20web%20app%20does%20here%2C%20explain%20to%20people%20what%20users%20input%20and%20what%20kinda%20output%20they%20can%20get%2C%20show%20off%20why%20it%27s%20cool%3E%0A%0Acc%3A%20%40_buildspace"
+                }
+            },
+            "Lesson:LE39b094e1-b91e-4cd3-bc03-ab7ad39e3fae": {
+                "__typename": "Lesson",
+                "id": "LE39b094e1-b91e-4cd3-bc03-ab7ad39e3fae",
+                "title": "Add in your prompt",
+                "slug": "add-in-your-prompt",
+                "position": 8,
+                "sectionId": "clazdyxto189891mbscu4vqwt9j",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvozx27544o1qqyxosqll9"
+                }
+            },
+            "Section:clazdyxto189891mbscu4vqwt9j": {
+                "__typename": "Section",
+                "id": "clazdyxto189891mbscu4vqwt9j",
+                "categoryId": null,
+                "title": "Set up your own GPT-3 writer",
+                "position": 2,
+                "lessons": [
+                    {
+                        "__ref": "Lesson:LE96b5a996-0886-4db6-8296-2754b05da456"
+                    },
+                    {
+                        "__ref": "Lesson:LE29ae9686-f7ac-4d34-898d-c35dd88a2176"
+                    },
+                    {
+                        "__ref": "Lesson:LE39b094e1-b91e-4cd3-bc03-ab7ad39e3fae"
+                    }
+                ]
+            },
+            "LessonRequirement:clazkvpuj27656o1qq5vb8blq5": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvpuj27656o1qq5vb8blq5",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of your extension and upload it here.",
+                "twitterMessage": null
+            },
+            "Lesson:LEda711961-8f5a-4e61-96dd-845e0c527e05": {
+                "__typename": "Lesson",
+                "id": "LEda711961-8f5a-4e61-96dd-845e0c527e05",
+                "title": "Setup your Chrome Extension",
+                "slug": "setup-your-chrome-extension",
+                "position": 9,
+                "sectionId": "clazdyy9d189932mbscqrh6pyzt",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvpuj27656o1qq5vb8blq5"
+                }
+            },
+            "LessonRequirement:clazkvpnc27622o1qqko0cwnl8": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvpnc27622o1qqko0cwnl8",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot w/ the OpenAI output in your service worker console and upload it here.",
+                "twitterMessage": null
+            },
+            "Lesson:LE7a2a2d02-dc15-4428-ac18-43475bba18f0": {
+                "__typename": "Lesson",
+                "id": "LE7a2a2d02-dc15-4428-ac18-43475bba18f0",
+                "title": "Call OpenAI from your extension",
+                "slug": "call-openai-from-your-extension",
+                "position": 10,
+                "sectionId": "clazdyy9d189932mbscqrh6pyzt",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvpnc27622o1qqko0cwnl8"
+                }
+            },
+            "LessonRequirement:clazkvpgh27599o1qqwff3dnx3": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvpgh27599o1qqwff3dnx3",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of Calmly with your generated text.",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #6",
+                    "title": "You're a Chrome Extension master.",
+                    "subtitle": "Not many people have played around with Chrome Extensions! Tell the world about their magic.",
+                    "content": "Playing%20around%20w%2F%20Chrome%20Extensions%20%F0%9F%91%80%0A%0ARight%20now%2C%20I%20have%20it%20where%20my%20extension%20can%20inject%20into%20a%20website%27s%20HTML%20%2B%20automatically%20write%20via%20GPT-3.%0A%0ASo%2C%20no%20matter%20what%20site%20a%20user%20writes%20on%20they%27ll%20be%20able%20to%20use%20my%20assistant!%0A%0ANotion%2C%20Twitter%2C%20Gmail%2C%20whatever%20%F0%9F%98%88%0A%0Acc%3A%20%40_buildspace"
+                }
+            },
+            "Lesson:LE77b78b1f-aae5-4b56-a27b-9d73182fa2c1": {
+                "__typename": "Lesson",
+                "id": "LE77b78b1f-aae5-4b56-a27b-9d73182fa2c1",
+                "title": "Inject into a webpage",
+                "slug": "inject-into-a-webpage",
+                "position": 11,
+                "sectionId": "clazdyy9d189932mbscqrh6pyzt",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvpgh27599o1qqwff3dnx3"
+                }
+            },
+            "Section:clazdyy9d189932mbscqrh6pyzt": {
+                "__typename": "Section",
+                "id": "clazdyy9d189932mbscqrh6pyzt",
+                "categoryId": null,
+                "title": "Build Chrome extension to write anywhere",
+                "position": 3,
+                "lessons": [
+                    {
+                        "__ref": "Lesson:LEda711961-8f5a-4e61-96dd-845e0c527e05"
+                    },
+                    {
+                        "__ref": "Lesson:LE7a2a2d02-dc15-4428-ac18-43475bba18f0"
+                    },
+                    {
+                        "__ref": "Lesson:LE77b78b1f-aae5-4b56-a27b-9d73182fa2c1"
+                    }
+                ]
+            },
+            "LessonRequirement:clazkvq3n27703o1qqazau0ymf": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvq3n27703o1qqazau0ymf",
+                "title": "Submit requirement",
+                "type": "image",
+                "description": "Take a screenshot of your deployed web app and upload it here.",
+                "twitterMessage": null
+            },
+            "Lesson:LE7fd8f1dc-89b0-4683-b41c-90a4f47e18a9": {
+                "__typename": "Lesson",
+                "id": "LE7fd8f1dc-89b0-4683-b41c-90a4f47e18a9",
+                "title": "The finishing touches",
+                "slug": "the-finishing-touches",
+                "position": 12,
+                "sectionId": "clazdyys6190031mbscvwdjv2fk",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvq3n27703o1qqazau0ymf"
+                }
+            },
+            "LessonRequirement:clazkvqap27730o1qqhlu8ebsc": {
+                "__typename": "LessonRequirement",
+                "id": "clazkvqap27730o1qqhlu8ebsc",
+                "title": "Submit requirement",
+                "type": "text",
+                "description": "Paste in the link to your deployed web app here. Localhost doesn't count!",
+                "twitterMessage": {
+                    "__typename": "TwitterMessage",
+                    "cta": "build in public: opportunity #7",
+                    "title": "You've done it. I'm proud af.",
+                    "subtitle": "It's a big deal that you made it this far, you built an end-to-end product that uses some insane tech. Now, go get some users!",
+                    "content": "All%20done%2C%20and%20off%20localhost%20%F0%9F%98%81%21%0A%0AYou%20can%20play%20around%20w%2F%20my%20GPT-3%20writer%20at%20the%20link%20below%20--%20lemme%20know%20what%20you%20think%21%0A%0AShoutout%20to%20%40_buildspace%20%0A%0A%3Cinsert%20deployed%20link%20here%3E"
+                }
+            },
+            "Lesson:LEa112cea8-0560-4784-bf13-830c2f3ef9ce": {
+                "__typename": "Lesson",
+                "id": "LEa112cea8-0560-4784-bf13-830c2f3ef9ce",
+                "title": "Celebrate!",
+                "slug": "celebrate",
+                "position": 13,
+                "sectionId": "clazdyys6190031mbscvwdjv2fk",
+                "requirement": {
+                    "__ref": "LessonRequirement:clazkvqap27730o1qqhlu8ebsc"
+                }
+            },
+            "Section:clazdyys6190031mbscvwdjv2fk": {
+                "__typename": "Section",
+                "id": "clazdyys6190031mbscvwdjv2fk",
+                "categoryId": null,
+                "title": "GTFOL",
+                "position": 4,
+                "lessons": [
+                    {
+                        "__ref": "Lesson:LE7fd8f1dc-89b0-4683-b41c-90a4f47e18a9"
+                    },
+                    {
+                        "__ref": "Lesson:LEa112cea8-0560-4784-bf13-830c2f3ef9ce"
+                    }
+                ]
+            },
+            "Course:COa1f5d67d-7261-4b20-8f67-35e873627c72": {
+                "__typename": "Course",
+                "id": "COa1f5d67d-7261-4b20-8f67-35e873627c72",
+                "createdAt": "2022-11-11T09:11:43.435Z",
+                "updatedAt": "2022-12-07T17:23:29.622Z",
+                "featured": true,
+                "upcoming": false,
+                "title": "Build your own AI writing assistant w/ GPT-3",
+                "tagline": "Intro to ML: Create an AI Writer w/ GPT-3",
+                "slug": "build-ai-writing-assistant-gpt3",
+                "description": "Heard of Lex Writer or other AI writing tools and wondered how does this work? This weekend build allows you to build exactly that using GPT-3 and Open AI. You'll then deploy the app to show off to your friends!",
+                "coverUrl": "https://cdn.buildspace.so/courses/gpt3-writer/poster.png",
+                "tags": [
+                    "noob",
+                    "weekend"
+                ],
+                "chain": null,
+                "githubUrl": "https://github.com/buildspace/buildspace-projects/tree/main/GPT3_Writer",
+                "introMarkdown": null,
+                "vertical": "ml",
+                "enrollmentsCount": 19449,
+                "rank": 3,
+                "nftVariants": [
+                    {
+                        "__typename": "NftVariant",
+                        "variant": "S",
+                        "tokenId": "0",
+                        "assetUrl": "https://gateway.ipfscdn.io/ipfs/QmTYX8FqARZpri7JzhubvE6TmQKeo3oPbEYZQwKNNrvEMJ/0.png"
+                    },
+                    {
+                        "__typename": "NftVariant",
+                        "variant": "G",
+                        "tokenId": "2",
+                        "assetUrl": "https://gateway.ipfscdn.io/ipfs/QmTuTx6dAVA59ekq1AsQCHCtQgNeowHcxiHkEw8wSNNTtB/2.png"
+                    },
+                    {
+                        "__typename": "NftVariant",
+                        "variant": "E",
+                        "tokenId": "3",
+                        "assetUrl": "https://gateway.ipfscdn.io/ipfs/QmQNbzNpTg9hqEbWGvtV2Ukc7csVnRv9KU62ut47ctYryo/3.png"
+                    },
+                    {
+                        "__typename": "NftVariant",
+                        "variant": "A",
+                        "tokenId": "4",
+                        "assetUrl": "https://gateway.ipfscdn.io/ipfs/Qmc1s7wW8XoUirP4o8vw1H7FZw4BGMVEraiNC5ecdMkftF/4.png"
+                    }
+                ],
+                "latestCohort": {
+                    "__ref": "Cohort:CHaab23108-6af9-4770-bff3-a6aeb760bcaf"
+                },
+                "twitterMessage": null,
+                "twitterMessageCompletion": null,
+                "twitterMessageNft": {
+                    "__typename": "TwitterMessage",
+                    "cta": "Share on Twitter",
+                    "title": "",
+                    "subtitle": "",
+                    "content": "%F0%9F%8E%89%20Just%20finished%20the%20Intro%20to%20ML%3A%20Create%20an%20AI%20Writer%20w%2F%20GPT-3%20project%20by%20buildspace%20%0A%0AI%20learned%20how%20to%3A%0A-%20program%20my%20first%20AI%20model%0A-%20set%20up%20GPT-3%20writer%0A-%20build%20chrome%20extension%0A%0Acheck%20out%20the%20epic%20NFT%20i%20got%20for%20getting%20off%20localhost!%0A%0A%3CWhen%20sharing%20the%20NFT%2C%20we%20recommend%20copying%20the%20NFT%20image%20directly%20and%20pasting%20it%20here.%20Looks%20way%20better%2C%20links%20are%20jank%3E",
+                    "replyContent": null
+                },
+                "participants": [
+                    {
+                        "__ref": "User:0cca4801-a728-41e2-bfd7-0fdcf57eb116"
+                    },
+                    {
+                        "__ref": "User:17f59402-b26e-4c49-8b2b-d53954cb7c2c"
+                    },
+                    {
+                        "__ref": "User:3c3e5407-545e-4b01-a594-4ef288ebe592"
+                    }
+                ],
+                "sectionCategories": [],
+                "sections": [
+                    {
+                        "__ref": "Section:clazdyx0n189776mbscnghesjz5"
+                    },
+                    {
+                        "__ref": "Section:clazdyxc6189842mbscdqw1bna2"
+                    },
+                    {
+                        "__ref": "Section:clazdyxto189891mbscu4vqwt9j"
+                    },
+                    {
+                        "__ref": "Section:clazdyy9d189932mbscqrh6pyzt"
+                    },
+                    {
+                        "__ref": "Section:clazdyys6190031mbscvwdjv2fk"
+                    }
+                ]
+            },
+            "ROOT_QUERY": {
+                "__typename": "Query",
+                "course({\"slug\":\"build-ai-writing-assistant-gpt3\"})": {
+                    "__ref": "Course:COa1f5d67d-7261-4b20-8f67-35e873627c72"
+                }
+            }
+        },
+        "_sentryTraceData": "b086c4f10110468fbb901676f4bcf20c-a88b21ade56634ae-1",
+        "_sentryBaggage": "sentry-environment=production,sentry-release=c228126ef57c378e2307a5af640a02f1ef09a19a,sentry-transaction=%2Fprojects%2F%5BcourseId%5D,sentry-public_key=9cf14c22f3a24540b0bc17bbd5923132,sentry-trace_id=b086c4f10110468fbb901676f4bcf20c,sentry-sample_rate=1"
+    },
+    "__N_SSP": true
+}

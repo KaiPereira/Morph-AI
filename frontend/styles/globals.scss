@@ -1,0 +1,23 @@
+// Preferences
+@import "global/variables.scss";
+@import "global/reset.scss";
+@import "global/preferences.scss";
+
+// Mixins
+@import "mixins/transitions.scss";
+@import "mixins/resets.scss";
+
+// Pages
+@import "pages/signup.scss";
+@import "pages/dashboard.scss";
+
+// Subcomponents
+@import "subcomponents/input.scss";
+@import "subcomponents/search.scss";
+@import "subcomponents/button.scss";
+@import "subcomponents/formStatusPopup.scss";
+@import "subcomponents/loader.scss";
+@import "subcomponents/course.scss";
+
+// Common
+@import "common/nav.scss";

@@ -1,0 +1,130 @@
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    padding: 0px 50px;
+}
+
+.dashboard {
+    width: 100%;
+    max-width: $grid-small-width;
+}
+
+.dashboard-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 125px;
+    width: 100%;
+    max-width: $grid-small-width;
+
+    h1 {
+        font-weight: 600;
+        font-size: 32px;
+        color: $black-text;
+    }
+}
+
+.dashboard-stats {
+    display: flex;
+    gap: 23px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.dashboard-stat {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 22px;
+    border-radius: 15px;
+    border: 1px solid $card-stroke;
+}
+
+.dashboard-stat-details {
+    h1 {
+        font-weight: 600;
+        font-size: 16px;
+        color: $light-black;
+    }
+    p {
+        font-weight: 600;
+        font-size: 30px;
+        color: $black-text;
+        margin-top: 9px;
+    }
+}
+
+.dashboard-stat-increase {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.dashboard-stat-increase-container {
+    display: flex;
+    flex-flow: column;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
+
+    div {
+        display: flex;
+        gap: 4px;
+        border-radius: 1000px;
+        border: 2px solid $black-text;
+        padding: 4px 15px;
+        font-weight: 700;
+        font-size: 13px;
+        color: $black-text;
+    }
+}
+
+.dashboard-stat-increase-header {
+    font-weight: 600;
+    font-size: 12px;
+    color: $light-black;
+}
+
+.dashboard-courses {
+    display: flex;
+    flex-flow: column;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.dashboard-courses-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    h2 {
+        font-weight: 600;
+        font-size: 25px;
+        color: $black-text;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 7px;
+        background: #F4F4F4;
+        width: 25px;
+        height: 25px;
+
+        p {
+            font-weight: 700;
+            font-size: 15px;
+            color: $light-black;
+        }
+    }
+}
+
+.dashboard-courses-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 25px;
+    width: 100%;
+}

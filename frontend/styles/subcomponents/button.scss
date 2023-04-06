@@ -1,0 +1,51 @@
+.button {
+    height: 50px;
+    width: 185px;
+    border-radius: 8px;
+    display: flex;
+    gap: 13px;
+    border: none;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    @include button-transition;
+}
+
+.button-light {
+    background: $light-white-bg;
+    color: $black-text;
+
+    &:hover {
+        background: darken($light-white-bg, $button-lighten);
+    }
+}
+
+.button-white {
+    background: $white;
+    color: $black-text;
+
+    &:hover {
+        background: darken($white, $button-lighten);
+    }
+}
+
+.button-black {
+    background: $black-bg;
+    color: $white;
+
+    &:hover {
+        background: lighten($black-bg, $button-lighten);
+    }
+}
+
+.button-primary {
+    background: $main;
+    color: $white;
+
+    &:hover {
+        background: lighten($main, $button-lighten);
+    }
+}

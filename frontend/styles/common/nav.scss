@@ -1,0 +1,104 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 50px;
+    height: 73px;
+    border-bottom: 1px solid $card-stroke;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: $grid-small-width;
+
+    .nav-logo {
+        width: 125px;
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: clamp(25px, 50px, 50px);
+    align-items: center;
+    
+    li a {
+        font-weight: 500;
+        font-size: 15px;
+        color: $light-black;
+        text-decoration: none;
+
+        &:hover {
+            color: darken($light-black, $text-blend)
+        }
+    }
+}
+
+.nav-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    @include transparency-transition;
+    cursor: pointer;
+
+    &:hover .nav-profile-dropdown {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.nav-profile-img {
+    width: 43px;
+    height: 43px;
+    object-fit: cover;
+    border-radius: 1000px;
+}
+
+.nav-profile-icon {
+    width: 15px;
+}
+
+.nav-profile-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    z-index: 5;
+    @include transparency-transition;
+
+    &:hover {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.nav-profile-dropdown-container {
+    margin-top: 12px;
+    display: flex;
+    flex-flow: column;
+    padding: 14px 16px;
+    gap: 9px;
+    width: 200px;
+    background: $white;
+    border-radius: 10px;
+    border: 1px solid $card-stroke;
+
+    * {
+        font-weight: 600;
+        font-size: 14px;
+        color: $black-text;
+        @include button-reset;
+        cursor: pointer;
+        text-decoration: none;
+        width: max-content;
+        padding: 0px;
+        @include link-transition;
+
+        &:hover {
+            color: lighten($black-text, $text-blend);
+        }
+    }
+}

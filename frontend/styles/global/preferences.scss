@@ -1,0 +1,9 @@
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+::selection {
+    background: $main;
+    color: $white;
+}

@@ -1,0 +1,11 @@
+@mixin button-transition {
+    transition: background-color 0.3s ease;
+}
+
+@mixin link-transition {
+    transition: color 0.3s ease;
+}
+
+@mixin transparency-transition {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
