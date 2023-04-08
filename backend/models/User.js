@@ -21,7 +21,7 @@ const UserSchema = mongoose.Schema({
         default: 0
     },
     lastLogin: {
-        type: Date
+        type: String
     },
     courses: [
         CourseSchema

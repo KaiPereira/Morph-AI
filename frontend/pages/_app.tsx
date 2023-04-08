@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app'
 import Head from "next/head"
 
 // Functions
-import { updateLoginDate, fetchProfileDetails } from "../api/user"
+import { fetchProfileDetails } from "../api/user"
 
 // States
 import { useEffect, useState } from "react"
@@ -19,19 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     fetchProfileDetails()
       .then(data => {
-        changeProfileDetails(data)
+        changeProfileDetails(data.data)
         changeLoading(false)
-        
-        updateLoginDate()
-          .then(data => {
-            console.log(data)
-          })
-          .catch(err => {
-            console.log(err)
-          })
       })
       .catch(err => {
         console.log(err)
+        changeLoading(false)
       }) 
   }, [])
 

@@ -1,9 +1,10 @@
 const env = require("dotenv/config")
 const jwt = require("jsonwebtoken")
+const User = require("../models/User.js")
 
 // This is our main authentication
 // Takes the cookie and verifies it
-const verifyUserToken = (req, res, next) => {
+const verifyUserToken = async (req, res, next) => {
     try {
         const token = req.cookies.token
 
@@ -17,7 +18,9 @@ const verifyUserToken = (req, res, next) => {
             return res.status(401).send("Invalid authorization!")
         }
 
-        req.user = verification
+        const user = await User.findById(verification.id)
+
+        req.user = user
 
         // Grab our user details from the JWT if it passes all calls
         next()

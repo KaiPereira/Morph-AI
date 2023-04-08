@@ -2,6 +2,10 @@
 import Search from "../subcomponents/Search"
 import Course from "../subcomponents/Course"
 
+// States
+import { useState, useEffect } from "react"
+
+
 
 type DashboardStatProps = {
     title: string,
@@ -44,30 +48,52 @@ const CoursesFormat = ({
     title,
     courses
 }: CoursesFormatProps) => {
+    const [courseElements, setElementsCourse] = useState<any>(null)
+
+    useEffect(() => {
+        setElementsCourse(courses.map((course: any, index: any) => {
+            return (
+                <Course 
+                    description={course.description}
+                    difficulty={course.difficulty}
+                    title={course.name}
+                    tags={course.tags}
+                    thumbnail={course.thumbnail}
+                    key={index}
+                    courseTime={course.courseTime}
+                    lessons={courses.lessons}
+                />
+            )
+        }))
+    }, [courses])
+
     return (
         <div className="dashboard-courses-format">
             <div className="dashboard-courses-header">
-                <h2>Courses</h2>
+                <h2>{title}</h2>
                 <div>
-                    <p>2</p>
+                    <p>{courses.length}</p>
                 </div>
             </div>
             <div className="dashboard-courses-list">
-                <Course 
-                    id="test"
-                />
+                {courseElements}
             </div>
         </div>
     )
 }
 
 type DashboardProps = {
-    profileDetails: any
+    profileDetails: any,
+    courses: any
 }
 
 const Dashboard = ({
-    profileDetails
+    profileDetails,
+    courses
 }: DashboardProps) => {
+    const dayStreak = profileDetails.dayStreak
+    const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
+
     return (
         <main className="dashboard-container">
             <div className="dashboard">
@@ -91,14 +117,18 @@ const Dashboard = ({
                     />
                     <DashboardStat 
                         title="Day Streak" 
-                        value="14 days" 
-                        increase={20} 
+                        value={dayStreakString}
+                        increase={20}
                     />
                 </div>
                 <div className="dashboard-courses">
                     <CoursesFormat 
                         title="Courses"
-                        courses={[]}
+                        courses={courses}
+                    />
+                    <CoursesFormat 
+                        title="What's Next?"
+                        courses={courses}
                     />
                 </div>
             </div>

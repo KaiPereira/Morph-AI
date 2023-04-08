@@ -8,9 +8,6 @@ const session = require("express-session");
 var SQLiteStore = require("connect-sqlite3")(session);
 const passport = require("passport");
 const cookieParser = require('cookie-parser');
-const cron = require('node-cron');
-const User = require("./models/User")
-const moment = require('moment-timezone');
 
 
 // Our MIDDLEware
@@ -29,15 +26,6 @@ app.listen(process.env.PORT || 5000, () => {
 })
 
 
-// This is a cron job that updates our user streak
-cron.schedule('0 0 * * *', () => {
-    User.updateMany({ lastLogin: moment().subtract(1, 'day').toDate() }, { $inc: {streak: 1} })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
-})
-
-
-
 // Our routes
 // Authentication
 const authentication = require("./routes/authentication.js")
@@ -46,6 +34,10 @@ app.use("/authentication", authentication)
 // User stuff
 const user = require("./routes/user.js")
 app.use("/user", user)
+
+// Courses stuff
+const courses = require("./routes/courses.js")
+app.use("/courses", courses)
 
 
 // Our Mongo db

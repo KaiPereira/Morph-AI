@@ -7,7 +7,7 @@ import axios from "axios"
 
 export const fetchProfileDetails = async () => {
     try {
-        const userProfile = await axios.post(`${apiUrl}/user/profile`, {}, { withCredentials: true })
+        const userProfile = await axios.post(`${apiUrl}/user/online`, {}, { withCredentials: true })
 
         return userProfile
     } catch (err) {

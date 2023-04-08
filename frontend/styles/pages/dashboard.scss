@@ -123,8 +123,8 @@
 
 .dashboard-courses-list {
     display: flex;
-    justify-content: space-between;
-    gap: 25px;
+    flex-flow: wrap;
+    gap: 40px;
     margin-top: 25px;
     width: 100%;
 }
