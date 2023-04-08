@@ -7,7 +7,7 @@ import Dashboard from "../components/pages/Dashboard"
 import { GetServerSideProps } from 'next'
 
 // Functions
-import { getAllCourses, getCourse } from "../api/courses"
+import { getAllCourses } from "../api/courses"
 
 
 
@@ -43,10 +43,6 @@ const Home = ({
 
 export const getServerSideProps = async (context: any) => {
   const courses = await getAllCourses()
-
-  const course = await getCourse("Handwritten Digit Recognizer")
-
-  console.log(course)
 
   return {
     props: {
