@@ -6,10 +6,7 @@
 // Mixins
 @import "mixins/transitions.scss";
 @import "mixins/resets.scss";
-
-// Pages
-@import "pages/signup.scss";
-@import "pages/dashboard.scss";
+@import "mixins/other.scss";
 
 // Subcomponents
 @import "subcomponents/input.scss";
@@ -18,6 +15,11 @@
 @import "subcomponents/formStatusPopup.scss";
 @import "subcomponents/loader.scss";
 @import "subcomponents/course.scss";
+
+// Pages
+@import "pages/signup.scss";
+@import "pages/dashboard.scss";
+@import "pages/lessonPage";
 
 // Common
 @import "common/nav.scss";

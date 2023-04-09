@@ -1,9 +1,5 @@
 // Libraries
 import fs from 'fs';
-import axios from 'axios';
-
-// Files
-import apiUrl from "../config"
 
 
 // Server side function
@@ -46,22 +42,25 @@ export const getCourseTime = async (courseName: string) => {
 // Server side function
 export const getCourse = async (courseName: string) => {
     try {
+
+        const courseNameNew = courseName.replaceAll("-", " ")
+
         // Isolate the course details
-        const courseDetails = JSON.parse(fs.readFileSync(`courses/${courseName}/details.json`, "utf8"))
+        const courseDetails = JSON.parse(fs.readFileSync(`courses/${courseNameNew}/details.json`, "utf8"))
 
         // Isolate the lessons
-        const lessons = fs.readdirSync(`courses/${courseName}/lessons`, "utf8")
+        const lessons = fs.readdirSync(`courses/${courseNameNew}/lessons`, "utf8")
 
         // grab the course time using the function using the courseName
-        const courseTime = await getCourseTime(courseName)
+        const courseTime = await getCourseTime(courseNameNew)
 
         // Map over all of the lessonCategories and grab their lessons and name
         const lessonsCourses = lessons.map((lessonCategory: string) => {
-            const lessons = fs.readdirSync(`courses/${courseName}/lessons/${lessonCategory}`, "utf8")
+            const lessons = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategory}`, "utf8")
 
             return {
                 lessonCategory: lessonCategory,
-                lessons: JSON.stringify(lessons)
+                lessons: lessons
             }
         })
 
@@ -93,13 +92,36 @@ export const getAllCourses = async () => {
     }
 }
 
-export const onCourse = async (courseName: string) => {
-    try {
-        const course = await axios.post(`${apiUrl}/courses/onCourse`, {
-            courseName: courseName
-        }, { withCredentials: true})
 
-        return course
+// Server side function
+export const getLesson = async (courseName: string, lessonName: string) => {
+    try {
+
+        // The URL has the dashes instead of spaces
+        const courseNameNew = courseName.replaceAll("-", " ")
+        const lessonNameNew = lessonName.replaceAll("-", " ")
+
+        const courseLessons = fs.readdirSync(`courses/${courseNameNew}/lessons`, "utf8")
+
+        // Grab the lesson text
+        let lessonText: any = courseLessons.map((lessonCategoryName: string) => {
+
+            const lessonCategory = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
+
+            // We need to check if lesson includes the lessonName
+            // Because the lessonName doesn't include the number
+            return lessonCategory.map((lesson: string) => {
+                if (lesson.includes(lessonNameNew)) {
+                    const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}/${lesson}`, "utf8")
+
+                    return lessonText
+                }
+            })
+        })
+
+        lessonText = lessonText.flat().join("")
+
+        return lessonText
     } catch (err) {
         throw err
     }

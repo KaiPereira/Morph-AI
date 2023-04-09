@@ -1,12 +1,5 @@
 .dashboard-container {
-    display: flex;
-    justify-content: center;
-    padding: 0px 50px;
-}
-
-.dashboard {
-    width: 100%;
-    max-width: $grid-small-width;
+    @include align-page($grid-small-width);
 }
 
 .dashboard-header {

@@ -4,6 +4,9 @@ import { useState, useEffect } from "react"
 // Libraries
 import Link from "next/link"
 
+// Functions
+import { onCourse, spaceToDash } from "../../api/client/courses"
+
 
 type CourseProps = {
     thumbnail: string,
@@ -26,6 +29,7 @@ const Course = ({
     lessons
 }: CourseProps) => {
     const [tagElements, changeTagElements] = useState<any>()
+    const [courseData, setCourseData] = useState<any>(null)
 
     useEffect(() => {
         changeTagElements(tags.map((tag: any, index: any) => {
@@ -36,13 +40,20 @@ const Course = ({
             )
         }))
 
+        const onCourseFunction = async () => {
+            const onCourseData = await onCourse(title)
 
+            setCourseData(onCourseData)
+        }
+
+        onCourseFunction()
     }, [])
 
+    const courseLink = `/courses/${courseData ? courseData : `${spaceToDash(title)}/${spaceToDash(lessons[0].lessons[0])}`}`
 
     return (
         <>
-            <Link href={`/${title}`} className="course-link">
+            <Link href={courseLink} className="course-link">
                 <div className="course">
                     <img src={thumbnail} alt="thumbnail" className="course-thumbnail" />
                     <div className="course-difficulty">

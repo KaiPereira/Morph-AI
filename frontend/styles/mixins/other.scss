@@ -1,0 +1,77 @@
+@mixin align-page($page-width) {
+    display: flex;
+    justify-content: center;
+    padding: 0px 50px;
+
+    & > *:first-child {
+        width: 100%;
+        max-width: $page-width;
+    }
+}
+
+
+@mixin dropdown() {
+    position: relative;
+    @include transparency-transition;
+    cursor: pointer;
+
+    &:hover .dropdown {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .dropdown {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        right: 0;
+        top: 45px;
+        z-index: 5;
+        @include transparency-transition;
+
+        &:hover {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .dropdown-container {
+        margin-top: 12px;
+        display: flex;
+        flex-flow: column;
+        padding: 14px 16px;
+        gap: 9px;
+        width: 200px;
+        background: $white;
+        border-radius: 10px;
+        border: 1px solid $card-stroke;
+
+        & > div, & > p, & > a, & > button {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: $black-text;
+            @include button-reset;
+            cursor: pointer;
+            text-decoration: none;
+            width: max-content;
+            padding: 0px;
+            @include link-transition;
+
+            * {
+                color: $black-text;
+                @include link-transition;
+            }
+
+            &:hover {
+                color: lighten($black-text, $text-blend);
+
+                * {
+                    color: lighten($black-text, $text-blend);
+                }
+            }
+        }
+    }
+}

@@ -10,12 +10,22 @@ const { verifyUserToken } = require("../utils/authentication.js")
 router.post("/online", verifyUserToken, async (req, res) => {
     try {
         const user = req.user
+        // Current date
         const date = new Date()
         const dayMonthYear = date.toLocaleDateString()
 
-        if (user.lastLogin !== dayMonthYear) {
+        // Date yesterday
+        const yesterday = new Date(date)
+        yesterday.setDate(yesterday.getDate() - 1)
+        const dayMonthYearYesterday = yesterday.toLocaleDateString()
+
+        if (user.lastLogin == dayMonthYearYesterday) {
             user.lastLogin = dayMonthYear
             user.dayStreak = user.dayStreak + 1
+            await user.save()
+        } else if (user.lastLogin !== dayMonthYear) {
+            user.lastLogin = dayMonthYear
+            user.dayStreak = 1
             await user.save()
         }
 

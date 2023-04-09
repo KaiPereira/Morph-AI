@@ -61,7 +61,7 @@ const CoursesFormat = ({
                     thumbnail={course.thumbnail}
                     key={index}
                     courseTime={course.courseTime}
-                    lessons={courses.lessons}
+                    lessons={course.lessons}
                 />
             )
         }))
@@ -96,7 +96,7 @@ const Dashboard = ({
 
     return (
         <main className="dashboard-container">
-            <div className="dashboard">
+            <div>
                 <div className="dashboard-header">
                     <h1>Overview</h1>
                     <Search 

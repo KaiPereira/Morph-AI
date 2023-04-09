@@ -2,7 +2,7 @@
 import Link from "next/link"
 
 // Functions
-import { logout } from "../../api/authentication"
+import { logout } from "../../api/client/authentication"
 
 type NavProps = {
     type?: "small" | "big"
@@ -13,7 +13,7 @@ const Nav = ({
 }: NavProps) => {
     return (
         <nav>
-            <div className="nav-container">
+            <div className={`nav-container nav-${type}`}>
                 <Link href="/">
                     <img src="/branding/Typographical Logo.svg" alt="logo" className="nav-logo" />
                 </Link>
@@ -24,8 +24,8 @@ const Nav = ({
                 <div className="nav-profile">
                     <img className="nav-profile-img" src="/images/Profile Image.png" alt="User Profile" />
                     <img src="/icons/angle.svg" className="nav-profile-icon" alt="Angle Icon" />
-                    <div className="nav-profile-dropdown">
-                        <div className="nav-profile-dropdown-container">
+                    <div className="dropdown">
+                        <div className="dropdown-container">
                             <Link href="/">Dashboard</Link>
                             <button onClick={logout}>Sign out!</button>
                         </div>

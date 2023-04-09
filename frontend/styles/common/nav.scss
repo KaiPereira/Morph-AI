@@ -11,7 +11,6 @@ nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: $grid-small-width;
 
     .nav-logo {
         width: 125px;
@@ -28,6 +27,7 @@ nav {
         font-size: 15px;
         color: $light-black;
         text-decoration: none;
+        @include link-transition;
 
         &:hover {
             color: darken($light-black, $text-blend)
@@ -36,17 +36,10 @@ nav {
 }
 
 .nav-profile {
-    position: relative;
+    @include dropdown;
     display: flex;
     align-items: center;
     gap: 13px;
-    @include transparency-transition;
-    cursor: pointer;
-
-    &:hover .nav-profile-dropdown {
-        visibility: visible;
-        opacity: 1;
-    }
 }
 
 .nav-profile-img {
@@ -60,45 +53,10 @@ nav {
     width: 15px;
 }
 
-.nav-profile-dropdown {
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    right: 0;
-    top: 45px;
-    z-index: 5;
-    @include transparency-transition;
-
-    &:hover {
-        visibility: visible;
-        opacity: 1;
-    }
+.nav-big {
+    max-width: $grid-big-width;
 }
 
-.nav-profile-dropdown-container {
-    margin-top: 12px;
-    display: flex;
-    flex-flow: column;
-    padding: 14px 16px;
-    gap: 9px;
-    width: 200px;
-    background: $white;
-    border-radius: 10px;
-    border: 1px solid $card-stroke;
-
-    * {
-        font-weight: 600;
-        font-size: 14px;
-        color: $black-text;
-        @include button-reset;
-        cursor: pointer;
-        text-decoration: none;
-        width: max-content;
-        padding: 0px;
-        @include link-transition;
-
-        &:hover {
-            color: lighten($black-text, $text-blend);
-        }
-    }
+.nav-small {
+    max-width: $grid-small-width;
 }

@@ -7,7 +7,7 @@ import Dashboard from "../components/pages/Dashboard"
 import { GetServerSideProps } from 'next'
 
 // Functions
-import { getAllCourses } from "../api/courses"
+import { getAllCourses } from "../api/server/courses"
 
 
 
@@ -19,23 +19,20 @@ const Home = ({
 }: any) => {
 
   return (
-    <>{ !loading &&
-      <>
-        { profileDetails ?
-          <>
-            <Nav 
-              type="small"
-            />
-            <Dashboard 
-              profileDetails={profileDetails}
-              courses={courses}
-            />
-          </>
-          :
-          <SignupSignin type="signup" />
-        }
-      </>
-    }
+    <>
+      { profileDetails ?
+        <>
+          <Nav 
+            type="small"
+          />
+          <Dashboard 
+            profileDetails={profileDetails}
+            courses={courses}
+          />
+        </>
+        :
+        <SignupSignin type="signup" />
+      }
     </>
   )
 }

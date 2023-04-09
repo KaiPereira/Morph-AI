@@ -19,7 +19,7 @@ router.post("/onCourse", verifyUserToken, async (req, res) => {
         if (onCourse) {
             res.send(courses.lessonOn)
         } else {
-            res.status(400).send("Not on course!")
+            res.send(false)
         }
         
     } catch (err) {

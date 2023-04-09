@@ -11,7 +11,7 @@ import Link from "next/link"
 import axios from "axios"
 
 // Our api functions
-import { signup, signin } from "../../api/authentication"
+import { signup, signin } from "../../api/client/authentication"
 
 type SignupSigninProps = {
     type: "signup" | "signin"

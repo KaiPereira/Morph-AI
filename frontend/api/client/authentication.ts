@@ -3,7 +3,7 @@ import axios from "axios"
 import Cookies from 'js-cookie';
 
 // Our files
-import apiUrl from "../config"
+import apiUrl from "../../config"
 
 
 export const signup = async (

@@ -1,5 +1,5 @@
 // Our files
-import apiUrl from "../config"
+import apiUrl from "../../config"
 
 // Our libraries
 import axios from "axios"
