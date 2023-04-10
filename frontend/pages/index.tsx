@@ -8,6 +8,10 @@ import { GetServerSideProps } from 'next'
 
 // Functions
 import { getAllCourses } from "../api/server/courses"
+import { getUserCourses } from "../api/client/courses"
+
+// States
+import { useEffect, useState } from "react"
 
 
 
@@ -17,6 +21,19 @@ const Home = ({
   profileDetails,
   courses
 }: any) => {
+  const [userCourses, setUserCourses] = useState<any>()
+  const [userCoursesLoading, setUserCoursesLoading] = useState<boolean>(true)
+
+  useEffect(() => {
+    const getUserCoursesFunction = async () => {
+      const userCourses = await getUserCourses(courses, profileDetails)
+      
+      setUserCoursesLoading(false)
+      setUserCourses(userCourses)
+    }
+
+    getUserCoursesFunction()
+  }, [courses])
 
   return (
     <>
@@ -25,10 +42,13 @@ const Home = ({
           <Nav 
             type="small"
           />
-          <Dashboard 
-            profileDetails={profileDetails}
-            courses={courses}
-          />
+          { !userCoursesLoading &&
+            <Dashboard 
+              profileDetails={profileDetails}
+              courses={courses}
+              userCourses={userCourses}
+            />
+          }
         </>
         :
         <SignupSignin type="signup" />
@@ -38,7 +58,7 @@ const Home = ({
 }
 
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async (context: any) => {  
   const courses = await getAllCourses()
 
   return {

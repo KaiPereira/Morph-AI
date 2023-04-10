@@ -56,7 +56,7 @@ export const onCourse = async (courseName: string) => {
 export const courseProgress = async (courseName: string) => {
     try {
         const courseProgress = await axios.post(`${apiUrl}/courses/course-progress`, {
-            courseName: courseName
+            currentCourse: courseName
         }, { withCredentials: true })
 
         return courseProgress.data
@@ -67,7 +67,6 @@ export const courseProgress = async (courseName: string) => {
 
 
 export const prettifyUrl = (str: any) => {
-    console.log("Prettify URL: ", str)
     return str.replace(/[0-9] /g, "").replaceAll(" ", "-")
 } 
 
@@ -126,8 +125,22 @@ export const nextLesson = async (course: any, lessonName: any) => {
     try {
         const lessonIndex = await fetchLessonIndex(course, lessonName)
 
-        const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
+        // We grab the progression so that we only update the course progress if the lesson is the next one
+        let courseProgression = await courseProgress(course.name)
+        courseProgression = courseProgression.lessonOn
 
+        console.log(courseProgression, lessonIndex)
+
+        if (courseProgression === lessonIndex) {
+            const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
+                currentCourse: course.name,
+                onLesson: lessonIndex + 1
+            }, { withCredentials: true })
+        }
+
+
+        const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
+        
         return lessonUrl
     } catch (err) {
         throw err
@@ -159,6 +172,76 @@ export const getLessonName = async (courseName: any, lessonIndex: number) => {
         const lesson = courses[lessonIndex]
 
         return lesson
+    } catch (err) {
+        throw err
+    }
+}
+
+export const courseFinished = async (courseName: any, courseProgress: number) => {
+    try {
+        let courses = courseName.lessons.map((lessonCategory: any) => {
+            return lessonCategory.lessons.map((lesson: any) => {
+                return lesson
+            })
+        })
+
+        courses = courses.flat()
+
+        let courseProgressIndex = courses.map((course: any, index: number) => {
+            if (course.includes(courseProgress)) {
+                return index
+            }
+        })
+
+        courseProgressIndex = courseProgressIndex.filter((course: any) => course !== undefined)
+
+        const courseFinished = courseProgressIndex[0] === courses.length - 1
+
+        return courseFinished
+    } catch (err) {
+        throw err
+    }
+}
+
+export const finishCourse = async (courseName: any) => {
+    try {
+        const finishedCourse = await axios.post(`${apiUrl}/courses/finished-course`, {
+            currentCourse: courseName
+        }, { withCredentials: true })
+
+        return finishedCourse.data
+    } catch (err) {
+        throw err
+    }
+}
+
+export const getUserCourses = async (allCourses: any, user: any) => {
+    try {
+        let userCourses: any = []
+        let finishedUserCourses: any = []
+
+
+        allCourses.map((course: any) => {
+            user.courses.map((userCourse: any) => {
+                console.log(userCourse)
+
+                if ((course.name === userCourse.title) && (!userCourse.finished)) {
+                    userCourses.push(course)
+                } else if ((course.name === userCourse.title) && (userCourse.finished)) {
+                    finishedUserCourses.push(course)
+                }
+            })
+        })
+
+        userCourses = userCourses.flat()
+        userCourses = userCourses.filter((course: any) => course !== undefined)
+        finishedUserCourses = finishedUserCourses.flat()
+        finishedUserCourses = finishedUserCourses.filter((course: any) => course !== undefined)
+
+        return {
+            current: userCourses,
+            finished: finishedUserCourses
+        }
     } catch (err) {
         throw err
     }

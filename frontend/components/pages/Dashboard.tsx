@@ -68,28 +68,32 @@ const CoursesFormat = ({
     }, [courses])
 
     return (
-        <div className="dashboard-courses-format">
-            <div className="dashboard-courses-header">
-                <h2>{title}</h2>
-                <div>
-                    <p>{courses.length}</p>
+        <>{ (courses.length > 0) &&
+            <div className="dashboard-courses-format">
+                <div className="dashboard-courses-header">
+                    <h2>{title}</h2>
+                    <div>
+                        <p>{courses.length}</p>
+                    </div>
+                </div>
+                <div className="dashboard-courses-list">
+                    {courseElements}
                 </div>
             </div>
-            <div className="dashboard-courses-list">
-                {courseElements}
-            </div>
-        </div>
+        }</>
     )
 }
 
 type DashboardProps = {
     profileDetails: any,
-    courses: any
+    courses: any,
+    userCourses: any
 }
 
 const Dashboard = ({
     profileDetails,
-    courses
+    courses,
+    userCourses
 }: DashboardProps) => {
     const dayStreak = profileDetails.dayStreak
     const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
@@ -123,8 +127,12 @@ const Dashboard = ({
                 </div>
                 <div className="dashboard-courses">
                     <CoursesFormat 
-                        title="Courses"
-                        courses={courses}
+                        title="My Courses"
+                        courses={userCourses.current}
+                    />
+                    <CoursesFormat 
+                        title="Finished Courses"
+                        courses={userCourses.finished}
                     />
                     <CoursesFormat 
                         title="What's Next?"

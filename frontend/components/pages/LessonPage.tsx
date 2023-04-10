@@ -5,14 +5,14 @@ import {
     courseLocked, 
     nextLesson, 
     prettifyUrl,
-    toLesson 
+    toLesson,
+    finishCourse 
 } from "@/api/client/courses"
 
 // States
 import { useEffect, useState } from "react"
 
 // Libraries
-import Link from "next/link"
 import { useRouter } from "next/router";
 
 // Components
@@ -99,14 +99,16 @@ type LessonPageProps = {
     onLesson: string,
     lessonData: any,
     courseData: any,
-    progress: any
+    progress: any,
+    courseIsFinished: boolean
 }
 
 const LessonPage = ({
     onLesson,
     lessonData,
     courseData,
-    progress
+    progress,
+    courseIsFinished
 }: LessonPageProps) => {
     const [lessonContent, setLessonContent] = useState<any>(null)
     const router = useRouter();
@@ -127,6 +129,12 @@ const LessonPage = ({
         const nextLessonUrl: any = await nextLesson(courseData, onLesson)
 
         router.push(nextLessonUrl)
+    }
+
+    const finishCourseFunction = async () => {
+        const finish = await finishCourse(courseData.name)
+
+        router.push("/")
     }
     
 
@@ -185,6 +193,17 @@ const LessonPage = ({
                         </div>
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: lessonContent }} className="lesson-course-content" />
+                    
+                    { courseIsFinished ?
+                    <Button 
+                        onClick={finishCourseFunction}
+                        arrow={true}
+                        className="lesson-next-button"
+                        type="primary"
+                    >
+                        Finish Course
+                    </Button>
+                    :
                     <Button 
                         onClick={nextLessonFunction}
                         arrow={true}
@@ -193,6 +212,7 @@ const LessonPage = ({
                     >
                         Next Lesson
                     </Button>
+                    }
                 </div>
                 <div className="lesson-community">
                     <div className="lesson-community-container">

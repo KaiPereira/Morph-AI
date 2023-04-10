@@ -8,6 +8,10 @@ const CourseSchema = mongoose.Schema({
     lessonOn: {
         type: Number,
         required: true
+    },
+    finished: {
+        type: Boolean,
+        default: false
     }
 })
 

@@ -96,31 +96,6 @@ export const getAllCourses = async () => {
 // Server side function
 export const getLesson = async (courseName: string, lessonIndex: string) => {
     try {
-
-        // // The URL has the dashes instead of spaces
-        // const courseNameNew = courseName.replaceAll("-", " ")
-        // const lessonNameNew = lessonName.replaceAll("-", " ")
-
-        // const courseLessons = fs.readdirSync(`courses/${courseNameNew}/lessons`, "utf8")
-
-        // // Grab the lesson text
-        // let lessonText: any = courseLessons.map((lessonCategoryName: string) => {
-
-        //     const lessonCategory = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
-
-        //     // We need to check if lesson includes the lessonName
-        //     // Because the lessonName doesn't include the number
-        //     return lessonCategory.map((lesson: string) => {
-        //         if (lesson.includes(lessonNameNew)) {
-        //             const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}/${lesson}`, "utf8")
-
-        //             return lessonText
-        //         }
-        //     })
-        // })
-
-        // lessonText = lessonText.flat().join("")
-
         // Reformat the string from url to name
         const courseNameNew = courseName.replaceAll("-", " ")
         // Grab all of the lessons

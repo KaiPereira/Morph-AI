@@ -25,8 +25,7 @@ const Course = ({
     title,
     description,
     tags,
-    courseTime,
-    lessons
+    courseTime
 }: CourseProps) => {
     const [tagElements, changeTagElements] = useState<any>()
     const [lessonProgress, setLessonProgress] = useState<any>(null)
@@ -41,7 +40,9 @@ const Course = ({
         }))
 
         const fetchCourseProgress = async () => {
+            // Use our course progress
             const courseProgressData = await courseProgress(title);
+
             setLessonProgress(courseProgressData.lessonOn)
         }
 

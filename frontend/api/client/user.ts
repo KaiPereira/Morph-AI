@@ -4,6 +4,9 @@ import apiUrl from "../../config"
 // Our libraries
 import axios from "axios"
 
+// Functions
+import { getUserCourses } from "./courses"
+
 
 export const fetchProfileDetails = async () => {
     try {
