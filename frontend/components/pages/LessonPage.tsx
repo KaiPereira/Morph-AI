@@ -1,11 +1,19 @@
 // Functions
-import { markdownToHtml, spaceToDash, courseLocked } from "@/api/client/courses"
+import { 
+    markdownToHtml, 
+    prettifyString, 
+    courseLocked, 
+    nextLesson, 
+    prettifyUrl,
+    toLesson 
+} from "@/api/client/courses"
 
 // States
 import { useEffect, useState } from "react"
 
 // Libraries
 import Link from "next/link"
+import { useRouter } from "next/router";
 
 // Components
 import Button from "../subcomponents/Button"
@@ -13,15 +21,16 @@ import Button from "../subcomponents/Button"
 
 
 type LessonsFormatProps = {
-    onLesson: string,
+    progress: string,
     courseData: any
 }
 
 const LessonsFormat = ({
-  onLesson,
-  courseData
+    progress,
+    courseData
 }: LessonsFormatProps) => {
   const [lessonCategories, setLessonCategories] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchLessonCategories = async () => {
@@ -31,10 +40,15 @@ const LessonsFormat = ({
                     lesson.lessons.map(async (lesson: any, index: any) => {
 
                         // Check if the course is locked
-                        const locked = await courseLocked(courseData, onLesson, lesson);
+                        const locked = await courseLocked(courseData, progress, lesson);
 
                         // We need to remote dashes in the url and replace them with spaces
-                        const lessonUrl = `/courses/${spaceToDash(courseData.name)}/${spaceToDash(lesson)}`;
+                        const nextLessonFunction = async () => {
+                            const nextLessonUrl: any = await toLesson(courseData, lesson)
+                    
+                            router.push(nextLessonUrl)
+                        }
+
 
                         return (
                             <>{ locked ?
@@ -44,19 +58,19 @@ const LessonsFormat = ({
                                         : 
                                         <i className="fa-solid fa-check"></i>
                                     }
-                                    <p>{lesson}</p>
+                                    <p>{prettifyString(lesson)}</p>
                                 </div>
                                 :
-                                <Link href={lessonUrl} key={index} className="lesson-category-lesson-url">
+                                <button onClick={nextLessonFunction} key={index} className="lesson-category-lesson-url">
                                     <div className="lesson-category-lesson lesson-category-lesson-hover">
                                         {locked ? 
                                             <i className="fa-solid fa-lock"></i> 
                                             : 
                                             <i className="fa-solid fa-check"></i>
                                         }
-                                        <p>{lesson}</p>
+                                        <p>{prettifyString(lesson)}</p>
                                     </div>
-                                </Link>
+                                </button>
                             }</>
                         );
                     })
@@ -64,8 +78,8 @@ const LessonsFormat = ({
 
                 return (
                     <div className="lesson-category" key={index}>
-                    <p className="lesson-category-header">{lesson.lessonCategory}</p>
-                    <div className="lesson-category-lessons">{lessonElements}</div>
+                        <p className="lesson-category-header">{prettifyUrl(lesson.lessonCategory)}</p>
+                        <div className="lesson-category-lessons">{lessonElements}</div>
                     </div>
                 );
             })
@@ -75,7 +89,7 @@ const LessonsFormat = ({
     };
 
     fetchLessonCategories();
-  }, [courseData]);
+  }, [progress]);
 
   return <>{lessonCategories}</>;
 };
@@ -84,15 +98,18 @@ const LessonsFormat = ({
 type LessonPageProps = {
     onLesson: string,
     lessonData: any,
-    courseData: any
+    courseData: any,
+    progress: any
 }
 
 const LessonPage = ({
     onLesson,
     lessonData,
-    courseData
+    courseData,
+    progress
 }: LessonPageProps) => {
     const [lessonContent, setLessonContent] = useState<any>(null)
+    const router = useRouter();
 
     useEffect(() => {
 
@@ -105,6 +122,13 @@ const LessonPage = ({
         getHTML()
     }, [lessonData])
 
+
+    const nextLessonFunction = async () => {
+        const nextLessonUrl: any = await nextLesson(courseData, onLesson)
+
+        router.push(nextLessonUrl)
+    }
+    
 
     const lessonThumbnail = {backgroundImage: `url(${courseData.thumbnail})`}
 
@@ -121,7 +145,7 @@ const LessonPage = ({
                         </div>
                         <div className="lesson-page-lessons">
                             <LessonsFormat 
-                                onLesson={onLesson}
+                                progress={progress}
                                 courseData={courseData}
                             />
                         </div>
@@ -161,6 +185,14 @@ const LessonPage = ({
                         </div>
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: lessonContent }} className="lesson-course-content" />
+                    <Button 
+                        onClick={nextLessonFunction}
+                        arrow={true}
+                        className="lesson-next-button"
+                        type="primary"
+                    >
+                        Next Lesson
+                    </Button>
                 </div>
                 <div className="lesson-community">
                     <div className="lesson-community-container">

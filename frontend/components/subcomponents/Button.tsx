@@ -5,7 +5,7 @@ type Button = {
     onClick?: any,
     arrow?: boolean,
     type: "primary" | "light" | "black" | "white",
-    link?: string,
+    link?: any,
     className?: string
 }
 

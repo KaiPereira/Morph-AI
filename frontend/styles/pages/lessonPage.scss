@@ -122,6 +122,52 @@
         color: $light-black;
         line-height: 25px;
     }
+
+    strong {
+        font-weight: 700;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    & > blockquote > blockquote {
+        margin-left: 20px;
+        border-left: 3px solid $light-black;
+    }
+
+    blockquote:nth-child(1) {
+        padding-left: 20px;
+        font-style: italic;
+    }
+
+    ul, ol {
+        margin-top: 18px;
+        margin-left: 20px;
+        list-style-type: circle;
+        font-weight: 500;
+        font-size: 15px;
+        color: $light-black;
+
+        li {
+            line-height: 25px;
+        }
+    }
+
+    img {
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    a {
+        @include link-transition;
+        color: $light-black;
+        text-decoration: underline;
+
+        &:hover {
+            color: darken($light-black, $text-blend);
+        }
+    }
 }
 
 .lesson-title {
@@ -200,5 +246,9 @@
 }
 
 .lesson-category-lesson-url {
-    text-decoration: none;
+    @include button-reset;
+}
+
+.lesson-next-button {
+    margin-top: 45px;
 }

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 
 // Functions
-import { onCourse, spaceToDash } from "../../api/client/courses"
+import { courseProgress, prettifyUrl } from "../../api/client/courses"
 
 
 type CourseProps = {
@@ -29,7 +29,7 @@ const Course = ({
     lessons
 }: CourseProps) => {
     const [tagElements, changeTagElements] = useState<any>()
-    const [courseData, setCourseData] = useState<any>(null)
+    const [lessonProgress, setLessonProgress] = useState<any>(null)
 
     useEffect(() => {
         changeTagElements(tags.map((tag: any, index: any) => {
@@ -40,16 +40,16 @@ const Course = ({
             )
         }))
 
-        const onCourseFunction = async () => {
-            const onCourseData = await onCourse(title)
-
-            setCourseData(onCourseData)
+        const fetchCourseProgress = async () => {
+            const courseProgressData = await courseProgress(title);
+            setLessonProgress(courseProgressData.lessonOn)
         }
 
-        onCourseFunction()
+        fetchCourseProgress()
+
     }, [])
 
-    const courseLink = `/courses/${courseData ? courseData : `${spaceToDash(title)}/${spaceToDash(lessons[0].lessons[0])}`}`
+    const courseLink = `/courses/${lessonProgress ? `${prettifyUrl(title)}/${lessonProgress}` : `${prettifyUrl(title)}/${0}`}`
 
     return (
         <>

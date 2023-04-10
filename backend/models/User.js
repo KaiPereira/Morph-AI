@@ -6,7 +6,7 @@ const CourseSchema = mongoose.Schema({
         required: true
     },
     lessonOn: {
-        type: String,
+        type: Number,
         required: true
     }
 })
