@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs")
 const User = require("../models/User")
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oidc');
+const emailValidator = require('deep-email-validator')
 
 // For future Google Auth - need to configure consent screen
 // passport.use(new GoogleStrategy({
@@ -47,27 +48,35 @@ const { verifyUserToken, jwtCreation } = require("../utils/authentication.js")
 router.post("/register", async (req, res) => {
     try {
 
-        // Test to see if the user already exists
-        const emailExists = await User.findOne({
-            email: req.body.email
-        })
+        // Validate email
+        const validation = await emailValidator.validate(req.body.email)
 
-        if (!emailExists) {
-            //Hash password
-            const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-
-            const newUser = new User({
-                email: req.body.email,
-                password: hashedPassword
+        if (validation.valid) {
+            // Test to see if the user already exists
+            const emailExists = await User.findOne({
+                email: req.body.email
             })
 
-            const savedUser = await newUser.save()
-            
-            jwtCreation(res, savedUser, "Successfully registered!")
+            if (!emailExists) {
+                //Hash password
+                const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+
+                const newUser = new User({
+                    email: req.body.email,
+                    password: hashedPassword
+                })
+
+                const savedUser = await newUser.save()
+                
+                jwtCreation(res, savedUser, "Successfully registered!")
+            } else {
+                res.status(400).send("Email already exists!")
+            }
         } else {
-            res.status(400).send("Email already exists!")
+            res.status(400).send("Invalid email!")
         }
     } catch (err) {
+        console.log(err)
         res.status(400).send("Unknown Error has Occured!")
     }
 })
