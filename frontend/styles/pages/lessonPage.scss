@@ -5,6 +5,7 @@
 .lesson-container {
     position: relative;
     display: flex;
+    min-height: 100vh;
 }
 
 .lesson-details, .lesson-community {
@@ -22,7 +23,7 @@
 }
 .lesson-main-content {
     width: 67%;
-    padding: 0px 50px;
+    padding: 25px 50px;
     border-left: 1px solid $card-stroke;
     border-right: 1px solid $card-stroke;
 }
@@ -57,7 +58,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 25px;
 }
 
 .lesson-main-content-location {

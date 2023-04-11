@@ -1,5 +1,6 @@
 .dashboard-container {
     @include align-page($grid-small-width);
+    margin-bottom: 150px;
 }
 
 .dashboard-header {

@@ -14,8 +14,7 @@ type CourseProps = {
     title: string,
     description: string,
     tags: any,
-    courseTime: string,
-    lessons: any
+    courseTime: string
 }
 
 

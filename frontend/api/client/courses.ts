@@ -246,3 +246,47 @@ export const getUserCourses = async (allCourses: any, user: any) => {
         throw err
     }
 }
+
+export const getDashboardStats = async (profileDetails: any) => {
+    try {
+        // Grab all of the lessons completed by the user by adding one to lessonOn to each course
+        let lessonsCompleted = 0
+    
+        profileDetails.courses.map((course: any) => {
+            lessonsCompleted += course.lessonOn + 1
+        })
+
+        const points = lessonsCompleted * 25
+        const dayStreak = profileDetails.dayStreak
+        const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
+
+
+        return {
+            points: points,
+            lessonsCompleted: lessonsCompleted,
+            dayStreak: dayStreakString
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+export const filterCourses = async (courses: any, filter: string) => {
+    try {
+        let filteredCourses: any = []
+
+        if (filter === "All") {
+            filteredCourses = courses
+        } else {
+            courses.map((course: any) => {
+                if (course.difficulty === filter) {
+                    filteredCourses.push(course)
+                }
+            })
+        }
+
+        return filteredCourses
+    } catch (err) {
+        throw err
+    }
+}

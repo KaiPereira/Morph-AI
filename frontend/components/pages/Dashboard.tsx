@@ -5,6 +5,9 @@ import Course from "../subcomponents/Course"
 // States
 import { useState, useEffect } from "react"
 
+// API FUnctions
+import { getDashboardStats, getUserCourses } from "../../api/client/courses"
+
 
 
 type DashboardStatProps = {
@@ -61,7 +64,6 @@ const CoursesFormat = ({
                     thumbnail={course.thumbnail}
                     key={index}
                     courseTime={course.courseTime}
-                    lessons={course.lessons}
                 />
             )
         }))
@@ -86,61 +88,89 @@ const CoursesFormat = ({
 
 type DashboardProps = {
     profileDetails: any,
-    courses: any,
-    userCourses: any
+    courses: any
 }
 
 const Dashboard = ({
     profileDetails,
-    courses,
-    userCourses
+    courses
 }: DashboardProps) => {
-    const dayStreak = profileDetails.dayStreak
-    const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
+    const [dashboardStats, setDashboardStats] = useState<any>({
+        lessonsCompleted: 0,
+        points: 0,
+        dayStreak: "0 days"
+    })
+    const [userCourses, setUserCourses] = useState<any>()
+
+    useEffect(() => {
+        const getUserCoursesFunction = async () => {
+            const userCourses = await getUserCourses(courses, profileDetails)
+            
+            setUserCourses(userCourses)
+        }
+
+        getUserCoursesFunction()
+
+        const getLessonPoints = async () => {
+            const { lessonsCompleted, points, dayStreak } = await getDashboardStats(profileDetails)
+            
+            setDashboardStats((prevState: any) => ({
+                ...prevState,
+                lessonsCompleted,
+                points,
+                dayStreak
+            }))
+        }
+
+        getLessonPoints()
+    }, [])
+
 
     return (
-        <main className="dashboard-container">
-            <div>
-                <div className="dashboard-header">
-                    <h1>Overview</h1>
-                    <Search 
-                        placeholder="Search Courses" 
-                        icon="fas fa-search" 
-                    />
+        <>{ userCourses &&
+            <main className="dashboard-container">
+                <div>
+                    <div className="dashboard-header">
+                        <h1>Overview</h1>
+                        <Search 
+                            placeholder="Search Courses" 
+                            icon="fas fa-search" 
+                        />
+                    </div>
+                    <div className="dashboard-stats">
+                        <DashboardStat 
+                            title="Lessons Completed" 
+                            value={dashboardStats.lessonsCompleted}
+                            increase={20} 
+                        />
+                        <DashboardStat 
+                            title="Points Earned" 
+                            value={dashboardStats.points}
+                            increase={20} 
+                        />
+                        <DashboardStat 
+                            title="Day Streak" 
+                            value={dashboardStats.dayStreak}
+                            increase={20}
+                        />
+                    </div>
+                    <div className="dashboard-courses">
+                        <CoursesFormat 
+                            title="My Courses"
+                            courses={userCourses.current}
+                        />
+                        <CoursesFormat 
+                            title="Finished Courses"
+                            courses={userCourses.finished}
+                        />
+                        <CoursesFormat 
+                            title="What's Next?"
+                            courses={courses}
+                        />
+                    </div>
                 </div>
-                <div className="dashboard-stats">
-                    <DashboardStat 
-                        title="Lessons Completed" 
-                        value="25" 
-                        increase={20} 
-                    />
-                    <DashboardStat 
-                        title="Points Earned" 
-                        value="526,254" 
-                        increase={20} 
-                    />
-                    <DashboardStat 
-                        title="Day Streak" 
-                        value={dayStreakString}
-                        increase={20}
-                    />
-                </div>
-                <div className="dashboard-courses">
-                    <CoursesFormat 
-                        title="My Courses"
-                        courses={userCourses.current}
-                    />
-                    <CoursesFormat 
-                        title="Finished Courses"
-                        courses={userCourses.finished}
-                    />
-                    <CoursesFormat 
-                        title="What's Next?"
-                        courses={courses}
-                    />
-                </div>
-            </div>
-        </main>
+            </main>
+        }</>
     )
 }
 

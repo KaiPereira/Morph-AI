@@ -1,0 +1,61 @@
+.courses-container {
+    display: flex;
+    justify-content: center;
+    @include align-page($grid-big-width);
+    margin-bottom: 200px;
+}
+
+.courses {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.courses {
+    margin-top: 135px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 40px;
+        color: $black-text;
+    }
+}
+
+
+// If the button was clicked
+.courses-filter-button-active {
+    background: $black-bg !important;
+    color: $white !important;
+}
+
+.courses-filter {
+    display: flex;
+    gap: 16px;
+    margin-top: 25px;
+
+    button {
+        @include button-reset;
+        border-radius: 7px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        padding: 0px 25px;
+        border: 2px solid $black-bg;
+        @include button-transition;
+        color: $black-bg;
+        font-weight: 600;
+        font-size: 14px;
+
+        &:hover {
+            background: $black-bg;
+            color: $white;
+        }
+    }
+}
+
+.courses-list {
+    display: flex;
+    flex-flow: wrap;
+    margin-top: 85px;
+    gap: 50px;
+}

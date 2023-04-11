@@ -2,6 +2,8 @@
 import SignupSignin from "../components/pages/SignupSignin"
 import Nav from "../components/common/Nav"
 import Dashboard from "../components/pages/Dashboard"
+import Footer from "../components/common/Footer"
+
 
 // Libraries
 import { GetServerSideProps } from 'next'
@@ -21,20 +23,6 @@ const Home = ({
   profileDetails,
   courses
 }: any) => {
-  const [userCourses, setUserCourses] = useState<any>()
-  const [userCoursesLoading, setUserCoursesLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    const getUserCoursesFunction = async () => {
-      const userCourses = await getUserCourses(courses, profileDetails)
-      
-      setUserCoursesLoading(false)
-      setUserCourses(userCourses)
-    }
-
-    getUserCoursesFunction()
-  }, [courses])
-
   return (
     <>
       { profileDetails ?
@@ -42,13 +30,11 @@ const Home = ({
           <Nav 
             type="small"
           />
-          { !userCoursesLoading &&
-            <Dashboard 
-              profileDetails={profileDetails}
-              courses={courses}
-              userCourses={userCourses}
-            />
-          }
+          <Dashboard 
+            profileDetails={profileDetails}
+            courses={courses}
+          />
+          <Footer />
         </>
         :
         <SignupSignin type="signup" />
