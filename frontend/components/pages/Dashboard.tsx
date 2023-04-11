@@ -13,13 +13,15 @@ import { getDashboardStats, getUserCourses } from "../../api/client/courses"
 type DashboardStatProps = {
     title: string,
     value: string,
-    increase: number
+    color: "green" | "purple" | "blue",
+    children: any 
 }
 
 const DashboardStat = ({ 
     title, 
     value, 
-    increase 
+    color,
+    children
 }: DashboardStatProps) => {
     return (
         <div className="dashboard-stat">
@@ -27,13 +29,9 @@ const DashboardStat = ({
                 <h1>{title}</h1>
                 <p>{value}</p>
             </div>
-            <div className="dashboard-stat-increase">
-                <div className="dashboard-stat-increase-container">
-                    <p className="dashboard-stat-increase-header">Past Week</p>
-                    <div>
-                        <i className="fa-solid fa-arrow-up"></i>
-                        <p>{increase}%</p>
-                    </div>
+            <div className="dashboard-stat-icon-container">
+                <div className={`dasboard-stat-icon dashboard-stat-icon-${color}`}>
+                    {children}
                 </div>
             </div>  
         </div>
@@ -132,27 +130,33 @@ const Dashboard = ({
                 <div>
                     <div className="dashboard-header">
                         <h1>Overview</h1>
-                        <Search 
+                        {/* <Search 
                             placeholder="Search Courses" 
                             icon="fas fa-search" 
-                        />
+                        /> */}
                     </div>
                     <div className="dashboard-stats">
                         <DashboardStat 
                             title="Lessons Completed" 
                             value={dashboardStats.lessonsCompleted}
-                            increase={20} 
-                        />
+                            color="purple"
+                        >
+                            <i className="fa-solid fa-book"></i>
+                        </DashboardStat>
                         <DashboardStat 
                             title="Points Earned" 
                             value={dashboardStats.points}
-                            increase={20} 
-                        />
+                            color="green"
+                        >
+                            <i className="fa-solid fa-coins"></i>
+                        </DashboardStat>
                         <DashboardStat 
                             title="Day Streak" 
                             value={dashboardStats.dayStreak}
-                            increase={20}
-                        />
+                            color="blue"
+                        >
+                            <i className="fa-solid fa-arrow-trend-up"></i>
+                        </DashboardStat>
                     </div>
                     <div className="dashboard-courses">
                         <CoursesFormat 
@@ -165,7 +169,7 @@ const Dashboard = ({
                         />
                         <CoursesFormat 
                             title="What's Next?"
-                            courses={courses}
+                            courses={userCourses.unfinished}
                         />
                     </div>
                 </div>

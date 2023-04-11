@@ -18,6 +18,8 @@
         font-weight: 700;
         font-size: 40px;
         color: $black-text;
+        text-align: center;
+        line-height: 45px;
     }
 }
 
@@ -30,6 +32,8 @@
 
 .courses-filter {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     gap: 16px;
     margin-top: 25px;
 
@@ -56,6 +60,7 @@
 .courses-list {
     display: flex;
     flex-flow: wrap;
+    justify-content: space-around;
     margin-top: 85px;
     gap: 50px;
 }

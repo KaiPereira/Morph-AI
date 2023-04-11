@@ -60,3 +60,25 @@ nav {
 .nav-small {
     max-width: $grid-small-width;
 }
+
+.dropdown-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 650px) {
+    .dropdown-desktop {
+        display: none;
+    }
+    .dropdown-mobile {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
+@media screen and (max-width: 450px) {
+    nav {
+        padding: 0px 20px;
+    }
+}

@@ -10,7 +10,6 @@ import { GetServerSideProps } from 'next'
 
 // Functions
 import { getAllCourses } from "../api/server/courses"
-import { getUserCourses } from "../api/client/courses"
 
 // States
 import { useEffect, useState } from "react"

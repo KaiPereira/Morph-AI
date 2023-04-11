@@ -24,9 +24,17 @@ const Nav = ({
                 <div className="nav-profile">
                     <img className="nav-profile-img" src="/images/Profile Image.png" alt="User Profile" />
                     <img src="/icons/angle.svg" className="nav-profile-icon" alt="Angle Icon" />
-                    <div className="dropdown">
+                    <div className="dropdown dropdown-desktop">
                         <div className="dropdown-container">
                             <Link href="/">Dashboard</Link>
+                            <button onClick={logout}>Sign out!</button>
+                        </div>
+                    </div>
+                    <div className="dropdown dropdown-mobile">
+                        <div className="dropdown-container">
+                            <Link href="/">Dashboard</Link>
+                            <Link href="/courses">Courses</Link>
+                            <a href="https://discord.gg/fMM8SdJ49a" target="_blank" rel="noreferrer">Community</a>
                             <button onClick={logout}>Sign out!</button>
                         </div>
                     </div>

@@ -24,15 +24,17 @@
     gap: 23px;
     width: 100%;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
 
 .dashboard-stat {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    gap: 20px;
     padding: 22px;
     border-radius: 15px;
     border: 1px solid $card-stroke;
+    flex: 1;
 }
 
 .dashboard-stat-details {
@@ -49,35 +51,31 @@
     }
 }
 
-.dashboard-stat-increase {
+.dashboard-stat-icon-container {
     display: flex;
     align-items: flex-end;
     height: 100%;
 }
 
-.dashboard-stat-increase-container {
+.dasboard-stat-icon {
     display: flex;
-    flex-flow: column;
-    gap: 4px;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-
-    div {
-        display: flex;
-        gap: 4px;
-        border-radius: 1000px;
-        border: 2px solid $black-text;
-        padding: 4px 15px;
-        font-weight: 700;
-        font-size: 13px;
-        color: $black-text;
-    }
+    width: 52px;
+    height: 52px;
+    border-radius: 100px;
+    font-size: 19px;
+    color: $white;
 }
 
-.dashboard-stat-increase-header {
-    font-weight: 600;
-    font-size: 12px;
-    color: $light-black;
+.dashboard-stat-icon-purple {
+    background: rgba(71, 51, 255, 0.5)
+}
+.dashboard-stat-icon-green {
+    background: rgba(116, 255, 51, 0.5);
+}
+.dashboard-stat-icon-blue {
+    background: rgba(51, 255, 243, 0.5);
 }
 
 .dashboard-courses {
@@ -121,4 +119,16 @@
     gap: 40px;
     margin-top: 25px;
     width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+    .dashboard-container {
+        padding: 0px 25px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .dashboard-courses-list .course {
+        max-width: none;
+    }
 }

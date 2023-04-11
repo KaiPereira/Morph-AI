@@ -219,16 +219,21 @@ export const getUserCourses = async (allCourses: any, user: any) => {
     try {
         let userCourses: any = []
         let finishedUserCourses: any = []
+        let unfinishedUserCourses: any = allCourses
 
 
         allCourses.map((course: any) => {
             user.courses.map((userCourse: any) => {
-                console.log(userCourse)
-
                 if ((course.name === userCourse.title) && (!userCourse.finished)) {
+                    // Add it to the user's courses
                     userCourses.push(course)
+                    // Remove the course to unfinished courses
+                    unfinishedUserCourses = unfinishedUserCourses.filter((c: any) => c.name !== course.name)
                 } else if ((course.name === userCourse.title) && (userCourse.finished)) {
+                    // If finished add it here
                     finishedUserCourses.push(course)
+                    // Remove the course to unfinished courses
+                    unfinishedUserCourses = unfinishedUserCourses.filter((c: any) => c.name !== course.name)
                 }
             })
         })
@@ -240,7 +245,8 @@ export const getUserCourses = async (allCourses: any, user: any) => {
 
         return {
             current: userCourses,
-            finished: finishedUserCourses
+            finished: finishedUserCourses,
+            unfinished: unfinishedUserCourses
         }
     } catch (err) {
         throw err

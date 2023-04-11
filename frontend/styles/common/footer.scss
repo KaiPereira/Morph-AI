@@ -1,16 +1,26 @@
 footer {
-    padding: 0px 110px;
+    display: flex;
+    justify-content: center;
+    padding: 0px 50px;
     padding-top: 60px;
     background: $black-bg;
 }
 
+.footer-wrapper {
+    width: 100%;
+    max-width: 1520px;
+}
+
 .footer-main {
     display: flex;
+    gap: 50px;
     justify-content: space-between;
     width: 100%;
 }
 
 .footer-branding {
+    width: 100%;
+
     img {
         width: 140px;
     }
@@ -26,8 +36,12 @@ footer {
 }
 
 .footer-content {
+    width: 100% !important;
+    max-width: 550px;
     display: flex;
-    gap: 100px;
+    flex-flow: wrap;
+    justify-content: space-between;
+    gap: 25px;
 }
 
 .footer-column-header {
@@ -47,6 +61,11 @@ footer {
         font-size: 15px;
         color: $white;
         text-decoration: none;
+        @include link-transition;
+
+        &:hover {
+            color: darken($white, $text-blend)
+        }
     }
 }
 
@@ -66,6 +85,8 @@ footer {
         font-weight: 500;
         font-size: 15px;
         color: $light-white;
+        text-align: center;
+        line-height: 20px;
     }
 }
 
@@ -76,5 +97,39 @@ footer {
     i {
         font-size: 20px;
         color: $light-white;
+        @include link-transition;
+
+        &:hover {
+            color: lighten($light-white, $text-blend)
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .footer-main {
+        flex-flow: column;
+        align-items: center;
+    }
+
+    footer {
+        padding: 0px 35px;
+        padding-top: 50px;
+    }
+
+    .footer-branding{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .footer-bottom-container {
+        flex-flow: column;
+        align-items: center;
+        height: max-content;
+        gap: 15px;
+        padding: 15px 0px;
     }
 }
