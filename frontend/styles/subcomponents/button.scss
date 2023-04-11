@@ -14,6 +14,10 @@
     @include button-transition;
 }
 
+.button-link {
+    text-decoration: none;
+}
+
 .button-light {
     background: $light-white-bg;
     color: $black-text;

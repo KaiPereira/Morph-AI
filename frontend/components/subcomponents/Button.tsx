@@ -41,7 +41,7 @@ const Button = ({
     return (
         <>
             {link ? 
-            <Link href={link}>
+            <Link href={link} className="button-link">
                 <button className={`button button-${type} ${className}`} onClick={onClick}>
                     {children}
                     {arrow ? <Arrow color={buttonColor}/> : null}
