@@ -23,15 +23,15 @@
     left: 12px;
     padding: 5px 12px;
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(6);
+    backdrop-filter: blur(6px);
     border-radius: 1000px;
-    border: 0.4px rgba(255, 255, 255, 0.15) solid;
+    border: 0.4px rgba(255, 255, 255, 0.25) solid;
 
     p {
         font-weight: 500;
         font-size: 11.5px;
         line-height: 13px;
-        color: $black-text;
+        color: #F0F0F0;
     }
 }
 

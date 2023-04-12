@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 // Our MIDDLEware
 const app = express()
 app.use(cors({
-    origin: 'https://kaipereira-animated-space-garbanzo-49w4xrx6qvgfjvv6-3000.preview.app.github.dev',
+    origin: 'http://localhost:3000',
     credentials: true
 }));
 app.use(express.json())

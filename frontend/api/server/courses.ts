@@ -98,20 +98,30 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
     try {
         // Reformat the string from url to name
         const courseNameNew = courseName.replaceAll("-", " ")
+
         // Grab all of the lessons
         const courseLessons = fs.readdirSync(`courses/${courseNameNew}/lessons`, "utf8")
 
-        // We do this to grab the lesson
-        let lessonText: any = courseLessons.map((lessonCategoryName: string) => {    
-            const lessons =  fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
+        let allCourseLessons: any = courseLessons.map((lessonCategoryName: string) => {
+            const lessons = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
 
             return lessons.map((lesson: string, index: any) => {
-                if (index == lessonIndex) {
-                    const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}/${lesson}`, "utf8")
-
-                    return lessonText
+                return {
+                    name: lesson,
+                    category: lessonCategoryName
                 }
             })
+        })
+
+        allCourseLessons = allCourseLessons.flat()
+
+        // We do this to grab the lesson
+        let lessonText: any = allCourseLessons.map((lesson: any, index: any) => {    
+            if (index == lessonIndex) {
+                const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lesson.category}/${lesson.name}`, "utf8")
+
+                return lessonText
+            }
         })
 
         lessonText = lessonText.flat().join("")
