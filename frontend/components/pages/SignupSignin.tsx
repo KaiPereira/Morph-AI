@@ -48,9 +48,9 @@ const SignupSignin = ({
                 window.location.reload()
             })
             .catch((error: any) => {
+                console.log(error)
                 changeStatus(error.response.data)
                 changeStatusType(error.response.status)
-                console.log(error)
             })
     }
 

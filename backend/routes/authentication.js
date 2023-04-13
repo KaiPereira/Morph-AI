@@ -3,42 +3,9 @@ const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const User = require("../models/User")
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oidc');
-const emailValidator = require('deep-email-validator')
-
-// For future Google Auth - need to configure consent screen
-// passport.use(new GoogleStrategy({
-//     clientID: process.env['GOOGLE_CLIENT_ID'],
-//     clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-//     callbackURL: '/oauth2/redirect/google',
-//     scope: [ 'profile' ]
-//   }, async function verify(issuer, profile, cb) {
-
-//     try {
-//         const user = await User.findOne({
-//             email: profile.emails[0].value
-//         })
-    
-//         if (user) {
-//             return cb(null, user)
-//         } else {
-//             const newUser = new User({
-//                 email: profile.emails[0].value,
-//                 id: profile.id,
-//                 provider: issuer
-//             })
-
-//             const user = await newUser.save()
-
-//             return cb(null, user)
-//         }
-
-//     } catch (err) {
-//         res.status(400).send("Unknown Error has Occured!")
-//         return cb(err)
-//     }
-//   }));
+const Token = require("../models/VerificationToken")
+const crypto = require("crypto");
+const sendEmail = require("../utils/emailVerification.js")
 
 
 // Functions
@@ -48,38 +15,59 @@ const { verifyUserToken, jwtCreation } = require("../utils/authentication.js")
 router.post("/register", async (req, res) => {
     try {
 
-        // Validate email
-        const validation = await emailValidator.validate(req.body.email)
+        // Test to see if the user already exists
+        const emailExists = await User.findOne({
+            email: req.body.email
+        })
 
-        if (validation.valid) {
-            // Test to see if the user already exists
-            const emailExists = await User.findOne({
-                email: req.body.email
-            })
+        if (!emailExists) {
+            //Hash password
+            const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-            if (!emailExists) {
-                //Hash password
-                const hashedPassword = bcrypt.hashSync(req.body.password, 8);
+            const newUser = await new User({
+                email: req.body.email,
+                password: hashedPassword
+            }).save()
 
-                const newUser = new User({
-                    email: req.body.email,
-                    password: hashedPassword
-                })
+            const newToken = await new Token({
+                userId: newUser._id,
+                token: crypto.randomBytes(32).toString("hex"),
+            }).save()
 
-                const savedUser = await newUser.save()
-                
-                jwtCreation(res, savedUser, "Successfully registered!")
-            } else {
-                res.status(400).send("Email already exists!")
-            }
+            const message = `${req.headers.origin}/login/${newUser.id}/${newToken.token}`;
+            await sendEmail(newUser.email, "Verify Email", message);
+
+            res.send("A verification email was sent!");
         } else {
-            res.status(400).send("Invalid email!")
+            res.status(400).send("Email already exists!")
         }
     } catch (err) {
         console.log(err)
         res.status(400).send("Unknown Error has Occured!")
     }
 })
+
+router.get("/verify/:id/:token", async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id });
+
+        if (!user) return res.status(400).send("Invalid link");
+
+            const token = await Token.findOne({
+                userId: user._id,
+                token: req.params.token,
+            });
+
+        if (!token) return res.status(400).send("Invalid link");
+
+        await User.updateOne({ _id: user._id}, {verified: true});
+        await Token.findByIdAndRemove(token._id);
+        await jwtCreation(res, user, "Successfully registered!")
+    } catch (err) {
+        console.log(err)
+        res.status(400).send("An error occured");
+    }
+});
 
 
 router.post("/login", async (req, res) => {

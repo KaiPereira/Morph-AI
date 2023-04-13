@@ -54,3 +54,13 @@ export const logout = async () => {
         throw err
     }
 }
+
+export const verifyEmail = async (userId: string, token: string) => {
+    try {
+        let verify: any = await axios.get(`${apiUrl}/authentication/verify/${userId}/${token}`)
+
+        return verify.data
+    } catch (err) {
+        throw err
+    }
+}

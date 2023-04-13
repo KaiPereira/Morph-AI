@@ -30,20 +30,13 @@ const UserSchema = mongoose.Schema({
     courses: [
         CourseSchema
     ],
-    // Password for username/password auth
-    password: String,
-    // Id and provider if there is no username and we're using google auth
-    id: {
+    password: {
         type: String,
-        required: function() {
-            return !this.password; // require 'id' only if 'password' is not present
-        }
+        require: true
     },
-    provider: {
-        type: String,
-        required: function() {
-            return !this.password; // require 'provider' only if 'password' is not present
-        }
+    verified: {
+        type: Boolean,
+        default: false
     }
 })
 

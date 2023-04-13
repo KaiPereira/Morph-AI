@@ -1,7 +1,7 @@
-import SignupSignin from "../components/pages/SignupSignin"
+import SignupSignin from "../../components/pages/SignupSignin"
 
 // API functions
-import { fetchProfileDetails } from "../api/client/user"
+import { fetchProfileDetails } from "../../api/client/user"
 
 // States
 import { useEffect, useState } from "react"
