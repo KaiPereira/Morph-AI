@@ -62,7 +62,8 @@ router.get("/verify/:id/:token", async (req, res) => {
 
         await User.updateOne({ _id: user._id}, {verified: true});
         await Token.findByIdAndRemove(token._id);
-        await jwtCreation(res, user, "Successfully registered!")
+        
+        jwtCreation(res, user, "Successfully registered!")
     } catch (err) {
         console.log(err)
         res.status(400).send("An error occured");
@@ -77,6 +78,9 @@ router.post("/login", async (req, res) => {
         })
 
         if (user) {
+
+            if (!user.verified) return res.status(400).send("Please verify your email first!")
+
             const validPass = await bcrypt.compare(req.body.password, user.password);
 
             if (!validPass) {

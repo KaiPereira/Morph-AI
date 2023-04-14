@@ -4,17 +4,27 @@ import { verifyEmail } from "@/api/client/authentication"
 // States
 import { useEffect } from "react"
 
+type TokenVerificationProps = {
+    userId: any,
+    token: any
+}
 
-const TokenVerification = (
-    verification: any
-) => {
+
+const TokenVerification = ({
+    userId,
+    token
+}: TokenVerificationProps) => {
 
     useEffect(() => {
-        console.log(verification)
+        const verifyEmailHandler = async () => {
+            const verification = await verifyEmail(userId, token)
 
-        if (verification.verification) {
-            window.location.href = "/"
+            if (verification) {
+                window.location.href = "/login"
+            }
         }
+
+        verifyEmailHandler()
     }, [])
 
     return (
@@ -27,11 +37,10 @@ const TokenVerification = (
 export const getServerSideProps = async (context: any) => {
     const { userId, token } = context.query;
 
-    const verification = await verifyEmail(userId, token)
-
     return {
         props: {
-            verification
+            userId,
+            token
         }
     }
 }
