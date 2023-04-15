@@ -1,5 +1,6 @@
 // Libraries
 import fs from 'fs';
+import path from 'path';
 
 
 // Server side function
@@ -80,7 +81,7 @@ export const getCourse = async (courseName: string) => {
 // Server side function
 export const getAllCourses = async () => {
     try {
-        const courses = fs.readdirSync("courses");
+        const courses = fs.readdirSync(path.join(process.cwd(), 'courses'));
 
         const courseData = await Promise.all(courses.map(async (course) => {
             return await getCourse(course)
