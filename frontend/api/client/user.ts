@@ -1,5 +1,5 @@
 // Our files
-import apiUrl from "../../config"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 // Our libraries
 import axios from "axios"

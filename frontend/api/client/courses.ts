@@ -4,7 +4,7 @@ import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 
 // Files
-import apiUrl from "../../config"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 
 export const fetchLessonIndex = async (

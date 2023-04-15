@@ -3,7 +3,7 @@ import axios from "axios"
 import Cookies from 'js-cookie';
 
 // Our files
-import apiUrl from "../../config"
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 
 export const signup = async (
@@ -29,6 +29,8 @@ export const signin = async (
     password: string
 ) => {
     try {
+        console.log(`${apiUrl}/authentication/login`, apiUrl)
+
         const user = await axios.post(`${apiUrl}/authentication/login`, {
             email: email,
             password: password
