@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 // Our MIDDLEware
 const app = express()
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.ORIGIN,
     credentials: true
 }));
 app.use(express.json())
