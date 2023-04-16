@@ -107,4 +107,12 @@ router.post("/logout", verifyUserToken, async (req, res) => {
     }
 })
 
+router.get("/test", async (req, res) => {
+    try {
+        res.send("Test successful!")
+    } catch (err) {
+        res.status(400).send("Unknown Error has Occured!")
+    }
+})
+
 module.exports = router;
