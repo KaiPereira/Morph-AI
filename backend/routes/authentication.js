@@ -100,7 +100,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", verifyUserToken, async (req, res) => {
     try {
-        res.clearCookie("token")
+        res.clearCookie("token", { httpOnly: true, sameSite: "None", secure: true })
         res.send("Successfully logged out!")
     } catch (err) {
         res.status(400).send("Unknown Error has Occured!")
