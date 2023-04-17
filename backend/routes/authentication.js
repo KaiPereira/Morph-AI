@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
             const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
             const newUser = await new User({
-                email: req.body.email,
+                email: req.body.email.toLowerCase(),
                 password: hashedPassword
             }).save()
 
@@ -74,7 +74,7 @@ router.get("/verify/:id/:token", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({
-            email: req.body.email
+            email: req.body.email.toLowerCase()
         })
 
         if (user) {

@@ -35,7 +35,7 @@ const jwtCreation = async (res, user, message) => {
     try {
         const jwtPayload = {
             id: user._id,
-            email: user.email
+            email: user.email.toLowerCase()
         }
 
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, {expiresIn: '7d'})
