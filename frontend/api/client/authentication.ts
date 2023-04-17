@@ -29,8 +29,6 @@ export const signin = async (
     password: string
 ) => {
     try {
-        console.log(`${apiUrl}/authentication/login`, apiUrl)
-
         const user = await axios.post(`${apiUrl}/authentication/login`, {
             email: email,
             password: password
