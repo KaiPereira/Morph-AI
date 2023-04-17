@@ -40,7 +40,7 @@ const jwtCreation = async (res, user, message) => {
 
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, {expiresIn: '7d'})
 
-        res.cookie('token', token, { httpOnly: true, sameSite: "None", secure: true, expires: 7 }).send(message)
+        res.cookie('token', token, { httpOnly: true, sameSite: "None", secure: true }).send(message)
     } catch (err) {
         console.log(err)
         res.status(400).send("Authentication failed!")
