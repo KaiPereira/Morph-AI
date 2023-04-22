@@ -83,9 +83,7 @@ router.post("/login", async (req, res) => {
 
             const validPass = await bcrypt.compare(req.body.password, user.password);
 
-            if (!validPass) {
-                res.status(400).send("Invalid username or password!")
-            }
+            if (!validPass) return res.status(400).send("Invalid username or password!")
 
             jwtCreation(res, user, "Successfully logged in!")
         } else {
