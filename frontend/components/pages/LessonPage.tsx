@@ -6,7 +6,7 @@ import {
     nextLesson, 
     prettifyUrl,
     toLesson,
-    finishCourse 
+    finishCourse,
 } from "@/api/client/courses"
 
 // States
@@ -78,7 +78,7 @@ const LessonsFormat = ({
 
                 return (
                     <div className="lesson-category" key={index}>
-                        <p className="lesson-category-header">{prettifyUrl(lesson.lessonCategory)}</p>
+                        <p className="lesson-category-header">{prettifyUrl(lesson.lessonCategory).replaceAll("-", " ")}</p>
                         <div className="lesson-category-lessons">{lessonElements}</div>
                     </div>
                 );
