@@ -14,7 +14,8 @@ type CourseProps = {
     title: string,
     description: string,
     tags: any,
-    courseTime: string
+    courseTime: string,
+    icon: string
 }
 
 
@@ -24,7 +25,8 @@ const Course = ({
     title,
     description,
     tags,
-    courseTime
+    courseTime,
+    icon
 }: CourseProps) => {
     const [tagElements, changeTagElements] = useState<any>()
     const [lessonProgress, setLessonProgress] = useState<any>(null)
@@ -49,29 +51,15 @@ const Course = ({
 
     }, [])
 
-    const courseLink = `/courses/${lessonProgress ? `${prettifyUrl(title)}/${lessonProgress}` : `${prettifyUrl(title)}/${0}`}`
+    const courseLink = `/courses/${prettifyUrl(title)}`
 
     return (
         <>
-            <Link href={courseLink} className="course-link">
-                <div className="course">
-                    <img src={thumbnail} alt="thumbnail" className="course-thumbnail" />
-                    <div className="course-difficulty">
-                        <p>{difficulty}</p>
-                    </div>
-                    <div className="course-info">
-                        <p className="course-header">{title}</p>
-                        <p className="course-description">{description}</p>
-                        <div className="course-info-extra">
-                            <div className="course-info-extra-tags">
-                                {tagElements}
-                            </div>
-                            <div className="course-info-extra-time">
-                                <i className="fa-solid fa-book"></i>
-                                <p>{courseTime}</p>
-                            </div>
-                        </div>
-                    </div>
+            <Link href={courseLink} className="course">
+                <i className={icon}></i>
+                <div>
+                    <p className="course-header">{title}</p>
+                    <p className="course-description">{description}</p>
                 </div>
             </Link>
         </>

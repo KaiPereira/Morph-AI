@@ -82,7 +82,7 @@ export const markdownToHtml = async (markdown: string) => {
     return html
 }
 
-export const courseLocked = async (courseName: any, courseProgress: string, currentLesson: any) => {
+export const courseLocked = async (courseName: any, courseProgress: any, currentLesson: any) => {
     try {
         // First we grab all of the courses and put them in an array
         // Then we grab the index of the course we're on in that array

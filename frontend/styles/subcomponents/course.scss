@@ -1,99 +1,35 @@
 .course {
-    position: relative;
-    width: 100%;
-    max-width: 270px;
-    cursor: pointer;
-    height: max-content;
-}
-
-.course-link {
     text-decoration: none;
-}
-
-.course-thumbnail {
-    border-radius: 10px;
-    height: 120px;
+    display: flex;
+    gap: 14px;
     width: 100%;
-    object-fit: cover;
-}
+    max-width: 625px;
+    padding: 17px 21px;
+    border-radius: 10px;
+    border: 1px solid $card-stroke;
+    text-align: left;
 
-.course-difficulty {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 5px 12px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(6px);
-    border-radius: 1000px;
-    border: 0.4px rgba(255, 255, 255, 0.25) solid;
+    i {
+        color: $black-text;
+        flex-grow: 0;
+        font-size: 23px;
+    }
 
-    p {
-        font-weight: 500;
-        font-size: 11.5px;
-        line-height: 13px;
-        color: #F0F0F0;
+    div {
+        margin-top: 3px;
     }
 }
 
-.course-info {
-    margin-top: 10px;
-}
 .course-header {
     font-weight: 700;
-    font-size: 19px;
-    line-height: 25px;
+    font-size: 17px;
     color: $black-text;
 }
 
-.course-description {
+.course-description{
     font-weight: 500;
-    font-size: 13px;
-    line-height: 22px;
-    margin-top: 5px;
+    font-size: 14px;
     color: $light-black;
-}
-
-.course-info-extra {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 11px;
-}
-
-.course-info-extra-tags {
-    display: flex;
-    gap: 5px;
-
-    div {
-        display: flex;
-        align-items: center;
-        padding: 0px 9px;
-        height: 22px;
-        border: 2px solid $light-black;
-        border-radius: 5px;
-
-        p {
-            font-weight: 700;
-            font-size: 11px;
-            color: $light-black;
-        }
-    }
-}
-
-.course-info-extra-time {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-
-    i {
-        font-weight: 900;
-        font-size: 15px;
-        color: $light-black;
-    }
-
-    p {
-        font-weight: 600;
-        font-size: 13px;
-        color: $light-black;
-    }
+    margin-top: 6px;
+    line-height: 21px;
 }

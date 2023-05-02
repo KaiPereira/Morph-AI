@@ -18,7 +18,7 @@ const Nav = ({
                     <img src="/branding/Typographical Logo.svg" alt="logo" className="nav-logo" />
                 </Link>
                 <ul className="nav-links">
-                    <li><Link href="/courses">Courses</Link></li>
+                    <li><Link href="/">Courses</Link></li>
                     <li><a href="https://discord.gg/fMM8SdJ49a" target="_blank" rel="noreferrer">Community</a></li>
                 </ul>
                 <div className="nav-profile">
@@ -33,7 +33,6 @@ const Nav = ({
                     <div className="dropdown dropdown-mobile">
                         <div className="dropdown-container">
                             <Link href="/">Dashboard</Link>
-                            <Link href="/courses">Courses</Link>
                             <a href="https://discord.gg/fMM8SdJ49a" target="_blank" rel="noreferrer">Community</a>
                             <button onClick={logout}>Sign out!</button>
                         </div>
