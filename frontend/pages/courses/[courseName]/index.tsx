@@ -17,6 +17,7 @@ const Course = ({
                 profileDetails={profileDetails}
                 courseData={courseData}
             />
+            <Footer />
         </>
     )
 }

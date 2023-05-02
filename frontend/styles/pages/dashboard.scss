@@ -3,6 +3,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    padding: 0px 10px;
     padding-top: 130px;
     margin-bottom: 200px;
 
@@ -29,4 +30,16 @@
     align-items: center;
     gap: 23px;
     width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+    .dashboard-container h1 {
+        font-size: 35px;
+    }
+    .dashboard-description {
+        font-size: 15px;
+    }
+    .course {
+        padding: 15px 15px;
+    }
 }
