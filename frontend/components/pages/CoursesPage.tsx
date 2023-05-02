@@ -63,6 +63,7 @@ const CoursesPage = ({
                         description={course.description}
                         tags={course.tags}
                         courseTime={course.courseTime}
+                        icon={course.icon}
                     />
                 )
             })
