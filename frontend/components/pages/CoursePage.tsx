@@ -21,26 +21,44 @@ const CourseLesson = ({
 }: any) => {
     const [lessonElements, setLessonElements] = useState<any>()
     const [lessonOpen, setLessonOpen] = useState(false)
-    const [lessonsCompleted, setLessonsCompleted] = useState()
+    const [lessonsCompleted, setLessonsCompleted] = useState(0)
 
     useEffect(() => {
         const lessonPromise = Promise.all(lessons.map(async (lesson: any, index: any) => {
             const { lessonOn } = await courseProgress(courseData.name);
             const lessonLocked = await courseLocked(courseData, lessonOn - 1, lesson);
 
-            !lessonLocked && setLessonsCompleted(index + 1)
-
-            return (
-                <li key={index} className={!lessonLocked ? "course-page-lesson-finished" : ""}>
-                    <Link href={`/courses/${prettifyUrl(courseData.name)}/${lessonOn ? lessonOn : 0}`} className="course-page-lesson-link">
-                        {prettifyString(lesson)}
-                    </Link>
-                </li>
-            )
+            return {
+                index: index,
+                lessonLocked: lessonLocked,
+                lessonElement: (
+                    <li key={index} className={!lessonLocked ? "course-page-lesson-finished" : ""}>
+                        <Link href={`/courses/${prettifyUrl(courseData.name)}/${lessonOn ? lessonOn : 0}`} className="course-page-lesson-link">
+                            {prettifyString(lesson)}
+                        </Link>
+                    </li>
+                )
+            }
         }))
 
-        lessonPromise.then((res) => setLessonElements(res)) 
-    }, [lessons])
+        lessonPromise.then((res) => {
+            let highestIndex = -1;
+
+            const lessonElementMap = res.map((lessonElement: any) => {
+                return lessonElement.lessonElement
+            })
+
+            res.forEach(lesson => {
+                if (!lesson.lessonLocked && lesson.index > highestIndex) {
+                    console.log(lesson)
+                    highestIndex = lesson.index;
+                }
+            });
+
+            setLessonsCompleted(highestIndex + 1)
+            setLessonElements(lessonElementMap)
+        }) 
+    }, [])
 
 
     const openLesson = () => {
