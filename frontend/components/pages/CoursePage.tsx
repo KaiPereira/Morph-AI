@@ -51,7 +51,6 @@ const CourseLesson = ({
         <div className="course-page-lessons-lesson">
             <div className="course-page-lessons-lesson-1">
                 <p>{prettifyString(lessonCategory)}</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus turpis sit amet mi tempor maximus.</p>
             </div>
             <div className={`course-page-lessons-lesson-2 ${lessonOpen && "course-page-lessons-lesson-open"}`}>
                 <div className="course-page-lessons-lesson-topbar">
