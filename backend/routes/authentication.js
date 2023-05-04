@@ -6,6 +6,7 @@ const User = require("../models/User")
 const Token = require("../models/VerificationToken")
 const crypto = require("crypto");
 const sendEmail = require("../utils/emailVerification.js")
+const axios = require("axios")
 
 
 // Functions
@@ -34,6 +35,25 @@ router.post("/register", async (req, res) => {
                 token: crypto.randomBytes(32).toString("hex"),
             }).save()
 
+            // Add them to the newsletter
+            let data = JSON.stringify({
+                "email": newUser.email
+            });
+            
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'https://api.beehiiv.com/v2/publications/pub_df4ab5b1-ba32-4ddb-99fb-d15e2219e1fa/subscriptions',
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`
+                },
+                data : data
+            };
+
+            await axios.request(config)
+
+            // Send the verification email
             const message = `${req.headers.origin}/login/${newUser.id}/${newToken.token}`;
             await sendEmail(newUser.email, "Verify Email", message);
 
