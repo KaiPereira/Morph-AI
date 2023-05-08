@@ -1,5 +1,6 @@
 // Libraries
 import Link from "next/link"
+import Image from "next/image"
 
 // Functions
 import { logout } from "../../api/client/authentication"
@@ -22,8 +23,8 @@ const Nav = ({
                     <li><a href="https://discord.gg/fMM8SdJ49a" target="_blank" rel="noreferrer">Community</a></li>
                 </ul>
                 <div className="nav-profile">
-                    <img className="nav-profile-img" src="/images/Profile Image.png" alt="User Profile" />
-                    <img src="/icons/angle.svg" className="nav-profile-icon" alt="Angle Icon" />
+                    <Image className="nav-profile-img" src="/images/Profile Image.png" alt="User Profile" width="43" height="43" />
+                    <img src="/icons/angle.svg" className="nav-profile-icon" alt="Angle Icon"/>
                     <div className="dropdown dropdown-desktop">
                         <div className="dropdown-container">
                             <Link href="/">Dashboard</Link>

@@ -24,6 +24,7 @@ const CourseLesson = ({
     const [lessonsCompleted, setLessonsCompleted] = useState(0)
 
     useEffect(() => {
+        // Check if the lesson is locked and return the element
         const lessonPromise = Promise.all(lessons.map(async (lesson: any, index: any) => {
             const { lessonOn } = await courseProgress(courseData.name);
             const lessonLocked = await courseLocked(courseData, lessonOn - 1, lesson);
@@ -41,6 +42,7 @@ const CourseLesson = ({
             }
         }))
 
+        // This will set the element and also how many are locked and unlocked
         lessonPromise.then((res) => {
             let highestIndex = -1;
 
@@ -50,7 +52,6 @@ const CourseLesson = ({
 
             res.forEach(lesson => {
                 if (!lesson.lessonLocked && lesson.index > highestIndex) {
-                    console.log(lesson)
                     highestIndex = lesson.index;
                 }
             });
