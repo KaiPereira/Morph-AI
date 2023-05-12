@@ -125,7 +125,7 @@ const SignupSignin = ({
                             "Sign In Using Google"
                         )}
                     </Button> */}
-                    <p className="signup-login">{signinSignupContent("Already have an account?", "Don’t have an account yet?")} <Link href={signinSignupContent("/login", "/")}><span>{signinSignupContent("Login In", " Sign Up")}</span></Link></p>
+                    <p className="signup-login">{signinSignupContent("Already have an account?", "Don’t have an account yet?")} <Link href={signinSignupContent("/login", "/register")}><span>{signinSignupContent("Login In", " Sign Up")}</span></Link></p>
                 </div>
             </div>
             <div className="signup-decoration">

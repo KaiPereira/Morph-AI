@@ -1,6 +1,7 @@
 .home-main {
     display: flex;
     justify-content: center;
+    padding: 20px;
     height: 100vh;
     overflow: hidden;
 }
@@ -15,6 +16,7 @@ nav:has(+ .home-main) {
 .home-main-container {  
     display: flex;
     justify-content: space-between;
+    gap: 50px;
     width: 100%;
     max-width: $grid-big-width;
 }
@@ -44,20 +46,28 @@ nav:has(+ .home-main) {
 
 .home-main-content-buttons {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 17px;
     margin-top: 35px;
+    max-width: max-content;
 }
 
 .home-main-content-users {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: 9px;
+    gap: 14px;
     margin-top: 25px;
+    max-width: max-content;
 }
 
 .home-main-content-users-container {
+    display: flex;
+    justify-content: flex-start;
     position: relative;
-    width: 170px;
+    width: 165px;
 
     img {
         position: absolute;
@@ -108,11 +118,27 @@ $home-animation-grid-spacing: 24px;
     }
 
     & > div {
+        display: flex;
+        align-items: flex-end;
+        padding: 17px;
         width: 200px;
         height: 260px;
-        background-image: url("https://image.lexica.art/full_jpg/a3863aa8-8b22-4095-aa6e-b393519b979d");
         background-size: cover;
         border-radius: 15px;
+
+        div {
+            width: 100%;
+            padding: 10px 10px;
+            color: $white;
+            background: rgba(20, 20, 22, 0.76);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            height: max-content;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            line-height: 18px;
+        }
     }
 }
 
@@ -131,5 +157,38 @@ $home-animation-grid-spacing: 24px;
     }
     100% {
         transform: translateY(-100vh);
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .home-main-animation {
+        display: none;
+    }
+    .home-main-container {
+        justify-content: center;
+        align-items: center;
+    }
+    .home-main-content {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home-main-content h1 {
+        font-size: 50px;
+        line-height: 60px;
+    }
+    .home-main-content-description {
+        font-size: 16px;
+    }
+    .home-main {
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .home-main-content h1 {
+        font-size: 40px;
+        line-height: 50px;
     }
 }

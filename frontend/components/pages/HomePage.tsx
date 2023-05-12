@@ -44,55 +44,55 @@ const HomePage = () => {
                 </div>
                 <div className="home-main-animation">
                     <div className="home-main-animation-container">
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image1.png)"}}>
+                            <div>Python Mastery</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image2.png)"}}>
+                            <div>Handwritten Digit Recognizer</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image3.png)"}}>
+                            <div>Flower Classification</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image4.png)"}}>
+                            <div>Predict House Prices</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image5.png)"}}>
+                            <div>Python Mastery</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image6.png)"}}>
+                            <div>Handwritten Digit Recognizer</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image7.png)"}}>
+                            <div>Flower Classification</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image8.png)"}}>
+                            <div>Predict House Prices</div>
                         </div>
                     </div>
                     <div className="home-main-animation-container">
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image1.png)"}}>
+                            <div>Python Mastery</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image2.png)"}}>
+                            <div>Handwritten Digit Recognizer</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image3.png)"}}>
+                            <div>Flower Classification</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image4.png)"}}>
+                            <div>Predict House Prices</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image5.png)"}}>
+                            <div>Python Mastery</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image6.png)"}}>
+                            <div>Handwritten Digit Recognizer</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image7.png)"}}>
+                            <div>Flower Classification</div>
                         </div>
-                        <div>
-                            <div></div>
+                        <div style={{backgroundImage: "url(/images/ai_image8.png)"}}>
+                            <div>Predict House Prices</div>
                         </div>
                     </div>
                 </div>

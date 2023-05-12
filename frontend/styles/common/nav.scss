@@ -63,6 +63,17 @@ nav {
     display: none;
 }
 
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+ 
+    button {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .dropdown-desktop {
         display: none;
@@ -73,6 +84,14 @@ nav {
 
     .nav-links {
         display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .nav-buttons {
+
+        a:nth-child(1) {
+            display: none;
+        }
     }
 }
 @media screen and (max-width: 450px) {
