@@ -5,12 +5,17 @@ import Image from "next/image"
 // Functions
 import { logout } from "../../api/client/authentication"
 
+// Components
+import Button from "../subcomponents/Button"
+
 type NavProps = {
-    type?: "small" | "big"
+    type?: "small" | "big",
+    signedIn?: boolean
 }
 
 const Nav = ({
-    type="big"
+    type="big",
+    signedIn=true
 }: NavProps) => {
     return (
         <nav>
@@ -22,6 +27,7 @@ const Nav = ({
                     <li><Link href="/">Courses</Link></li>
                     <li><a href="https://discord.gg/fMM8SdJ49a" target="_blank" rel="noreferrer">Community</a></li>
                 </ul>
+                { signedIn ?
                 <div className="nav-profile">
                     <Image className="nav-profile-img" src="/images/Profile Image.png" alt="User Profile" width="43" height="43" />
                     <img src="/icons/angle.svg" className="nav-profile-icon" alt="Angle Icon"/>
@@ -39,6 +45,22 @@ const Nav = ({
                         </div>
                     </div>
                 </div>
+                :
+                <div className="nav-buttons">
+                    <Button
+                        type="light"
+                        link="/login"
+                    >
+                        Login
+                    </Button>
+                    <Button
+                        type="black"
+                        link="/register"
+                    >
+                        Get Started!
+                    </Button>
+                </div>
+                }
             </div>
         </nav>
     )
