@@ -21,6 +21,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.5.1",
     "@types/node": "18.14.6",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -33,6 +34,7 @@
     "next": "13.2.3",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
+    "pyodide": "^0.23.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loader-spinner": "^5.3.4",
@@ -40,6 +42,7 @@
     "remark-html": "^15.0.2",
     "remark-react": "^9.0.1",
     "sass": "^1.60.0",
+    "skulpt": "^1.2.0",
     "typescript": "4.9.5"
   },
   "devDependencies": {
