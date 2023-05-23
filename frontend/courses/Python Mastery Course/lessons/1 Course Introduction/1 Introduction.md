@@ -1,19 +1,36 @@
-# Python Mastery Course
+# --exercise--
 
-Welcome to the Python Mastery Course! This course is designed for anyone who has little to no experience with Python but wants to learn the language from scratch.
+# Multiple linear regression
 
-## About Python
+In the casino game Blackjack, a player can determine whether they have an advantage on the next hand over the house by keeping track of the relative number of high and low cards remaining in the deck. This is called Card Counting.
 
-Python is a high-level programming language that is widely used in a variety of fields, including web development, data analysis, artificial intelligence, and more. With its clean syntax and powerful libraries, Python is a great language for beginners to learn.
+Having more high cards remaining in the deck favors the player. Each card is assigned a value according to the table below. When the count is positive, the player should bet high. When the count is zero or negative, the player should bet low.
 
-## About the course
+## Example
 
-This course will take you through the basics of Python and gradually build up your knowledge to more advanced topics. By the end of the course, you'll have a solid foundation in Python programming and be able to write your own Python programs.
+```
+function fnSearch() { 
+    var frm = document.searchFrm; 
+    var str = encryptData(frm, _currentPage); 
+}
+```
 
-We'll start by introducing Python and explaining what it's used for. We'll then cover the basics of programming, including data types, variables, and control structures. From there, we'll move on to more advanced topics like object-oriented programming, file handling, and web scraping.
+# --hints--
 
-Throughout the course, we'll provide exercises and challenges to help reinforce your learning. We'll also work on a project in the final module to apply what we've learned and build a real-world Python application.
+Name a variable called hello_world_variable
 
-## Ready?
+```
+True if hello_world_variable == "hello world" else False
+```
 
-So, if you're ready to start your journey to Python mastery, let's get started!
+hello_world_variable should have a value of "hello world"
+
+```
+True if hello_world_variable == "hello world" else False
+```
+
+# --preset--
+
+```
+Hello WOrld!
+```

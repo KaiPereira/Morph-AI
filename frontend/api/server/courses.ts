@@ -127,9 +127,33 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
 
         lessonText = lessonText.flat().join("")
 
-        return lessonText
+        // This will split the markdown into the exercise, instructions and preset
+        const sectionSplitRegex = /# --(\w+)--/g;
+        const matches = [...lessonText.split(sectionSplitRegex)];
 
-        // return lessonText
+        // We need to split the instructions into separate instructions
+        const hintsSplitRegex = /(```[\s\S]*?```)/
+        const hints = matches[4].split(hintsSplitRegex)
+        const hintsFormatted = [];
+
+        for (let i = 0; i < hints.length - 1; i += 2) {
+            const description = hints[i].trim();
+            let code = hints[i + 1].trim();
+            code = code.replaceAll("```", "")
+            
+            hintsFormatted.push({ description, code });
+        }
+
+        // Remove the codeblock backticks from the preset
+        let preset = matches[6].replaceAll("`", "")
+        // Trim whitespace from start and end
+        preset = preset.trim()
+
+        return {
+            exercise: matches[2],
+            hints: hintsFormatted,
+            preset: preset
+        }
     } catch (err) {
         throw err
     }

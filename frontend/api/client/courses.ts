@@ -253,46 +253,42 @@ export const getUserCourses = async (allCourses: any, user: any) => {
     }
 }
 
-export const getDashboardStats = async (profileDetails: any) => {
+export const runLessonTest = async (editorCode: any, testCode: any) => {
     try {
-        // Grab all of the lessons completed by the user by adding one to lessonOn to each course
-        let lessonsCompleted = 0
-    
-        profileDetails.courses.map((course: any) => {
-            lessonsCompleted += course.lessonOn + 1
-        })
+        // We'll use this variable to check if our code is good
+        const fullCodeCheck = `${editorCode}\n${testCode}`
 
-        const points = lessonsCompleted * 25
-        const dayStreak = profileDetails.dayStreak
-        const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
+        const lessonTestWorker = new Worker(new URL('../../workers/runLessonTest', import.meta.url));
+        let resolveFn: (data: any) => void; // Promise resolve function
 
+        const resultPromise = new Promise((resolve) => {
+            resolveFn = resolve;
+            lessonTestWorker.onmessage = (event) => {
+                resolve(event.data); // Resolve the promise with the worker data
+            };
+        });
+
+        lessonTestWorker.onerror = (event) => {
+            if (event instanceof Event) {
+                console.log('🍎 Error message received from worker: ', event);
+                throw event;
+            }
+
+            console.log('🍎 Unexpected error: ', event);
+            throw event;
+        };
+
+        lessonTestWorker.postMessage(fullCodeCheck);
+
+        const cleanup = () => {
+            lessonTestWorker.terminate();
+        };
 
         return {
-            points: points,
-            lessonsCompleted: lessonsCompleted,
-            dayStreak: dayStreakString
-        }
+            result: await resultPromise, // Wait for the promise to resolve
+            cleanup: cleanup // Return the cleanup function
+        };
     } catch (err) {
-        throw err
-    }
-}
-
-export const filterCourses = async (courses: any, filter: string) => {
-    try {
-        let filteredCourses: any = []
-
-        if (filter === "All") {
-            filteredCourses = courses
-        } else {
-            courses.map((course: any) => {
-                if (course.difficulty === filter) {
-                    filteredCourses.push(course)
-                }
-            })
-        }
-
-        return filteredCourses
-    } catch (err) {
-        throw err
+        throw err;
     }
 }
