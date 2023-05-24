@@ -70,6 +70,12 @@ const LessonCode = ({
     defaultCode,
     handleRunTests
 }: any) => {
+    const editorOptions: any = {
+        minimap: {
+            enabled: false
+        }
+    }
+
     return (
         <>
             <Editor 
@@ -78,6 +84,7 @@ const LessonCode = ({
                 theme="vs-dark" 
                 defaultLanguage="python" 
                 value={code} 
+                options={{...editorOptions}}
             />
             <div className="lesson-code-buttons">
                 <Button
@@ -205,7 +212,10 @@ const LessonPage = ({
 
     // Display the completed modal if all hints are completed
     useEffect(() => {
-        lessonHintsCompleted.every((hint: any) => hint == true) ? alert("You've completed all the hints!") : null
+        // Ensure it doesn't trigger on-start
+        if (lessonHintsCompleted.length > 0) {
+            lessonHintsCompleted.every((hint: any) => hint == true) ? alert("You've completed all the hints!") : null
+        }
     }, [lessonHintsCompleted])
 
     const handleEditorCodeChange = (action: any) => {
