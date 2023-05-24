@@ -228,3 +228,44 @@
     color: $white;
     cursor: pointer;
 }
+
+.lesson-error {
+    display: none;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    height: calc(100vh - 73px);
+
+    h1 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        color: $black-text;
+        max-width: 450px;
+    }
+
+    p {
+        margin-top: 20px;
+        font-weight: 500;
+        font-size: 16px;
+        color: $light-black;
+        line-height: 20px;
+    }
+
+    img {
+        margin-top: 30px;
+        border-radius: 15px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .lesson-main {
+        display: none;
+    }
+    .lesson-error {
+        display: flex;
+    }
+}

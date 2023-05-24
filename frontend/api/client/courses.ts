@@ -264,7 +264,13 @@ export const runLessonTest = async (editorCode: any, testCode: any) => {
         const resultPromise = new Promise((resolve) => {
             resolveFn = resolve;
             lessonTestWorker.onmessage = (event) => {
-                resolve(event.data); // Resolve the promise with the worker data
+                if (event.data.error) {
+                    console.log("ERROR MESSAGE RECEIVED FROM WORKER: ", event.data)
+                    resolve(false)
+                } else {
+                    console.log("SUCCESS MESSAGE RECEIVED FROM WORKER: ", event.data)
+                    resolve(event.data); // Resolve the promise with the worker data
+                }
             };
         });
 

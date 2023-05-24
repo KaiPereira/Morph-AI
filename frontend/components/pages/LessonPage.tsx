@@ -99,23 +99,35 @@ type LessonInstructionProps = {
     hint: string,
     codeAssertion: string,
     runTestSwitch: boolean,
-    editorCode: string
+    editorCode: string,
+    lessonHintCompletedPosition: number,
+    setLessonHintCompletedHandler: any,
+    grabLessonHintCompleted: any
 }
 
 const LessonInstruction = ({
     hint,
     codeAssertion,
     runTestSwitch,
-    editorCode
+    editorCode,
+    lessonHintCompletedPosition,
+    setLessonHintCompletedHandler,
+    grabLessonHintCompleted
 }: LessonInstructionProps) => {
-    const [completed, setCompleted] = useState<any>()
+    const [completed, setCompleted ]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
     const isMounted = useRef(false)
 
     useEffect(() => {
         async function test() {
-            const testResult = await runLessonTest(editorCode, codeAssertion)
+            try {
+                const testResult = await runLessonTest(editorCode, codeAssertion)
 
-            setCompleted(testResult.result)
+                setLessonHintCompletedHandler(lessonHintCompletedPosition, testResult.result)
+                setCompleted(testResult.result)
+            } catch (err) {
+                setLessonHintCompletedHandler(lessonHintCompletedPosition, false)
+                setCompleted(false)
+            }
         }
 
         if (isMounted.current) {
@@ -149,10 +161,32 @@ const LessonPage = ({
     const [hintElements, changeHintElements] = useState()
     const [editorCode, setEditorCode] = useState(lessonData.preset)
     const [runTestSwitch, setRunTestSwitch] = useState(false)
+    // We're using this to keep track of all completed states of the hints
+    const [lessonHintsCompleted, setLessonHintsCompleted] = useState<any>([])
+
+    // We need all of this gibberish so we can use the parent to keep track of the lesson hints completed state
+    const setLessonHintCompletedHandler = (index: any, completed: any) => {
+        setLessonHintsCompleted((prevState: any) => {
+            const newCompletedStates = [...prevState];
+            newCompletedStates[index] = completed;
+            return newCompletedStates;
+        })
+    }
+
+    const grabLessonHintCompleted = (index: any) => {
+        return lessonHintsCompleted[index]
+    }
 
     useEffect(() => {
         changeHintElements(
             lessonData.hints.map((hint: any, index: any) => {
+                // Set the completed state of the hint
+                setLessonHintsCompleted((prevState: any) => {
+                    const newCompletedStates = [...prevState];
+                    newCompletedStates[index] = false;
+                    return newCompletedStates;
+                })
+
                 return (
                     <LessonInstruction 
                         key={index}
@@ -160,11 +194,19 @@ const LessonPage = ({
                         codeAssertion={hint.code}
                         runTestSwitch={runTestSwitch}
                         editorCode={editorCode}
+                        lessonHintCompletedPosition={index}
+                        setLessonHintCompletedHandler={setLessonHintCompletedHandler}
+                        grabLessonHintCompleted={grabLessonHintCompleted}
                     />
                 )
             })
         )
     }, [runTestSwitch])
+
+    // Display the completed modal if all hints are completed
+    useEffect(() => {
+        lessonHintsCompleted.every((hint: any) => hint == true) ? alert("You've completed all the hints!") : null
+    }, [lessonHintsCompleted])
 
     const handleEditorCodeChange = (action: any) => {
         setEditorCode(action);
@@ -174,44 +216,51 @@ const LessonPage = ({
         setRunTestSwitch(!runTestSwitch)
     }
     return (
-        <main className="lesson-main">
-            <div className="lesson-content">
-                <LessonCategorySection 
-                    mode="light"
-                    text="Exercise"
-                    icon="fa-solid fa-book"
-                    border="bottom"
-                >
-                    <LessonMarkdown 
-                        exercise={lessonData.exercise}
-                    />
-                </LessonCategorySection>
-                <LessonCategorySection 
-                    mode="light"
-                    text="Exercise"
-                    icon="fa-solid fa-book"
-                    border="bottom"
-                >
-                    <div className="lesson-instructions">
-                        {hintElements}
-                    </div>
-                </LessonCategorySection>
-            </div>
-            <div className="lesson-code-env">
-                <LessonCategorySection 
-                    mode="dark"
-                    text="Solution"
-                    icon="fa-regular fa-square-check"
-                >
-                    <LessonCode 
-                        code={editorCode}
-                        handleEditorCodeChange={handleEditorCodeChange}
-                        defaultCode={lessonData.preset}
-                        handleRunTests={handleRunTests}
-                    />
-                </LessonCategorySection>
-            </div>
-        </main>
+        <>
+            <main className="lesson-main">
+                <div className="lesson-content">
+                    <LessonCategorySection 
+                        mode="light"
+                        text="Exercise"
+                        icon="fa-solid fa-book"
+                        border="bottom"
+                    >
+                        <LessonMarkdown 
+                            exercise={lessonData.exercise}
+                        />
+                    </LessonCategorySection>
+                    <LessonCategorySection 
+                        mode="light"
+                        text="Exercise"
+                        icon="fa-solid fa-book"
+                        border="bottom"
+                    >
+                        <div className="lesson-instructions">
+                            {hintElements}
+                        </div>
+                    </LessonCategorySection>
+                </div>
+                <div className="lesson-code-env">
+                    <LessonCategorySection 
+                        mode="dark"
+                        text="Solution"
+                        icon="fa-regular fa-square-check"
+                    >
+                        <LessonCode 
+                            code={editorCode}
+                            handleEditorCodeChange={handleEditorCodeChange}
+                            defaultCode={lessonData.preset}
+                            handleRunTests={handleRunTests}
+                        />
+                    </LessonCategorySection>
+                </div>
+            </main>
+            <main className="lesson-error">
+                <h1>We&apos;re sorry, please continue on a computer!</h1>
+                <p>Morph is currently unavailable on mobile as of this moment. Programming on a phone is really difficult too. Don&apos;t worry, we&apos;re currently working on making it available!</p>
+                <img src="https://media4.giphy.com/media/CHSHxWaOEmlFwEVRmk/giphy.gif?cid=ecf05e47m8wokwyjrus956du5s9nwk8gt1nmle0yiomxzmga&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Kitty Giphy" />
+            </main>
+        </>
     )
 }
 
