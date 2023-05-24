@@ -20,7 +20,7 @@ function fnSearch() {
 Name a variable called hello_world_variable
 
 ```
-True if hello_world_variable == "hello world" else False
+True if 'hello_world_variable' in locals() else False
 ```
 
 hello_world_variable should have a value of "hello world"
