@@ -1,13 +1,21 @@
 type ModalProps = {
     header: string,
-    description: string
+    description: string,
+    children: any
 }
 
 const Modal = ({
     header,
-    description
+    description,
+    children
 }: ModalProps) => {
     return (
-        
+        <div className="modal-align">
+            <div className="modal">
+
+            </div>
+        </div>
     )
 }
+
+export default Modal

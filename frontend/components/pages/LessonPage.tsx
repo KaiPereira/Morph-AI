@@ -9,6 +9,7 @@ import Editor from '@monaco-editor/react';
 
 // Components
 import Button from "../subcomponents/Button"
+import Modal from "../subcomponents/Modal"
 
 
 type lessonCategorySectionProps = {
@@ -270,6 +271,12 @@ const LessonPage = ({
                 <p>Morph is currently unavailable on mobile as of this moment. Programming on a phone is really difficult too. Don&apos;t worry, we&apos;re currently working on making it available!</p>
                 <img src="https://media4.giphy.com/media/CHSHxWaOEmlFwEVRmk/giphy.gif?cid=ecf05e47m8wokwyjrus956du5s9nwk8gt1nmle0yiomxzmga&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Kitty Giphy" />
             </main>
+            <Modal 
+                header="BOOM"
+                description="BOOM"
+            >
+                CHILDREN
+            </Modal>
         </>
     )
 }

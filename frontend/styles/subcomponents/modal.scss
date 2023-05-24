@@ -1,0 +1,19 @@
+.modal-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal {
+    width: 100%;
+    max-width: 530px;
+    padding: 20px 25px;
+    background: $white;
+    border-radius: 15px;
+    box-shadow: 0 0 0 1000px rgba(0,0,0,.35);
+    z-index: 200;
+}
