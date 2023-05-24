@@ -70,6 +70,12 @@ const LessonCode = ({
     defaultCode,
     handleRunTests
 }: any) => {
+    const editorOptions: any = {
+        minimap: {
+            enabled: false
+        }
+    }
+
     return (
         <>
             <Editor 
@@ -78,6 +84,7 @@ const LessonCode = ({
                 theme="vs-dark" 
                 defaultLanguage="python" 
                 value={code} 
+                options={{...editorOptions}}
             />
             <div className="lesson-code-buttons">
                 <Button
