@@ -261,6 +261,49 @@
     }
 }
 
+.lesson-modal {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+
+    p:nth-child(2) {
+        margin-top: 18px;
+        font-weight: 700;
+        font-size: 20px;
+        color: $black-text;
+    }
+
+    p:nth-child(3) {
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 17px;
+        color: $light-black;
+    }
+
+    button {
+        height: 41px;
+        width: 100%;
+        margin-top: 35px;
+    }
+}
+
+.lesson-modal-checkmark {
+    margin-top: 40px;
+    width: 97px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1000px;
+    border: 5px solid $black-text;
+
+    i {
+        font-size: 42px;
+        color: $black-text;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .lesson-main {
         display: none;

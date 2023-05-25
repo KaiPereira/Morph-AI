@@ -2,6 +2,9 @@
 import fs from 'fs';
 import path from 'path';
 
+// Functions
+import { prettifyString } from "../client/courses"
+
 
 // Server side function
 export const getCourseTime = async (courseName: string) => {
@@ -97,6 +100,10 @@ export const getAllCourses = async () => {
 // Server side function
 export const getLesson = async (courseName: string, lessonIndex: string) => {
     try {
+        var lessonName;
+        var completedPercentage;
+        var currentLessonIndex;
+
         // Reformat the string from url to name
         const courseNameNew = courseName.replaceAll("-", " ")
 
@@ -119,6 +126,13 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         // We do this to grab the lesson
         let lessonText: any = allCourseLessons.map((lesson: any, index: any) => {    
             if (index == lessonIndex) {
+                lessonName = prettifyString(lesson.name)
+                // Completed percentage thing when you complete the lesson
+                completedPercentage = Math.round(((index + 1) / allCourseLessons.length) * 100)
+                console.log((index + 1) / allCourseLessons.length)
+
+                currentLessonIndex = index
+
                 const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lesson.category}/${lesson.name}`, "utf8")
 
                 return lessonText
@@ -152,7 +166,11 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         return {
             exercise: matches[2],
             hints: hintsFormatted,
-            preset: preset
+            preset: preset,
+            lessonName: lessonName,
+            completedPercentage: completedPercentage,
+            currentLessonIndex: currentLessonIndex,
+            courseName: courseNameNew
         }
     } catch (err) {
         throw err

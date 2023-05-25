@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 
 // Functions
-import { markdownToHtml, runLessonTest } from "@/api/client/courses"
+import { markdownToHtml, runLessonTest, prettifyUrl } from "@/api/client/courses"
 
 // Libraries
 import Editor from '@monaco-editor/react';
@@ -169,8 +169,16 @@ const LessonPage = ({
     const [hintElements, changeHintElements] = useState()
     const [editorCode, setEditorCode] = useState(lessonData.preset)
     const [runTestSwitch, setRunTestSwitch] = useState(false)
+    const [modalState, setModalState] = useState(false)
     // We're using this to keep track of all completed states of the hints
     const [lessonHintsCompleted, setLessonHintsCompleted] = useState<any>([])
+
+    console.log(lessonData)
+
+
+    const modalStateHandler = () => {
+        setModalState(!modalState)
+    }
 
     // We need all of this gibberish so we can use the parent to keep track of the lesson hints completed state
     const setLessonHintCompletedHandler = (index: any, completed: any) => {
@@ -215,7 +223,7 @@ const LessonPage = ({
     useEffect(() => {
         // Ensure it doesn't trigger on-start
         if (lessonHintsCompleted.length > 0) {
-            lessonHintsCompleted.every((hint: any) => hint == true) ? alert("You've completed all the hints!") : null
+            lessonHintsCompleted.every((hint: any) => hint == true) ? modalStateHandler() : null
         }
     }, [lessonHintsCompleted])
 
@@ -272,10 +280,25 @@ const LessonPage = ({
                 <img src="https://media4.giphy.com/media/CHSHxWaOEmlFwEVRmk/giphy.gif?cid=ecf05e47m8wokwyjrus956du5s9nwk8gt1nmle0yiomxzmga&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Kitty Giphy" />
             </main>
             <Modal 
-                header="BOOM"
-                description="BOOM"
+                header="Let&apos;s go! Nice job!"
+                description="Nice job completing that lesson! Let's continue!"
+                modalStateHandler={modalStateHandler}
+                modalState={modalState}
             >
-                CHILDREN
+                <div className="lesson-modal">
+                    <div className="lesson-modal-checkmark">
+                        <i className="fa-solid fa-check"></i>
+                    </div>
+                    <p>{lessonData.name}</p>
+                    <p>{lessonData.completedPercentage}% Done!</p>
+                    <Button
+                        type="primary"
+                        arrow={true}
+                        link={`/courses/${prettifyUrl(lessonData.courseName)}/${lessonData.currentLessonIndex + 1}`}
+                    >
+                        Next Lesson
+                    </Button>
+                </div>
             </Modal>
         </>
     )

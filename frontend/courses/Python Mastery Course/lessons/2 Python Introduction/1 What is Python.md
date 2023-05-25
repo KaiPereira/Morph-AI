@@ -1,33 +1,36 @@
-# Introduction to Python
+# --exercise--
 
-Python is a high-level, interpreted programming language that was first released in 1991. It was created by Guido van Rossum, and it has since become one of the most popular programming languages in the world.
+# Multiple linear regression
 
-## Characteristics of Python
+In the casino game Blackjack, a player can determine whether they have an advantage on the next hand over the house by keeping track of the relative number of high and low cards remaining in the deck. This is called Card Counting.
 
-Python is known for its simplicity, readability, and ease of use. Here are some of the key characteristics of Python:
+Having more high cards remaining in the deck favors the player. Each card is assigned a value according to the table below. When the count is positive, the player should bet high. When the count is zero or negative, the player should bet low.
 
-- **Easy to learn**: Python has a simple syntax and easy-to-understand concepts, making it an excellent choice for beginners.
+## Example
 
-- **Readable code**: Python code is easy to read and understand, thanks to its use of whitespace and English-like syntax.
+```
+function fnSearch() { 
+    var frm = document.searchFrm; 
+    var str = encryptData(frm, _currentPage); 
+}
+```
 
-- **Large standard** library: Python comes with a large standard library that provides support for many common programming tasks, such as working with files, networking, and regular expressions.
+# --hints--
 
-- **Cross-platform**: Python code can be run on many different platforms, including Windows, macOS, and Linux.
+Name a variable called hello_world_variable
 
-- **Interpreted**: Python is an interpreted language, which means that the code is executed directly without needing to be compiled first.
+```
+True if 'hello_world_variable' in locals() else False
+```
 
-## Uses of Python
+hello_world_variable should have a value of "hello world"
 
-Python is a versatile language that can be used for a wide range of programming tasks. Here are some of the most common uses of Python:
+```
+True if hello_world_variable == "hello world" else False
+```
 
-- **Web development**: Python is used extensively in web development, with popular web frameworks like Django and Flask.
+# --preset--
 
-- **Data science**: Python has become a go-to language for data scientists, thanks to its extensive libraries for data analysis and visualization, such as NumPy, Pandas, and Matplotlib.
-
-- **Machine learning and artificial intelligence**: Python is also popular in the field of machine learning and AI, with libraries like TensorFlow, Keras, and PyTorch.
-
-- **Scripting**: Python is a great language for writing scripts to automate tasks, such as system administration, network programming, and file handling.
-
-## Conclusion
-
-Awesome! Now that you've learned about Python, let's start by installing it!
+```
+Hello WOrld!
+```
