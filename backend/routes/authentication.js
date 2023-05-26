@@ -36,22 +36,22 @@ router.post("/register", async (req, res) => {
             }).save()
 
             // Add them to the newsletter
-            let data = JSON.stringify({
-                "email": newUser.email
-            });
+            // let data = JSON.stringify({
+            //     "email": newUser.email
+            // });
             
-            let config = {
-                method: 'post',
-                maxBodyLength: Infinity,
-                url: 'https://api.beehiiv.com/v2/publications/pub_df4ab5b1-ba32-4ddb-99fb-d15e2219e1fa/subscriptions',
-                headers: { 
-                    'Content-Type': 'application/json', 
-                    'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`
-                },
-                data : data
-            };
+            // let config = {
+            //     method: 'post',
+            //     maxBodyLength: Infinity,
+            //     url: 'https://api.beehiiv.com/v2/publications/pub_df4ab5b1-ba32-4ddb-99fb-d15e2219e1fa/subscriptions',
+            //     headers: { 
+            //         'Content-Type': 'application/json', 
+            //         'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`
+            //     },
+            //     data : data
+            // };
 
-            await axios.request(config)
+            // await axios.request(config)
 
             // Send the verification email
             const message = `${req.headers.origin}/login/${newUser.id}/${newToken.token}`;

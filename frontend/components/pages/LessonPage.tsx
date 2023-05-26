@@ -2,10 +2,11 @@
 import { useEffect, useState, useRef } from "react"
 
 // Functions
-import { markdownToHtml, runLessonTest, prettifyUrl } from "@/api/client/courses"
+import { markdownToHtml, runLessonTest, nextLesson } from "@/api/client/courses"
 
 // Libraries
 import Editor from '@monaco-editor/react';
+import { useRouter } from "next/router";
 
 // Components
 import Button from "../subcomponents/Button"
@@ -122,7 +123,7 @@ const LessonInstruction = ({
     setLessonHintCompletedHandler,
     grabLessonHintCompleted
 }: LessonInstructionProps) => {
-    const [completed, setCompleted ]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
+    const [completed, setCompleted]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
     const isMounted = useRef(false)
 
     useEffect(() => {
@@ -164,8 +165,13 @@ const LessonInstruction = ({
 
 
 const LessonPage = ({
-    lessonData
+    lessonData,
+    courseData
 }: any) => {
+    const router = useRouter()
+    // Use this to reset state
+    const dynamicPath = router.asPath
+
     const [hintElements, changeHintElements] = useState()
     const [editorCode, setEditorCode] = useState(lessonData.preset)
     const [runTestSwitch, setRunTestSwitch] = useState(false)
@@ -217,7 +223,7 @@ const LessonPage = ({
                 )
             })
         )
-    }, [runTestSwitch])
+    }, [runTestSwitch, dynamicPath])
 
     // Display the completed modal if all hints are completed
     useEffect(() => {
@@ -225,7 +231,7 @@ const LessonPage = ({
         if (lessonHintsCompleted.length > 0) {
             lessonHintsCompleted.every((hint: any) => hint == true) ? modalStateHandler() : null
         }
-    }, [lessonHintsCompleted])
+    }, [lessonHintsCompleted, dynamicPath])
 
     const handleEditorCodeChange = (action: any) => {
         setEditorCode(action);
@@ -234,6 +240,13 @@ const LessonPage = ({
     const handleRunTests = () => {
         setRunTestSwitch(!runTestSwitch)
     }
+
+    const completeLesson = async () => {
+        const nextLessonUrl = await nextLesson(courseData, lessonData)
+        router.push(nextLessonUrl)
+    }
+
+
     return (
         <>
             <main className="lesson-main">
@@ -289,12 +302,12 @@ const LessonPage = ({
                     <div className="lesson-modal-checkmark">
                         <i className="fa-solid fa-check"></i>
                     </div>
-                    <p>{lessonData.name}</p>
+                    <p>{lessonData.courseName}</p>
                     <p>{lessonData.completedPercentage}% Done!</p>
                     <Button
                         type="primary"
                         arrow={true}
-                        link={`/courses/${prettifyUrl(lessonData.courseName)}/${lessonData.currentLessonIndex + 1}`}
+                        onClick={completeLesson}
                     >
                         Next Lesson
                     </Button>

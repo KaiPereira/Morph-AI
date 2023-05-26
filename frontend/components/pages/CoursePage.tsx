@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { 
     prettifyString, 
     courseLocked, 
-    courseProgress, 
+    onCourse, 
     prettifyUrl 
 } from "@/api/client/courses"
 
@@ -24,17 +24,26 @@ const CourseLesson = ({
     const [lessonsCompleted, setLessonsCompleted] = useState(0)
 
     useEffect(() => {
+        var lessonOnVar = 0;
+
+        const updateCourseDetails = async () => {
+            const { lessonOn } = await onCourse(courseData.name);
+            lessonOnVar = lessonOn;
+        }
+
+        updateCourseDetails()
+
+
         // Check if the lesson is locked and return the element
         const lessonPromise = Promise.all(lessons.map(async (lesson: any, index: any) => {
-            const { lessonOn } = await courseProgress(courseData.name);
-            const lessonLocked = await courseLocked(courseData, lessonOn - 1, lesson);
+            const lessonLocked = await courseLocked(courseData, lessonOnVar - 1, lesson);
 
             return {
                 index: index,
                 lessonLocked: lessonLocked,
                 lessonElement: (
                     <li key={index} className={!lessonLocked ? "course-page-lesson-finished" : ""}>
-                        <Link href={`/courses/${prettifyUrl(courseData.name)}/${lessonOn ? lessonOn : 0}`} className="course-page-lesson-link">
+                        <Link href={`/courses/${prettifyUrl(courseData.name)}/${lessonOnVar ? lessonOnVar : 0}`} className="course-page-lesson-link">
                             {prettifyString(lesson)}
                         </Link>
                     </li>

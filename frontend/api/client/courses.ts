@@ -121,19 +121,18 @@ export const courseLocked = async (courseName: any, courseProgress: any, current
     }
 }
 
-export const nextLesson = async (course: any, lessonName: any) => {
+export const nextLesson = async (course: any, lesson: any) => {
     try {
-        const lessonIndex = await fetchLessonIndex(course, lessonName)
+        console.log(course, lesson)
+        const lessonIndex = await fetchLessonIndex(course, lesson.courseName)
 
         // We grab the progression so that we only update the course progress if the lesson is the next one
-        let courseProgression = await courseProgress(course.name)
+        let courseProgression = await courseProgress(course.courseName)
         courseProgression = courseProgression.lessonOn
-
-        console.log(courseProgression, lessonIndex)
 
         if (courseProgression === lessonIndex) {
             const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
-                currentCourse: course.name,
+                currentCourse: course.courseName,
                 onLesson: lessonIndex + 1
             }, { withCredentials: true })
         }
@@ -141,7 +140,7 @@ export const nextLesson = async (course: any, lessonName: any) => {
 
         const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
         
-        return lessonUrl
+        return "/courses/Python-Mastery-Course/1"
     } catch (err) {
         throw err
     }

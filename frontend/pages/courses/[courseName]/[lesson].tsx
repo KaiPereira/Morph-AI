@@ -17,6 +17,7 @@ const Lesson = ({
             />
             <LessonPage 
                 lessonData={lessonData}
+                courseData={courseData}
             />
         </>
     )

@@ -6,7 +6,8 @@ type Button = {
     arrow?: boolean,
     type: "primary" | "light" | "black" | "white",
     link?: any,
-    className?: string
+    className?: string,
+    clientSide?: boolean
 }
 
 
@@ -27,34 +28,46 @@ const Arrow = (color: any) => {
     )
 }
 
-const Button = ({ 
-    children, 
-    onClick, 
-    arrow, 
-    type, 
-    link,
-    className 
+
+const Button = ({
+  children,
+  onClick,
+  arrow,
+  type,
+  link,
+  className,
+  clientSide=true,
 }: Button) => {
+  const buttonColor = type === "primary" || type === "black" ? "white" : "black";
 
-    const buttonColor = (type == "primary" || type == "black") ? "white" : "black"
-
-    return (
-        <>
-            {link ? 
-            <Link href={link} className="button-link">
-                <button className={`button button-${type} ${className}`} onClick={onClick}>
-                    {children}
-                    {arrow ? <Arrow color={buttonColor}/> : null}
-                </button>
-            </Link>
-            :
-            <button className={`button ${className} button-${type}`} onClick={onClick}>
+  if (link) {
+    if (clientSide) {
+      return (
+        <Link href={link} className="button-link">
+            <button className={`button button-${type} ${className}`} onClick={onClick}>
                 {children}
-                {arrow ? <Arrow color={buttonColor} /> : null}
+                {arrow ? <Arrow color={buttonColor}/> : null}
             </button>
-            }
-        </>
-    )
-}
+        </Link>
+      );
+    } else {
+      return (
+        <a href={link} className="button-link">
+            <button className={`button button-${type} ${className}`} onClick={onClick}>
+                {children}
+                {arrow ? <Arrow color={buttonColor}/> : null}
+            </button>
+        </a>
+      );
+    }
+  } else {
+    return (
+      <button className={`button ${className} button-${type}`} onClick={onClick}>
+        {children}
+        {arrow ? <Arrow color={buttonColor} /> : null}
+      </button>
+    );
+  }
+};
 
-export default Button
+export default Button;
