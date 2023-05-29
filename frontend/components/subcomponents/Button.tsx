@@ -7,7 +7,8 @@ type Button = {
     type: "primary" | "light" | "black" | "white",
     link?: any,
     className?: string,
-    clientSide?: boolean
+    clientSide?: boolean,
+    disabled?: boolean
 }
 
 
@@ -37,6 +38,7 @@ const Button = ({
   link,
   className,
   clientSide=true,
+  disabled = false
 }: Button) => {
   const buttonColor = type === "primary" || type === "black" ? "white" : "black";
 
@@ -44,7 +46,7 @@ const Button = ({
     if (clientSide) {
       return (
         <Link href={link} className="button-link">
-            <button className={`button button-${type} ${className}`} onClick={onClick}>
+            <button className={`button button-${type} ${className}`} onClick={onClick} disabled={disabled}>
                 {children}
                 {arrow ? <Arrow color={buttonColor}/> : null}
             </button>
@@ -53,7 +55,7 @@ const Button = ({
     } else {
       return (
         <a href={link} className="button-link">
-            <button className={`button button-${type} ${className}`} onClick={onClick}>
+            <button className={`button button-${type} ${className}`} onClick={onClick} disabled={disabled}>
                 {children}
                 {arrow ? <Arrow color={buttonColor}/> : null}
             </button>
@@ -62,7 +64,7 @@ const Button = ({
     }
   } else {
     return (
-      <button className={`button ${className} button-${type}`} onClick={onClick}>
+      <button className={`button ${className} button-${type}`} onClick={onClick} disabled={disabled}>
         {children}
         {arrow ? <Arrow color={buttonColor} /> : null}
       </button>

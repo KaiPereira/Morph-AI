@@ -129,7 +129,6 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
                 lessonName = prettifyString(lesson.name)
                 // Completed percentage thing when you complete the lesson
                 completedPercentage = Math.round(((index + 1) / allCourseLessons.length) * 100)
-                console.log((index + 1) / allCourseLessons.length)
 
                 currentLessonIndex = index
 

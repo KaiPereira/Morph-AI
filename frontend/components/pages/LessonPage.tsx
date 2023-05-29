@@ -70,7 +70,8 @@ const LessonCode = ({
     code,
     handleEditorCodeChange,
     defaultCode,
-    handleRunTests
+    handleRunTests,
+    runTestsIsLoading
 }: any) => {
     const editorOptions: any = {
         minimap: {
@@ -92,6 +93,7 @@ const LessonCode = ({
                 <Button
                     type="primary"
                     onClick={handleRunTests}
+                    disabled={runTestsIsLoading}
                 >
                     Run Tests
                 </Button>
@@ -111,7 +113,8 @@ type LessonInstructionProps = {
     editorCode: string,
     lessonHintCompletedPosition: number,
     setLessonHintCompletedHandler: any,
-    grabLessonHintCompleted: any
+    grabLessonHintCompleted: any,
+    setTestsRunning: any
 }
 
 const LessonInstruction = ({
@@ -121,7 +124,8 @@ const LessonInstruction = ({
     editorCode,
     lessonHintCompletedPosition,
     setLessonHintCompletedHandler,
-    grabLessonHintCompleted
+    grabLessonHintCompleted,
+    setTestsRunning
 }: LessonInstructionProps) => {
     const [completed, setCompleted]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
     const isMounted = useRef(false)
@@ -132,6 +136,14 @@ const LessonInstruction = ({
                 const testResult = await runLessonTest(editorCode, codeAssertion)
 
                 setLessonHintCompletedHandler(lessonHintCompletedPosition, testResult.result)
+
+                // Our loading
+                setTestsRunning((prevStatus: any) => {
+                    const updatedStatus = [...prevStatus];
+                    updatedStatus[lessonHintCompletedPosition] = false; // Set the test status of the child to true
+                    return updatedStatus;
+                });
+
                 setCompleted(testResult.result)
             } catch (err) {
                 setLessonHintCompletedHandler(lessonHintCompletedPosition, false)
@@ -178,8 +190,10 @@ const LessonPage = ({
     const [modalState, setModalState] = useState(false)
     // We're using this to keep track of all completed states of the hints
     const [lessonHintsCompleted, setLessonHintsCompleted] = useState<any>([])
+    const [testsRunning, setTestsRunning] = useState<any>([])
+    const isMounted = useRef(false)
 
-    console.log(lessonData)
+    const runTestsIsLoading = testsRunning.length > 0 ? testsRunning.every((test: any) => test == true) : false
 
 
     const modalStateHandler = () => {
@@ -200,6 +214,9 @@ const LessonPage = ({
     }
 
     useEffect(() => {
+        // Tests don't run on first render so we don't want to set our loading to true
+        isMounted.current && setTestsRunning(Array(lessonData.hints.length).fill(true));
+
         changeHintElements(
             lessonData.hints.map((hint: any, index: any) => {
                 // Set the completed state of the hint
@@ -219,10 +236,13 @@ const LessonPage = ({
                         lessonHintCompletedPosition={index}
                         setLessonHintCompletedHandler={setLessonHintCompletedHandler}
                         grabLessonHintCompleted={grabLessonHintCompleted}
+                        setTestsRunning={setTestsRunning}
                     />
                 )
             })
         )
+
+        isMounted.current = true
     }, [runTestSwitch, dynamicPath])
 
     // Display the completed modal if all hints are completed
@@ -283,6 +303,7 @@ const LessonPage = ({
                             handleEditorCodeChange={handleEditorCodeChange}
                             defaultCode={lessonData.preset}
                             handleRunTests={handleRunTests}
+                            runTestsIsLoading={runTestsIsLoading}
                         />
                     </LessonCategorySection>
                 </div>
