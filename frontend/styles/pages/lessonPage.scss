@@ -195,6 +195,24 @@
         font-size: 15.5px;
         line-height: 19px;
         color: $light-black;
+
+        a {
+            @include link-transition;
+            color: $light-black;
+            text-decoration: underline;
+    
+            &:hover {
+                color: darken($light-black, $text-blend);
+            }
+        }
+    
+        strong {
+            font-weight: 700;
+        }
+    
+        em {
+            font-style: italic;
+        }
     }
 }
 

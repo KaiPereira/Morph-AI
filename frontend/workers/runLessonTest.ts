@@ -9,6 +9,9 @@ const onMessage = async (event: MessageEvent) => {
     // Load Pyodide using the Web Worker bundle
     const pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.2/full/' });
 
+    // Import the regex package
+    await pyodide.loadPackage('regex');
+    
     // Add a custom function to Pyodide
     const executedPython = await pyodide.runPython(data);
 

@@ -128,9 +128,17 @@ const LessonInstruction = ({
     setTestsRunning
 }: LessonInstructionProps) => {
     const [completed, setCompleted]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
+    const [hintMarkdown, setHintMarkdown] = useState<any>(hint)
     const isMounted = useRef(false)
 
     useEffect(() => {
+        const convertHintToMarkdown = async () => {
+            let hintMarkdownPromise: any = await markdownToHtml(hint)
+            hintMarkdownPromise = hintMarkdownPromise.value
+
+            setHintMarkdown(hintMarkdownPromise)
+        }
+
         async function test() {
             try {
                 const testResult = await runLessonTest(editorCode, codeAssertion)
@@ -156,8 +164,9 @@ const LessonInstruction = ({
         } else {
             isMounted.current = true
         }
-    }, [runTestSwitch])
 
+        convertHintToMarkdown()
+    }, [runTestSwitch])
 
     return (
         <div className="lesson-instruction">
@@ -170,7 +179,7 @@ const LessonInstruction = ({
                     <i className="fa-solid fa-check"></i>
                 }
             </div>
-            <p>{hint}</p>
+            <p dangerouslySetInnerHTML={{ __html: hintMarkdown }}></p>
         </div>
     )
 }
@@ -263,7 +272,7 @@ const LessonPage = ({
 
     const completeLesson = async () => {
         const nextLessonUrl = await nextLesson(courseData, lessonData)
-        router.push(nextLessonUrl)
+        router.push(nextLessonUrl).then(() => router.reload());
     }
 
 

@@ -140,7 +140,7 @@ export const nextLesson = async (course: any, lesson: any) => {
 
         const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
         
-        return "/courses/Python-Mastery-Course/1"
+        return lessonUrl
     } catch (err) {
         throw err
     }
@@ -255,11 +255,13 @@ export const getUserCourses = async (allCourses: any, user: any) => {
 export const runLessonTest = async (editorCode: any, testCode: any) => {
     try {
         // We'll use this variable to check if our code is good
-        const fullCodeCheck = `${editorCode}\n${testCode}`
+        // Here, we're running editor code, setting editorCode to a variable too, then running our test on these
+        const fullCodeCheck = `${editorCode}\ncode="""\n${editorCode}\n"""\n${testCode}`
 
         const lessonTestWorker = new Worker(new URL('../../workers/runLessonTest', import.meta.url));
         let resolveFn: (data: any) => void; // Promise resolve function
 
+        // Worker response
         const resultPromise = new Promise((resolve) => {
             resolveFn = resolve;
             lessonTestWorker.onmessage = (event) => {
@@ -273,6 +275,7 @@ export const runLessonTest = async (editorCode: any, testCode: any) => {
             };
         });
 
+        // Worker error
         lessonTestWorker.onerror = (event) => {
             if (event instanceof Event) {
                 console.log('🍎 Error message received from worker: ', event);
