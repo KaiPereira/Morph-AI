@@ -38,22 +38,22 @@ print(message)
 
 # --hints--
 
-Create a variable called fruit and assign it the value "apple".
+Create a variable called fruit and assign it the value "apples".
 
 ```
-True if fruit == "apple" else False
+True if fruit == "apples" else False
 ```
 
-Use a format string to create a sentence using the fruit variable. The sentence should say "I like eating apples.". **Assign the format string to a variable called "sentence"**.
+Use a format string to create a sentence using the fruit variable. The sentence should say "I like eating apples". **Assign the format string to a variable called "sentence"**.
 
 ```
-True if sentence == "I like eating apples." else False
+True if sentence == "I like eating apples" else False
 ```
 
-Use an **f-string this time** to create a new sentence. Create a variable called "sentence_2". Sentence_2 should have a value of "I don't like apples.". 
+Use an **f-string this time** to create a new sentence. Create a variable called "sentence_2". Sentence_2 should have a value of "I don't like apples". 
 
 ```
-True if sentence_2 == "I don't like apples." else False
+True if sentence_2 == "I don't like apples" else False
 ```
 
 # --preset--

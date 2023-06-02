@@ -123,24 +123,30 @@ export const courseLocked = async (courseName: any, courseProgress: any, current
 
 export const nextLesson = async (course: any, lesson: any) => {
     try {
-        console.log(course, lesson)
-        const lessonIndex = await fetchLessonIndex(course, lesson.lessonName)
+        const lessonFinished = await courseFinished(course, lesson)
+        console.log(lessonFinished)
 
-        // We grab the progression so that we only update the course progress if the lesson is the next one
-        let courseProgression = await courseProgress(course.name)
-        courseProgression = courseProgression.lessonOn
+        if (lessonFinished) {
+            return "/"
+        } else {
+            const lessonIndex = await fetchLessonIndex(course, lesson.lessonName)
 
-        if (courseProgression === lessonIndex) {
-            const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
-                currentCourse: course.name,
-                onLesson: lessonIndex + 1
-            }, { withCredentials: true })
+            // We grab the progression so that we only update the course progress if the lesson is the next one
+            let courseProgression = await courseProgress(course.name)
+            courseProgression = courseProgression.lessonOn
+
+            if (courseProgression === lessonIndex) {
+                const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
+                    currentCourse: course.name,
+                    onLesson: lessonIndex + 1
+                }, { withCredentials: true })
+            }
+
+
+            const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
+            
+            return lessonUrl
         }
-
-
-        const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
-        
-        return lessonUrl
     } catch (err) {
         throw err
     }
@@ -176,9 +182,10 @@ export const getLessonName = async (courseName: any, lessonIndex: number) => {
     }
 }
 
-export const courseFinished = async (courseName: any, courseProgress: number) => {
+export const courseFinished = async (course: any, lesson: any) => {
     try {
-        let courses = courseName.lessons.map((lessonCategory: any) => {
+        console.log(course, courseProgress)
+        let courses = course.lessons.map((lessonCategory: any) => {
             return lessonCategory.lessons.map((lesson: any) => {
                 return lesson
             })
@@ -186,15 +193,13 @@ export const courseFinished = async (courseName: any, courseProgress: number) =>
 
         courses = courses.flat()
 
-        let courseProgressIndex = courses.map((course: any, index: number) => {
-            if (course.includes(courseProgress)) {
-                return index
-            }
-        })
+        const courseFinished = lesson.currentLessonIndex == courses.length - 1
 
-        courseProgressIndex = courseProgressIndex.filter((course: any) => course !== undefined)
-
-        const courseFinished = courseProgressIndex[0] === courses.length - 1
+        if (courseFinished) {
+            const finishedCourse = await axios.post(`${apiUrl}/courses/finished-course`, {
+                currentCourse: course
+            }, { withCredentials: true })
+        }
 
         return courseFinished
     } catch (err) {
@@ -256,7 +261,8 @@ export const runLessonTest = async (editorCode: any, testCode: any) => {
     try {
         // We'll use this variable to check if our code is good
         // Here, we're running editor code, setting editorCode to a variable too, then running our test on these
-        const fullCodeCheck = `${editorCode}\ncode="""\n${editorCode}\n"""\n${testCode}`
+        // We use the replaceAll in the editorCode in case that someone puts triple quotes inside of the editorCode
+        const fullCodeCheck = `${editorCode}\ncode="""\n${editorCode.replaceAll('"""', '\\"""')}\n"""\n${testCode}`
 
         const lessonTestWorker = new Worker(new URL('../../workers/runLessonTest', import.meta.url));
         let resolveFn: (data: any) => void; // Promise resolve function
