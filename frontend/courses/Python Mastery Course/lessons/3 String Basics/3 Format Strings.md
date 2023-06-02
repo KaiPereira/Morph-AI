@@ -38,22 +38,28 @@ print(message)
 
 # --hints--
 
-Create a variable called fruit and assign it the value "apples".
+Create a variable called "name" and assign it the value of your name.
 
 ```
-True if fruit == "apples" else False
+True if isinstance(name, str) else False
 ```
 
-Use a format string to create a sentence using the fruit variable. The sentence should say "I like eating apples". **Assign the format string to a variable called "sentence"**.
+Create a variable called "age" and assign it the **int** value of your age.
 
 ```
-True if sentence == "I like eating apples" else False
+True if isinstance(age, int) else False
 ```
 
-Use an **f-string this time** to create a new sentence. Create a variable called "sentence_2". Sentence_2 should have a value of "I don't like apples". 
+Create a variable called "sentence" and using format strings, assign it the value of "My name is {} and I am {} years old". With the blanks filled as your name and age using format strings.
 
 ```
-True if sentence_2 == "I don't like apples" else False
+True if sentence == "My name is {} and I am {} years old".format(name, age) else False
+```
+
+Create a variable called "sentence_2" and using **f-strings** this time, assign it the value of "Hello, I'm {} and I am {}" with the blanks filled with your name and age.
+
+```
+True if sentence_2 == f"Hello, I'm {name} and I am {age}" else False
 ```
 
 # --preset--
