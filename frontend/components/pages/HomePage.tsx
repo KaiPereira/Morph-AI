@@ -15,7 +15,7 @@ const HomePage = () => {
             <div className="home-main-container">
                 <div className="home-main-content">
                     <h1>Easily Learn AI/ML Programming</h1>
-                    <p className="home-main-content-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula sed urna sit amet dapibus. Pellentesque ipsum</p>
+                    <p className="home-main-content-description">Morph is the world’s best place to learn machine learning, easily. Our interactive machine learning courses with Python are meant for everyone regardless of any skill level.</p>
                     <div className="home-main-content-buttons">
                         <Button
                             arrow={true}
