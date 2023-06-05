@@ -24,10 +24,10 @@ Use the less than operator to compare a and b using an if statement and return T
 True if compare(5, 8) else False
 ```
 
-compare(12, 8) should return True
+compare(12, 8) should return False
 
 ```
-True if compare(12, 8) else False
+True if compare(12, 8) == None else False
 ```
 
 compare(13, 13) should return None
@@ -36,10 +36,10 @@ compare(13, 13) should return None
 True if compare(13, 13) == None else False
 ```
 
-compare(52, 3) should return True
+compare(3, 52) should return True
 
 ```
-True if compare(52, 3) else False
+True if compare(3, 52) else False
 ```
 
 compare(5, 5) should return None
