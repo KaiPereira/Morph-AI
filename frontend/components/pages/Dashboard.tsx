@@ -36,7 +36,7 @@ const Dashboard = ({
     return (
         <main className="dashboard-container">
             <h1>Welcome to the Curriculum</h1>
-            <p className="dashboard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur magna orci, non malesuada purus imperdiet id.</p>
+            <p className="dashboard-description">Morph is the best place to learn machine learning. Let&apos;s being learning Machine Learning through interactive python courses!</p>
             <div className="dashboard-courses">
                 {courseElements}
             </div>
