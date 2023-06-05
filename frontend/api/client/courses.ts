@@ -262,7 +262,10 @@ export const runLessonTest = async (editorCode: any, testCode: any) => {
         // We'll use this variable to check if our code is good
         // Here, we're running editor code, setting editorCode to a variable too, then running our test on these
         // We use the replaceAll in the editorCode in case that someone puts triple quotes inside of the editorCode
-        const fullCodeCheck = `${editorCode}\ncode="""\n${editorCode.replaceAll('"""', '\\"""')}\n"""\n${testCode}`
+        const codeVariable = `\ncode="""\n${editorCode.replaceAll('"""', '\\"""')}\n"""\n`
+        const fullCodeCheck = `
+${editorCode}${codeVariable}${testCode}
+        `
 
         const lessonTestWorker = new Worker(new URL('../../workers/runLessonTest', import.meta.url));
         let resolveFn: (data: any) => void; // Promise resolve function
