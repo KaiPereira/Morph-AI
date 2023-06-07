@@ -14,12 +14,23 @@ export const fetchLessonIndex = async (
     try {
         // Grab all of the courses
         let lessons = course.lessons.map((lessonCategory: any) => {
-            return lessonCategory.lessons.map((lesson: any) => {
+            let lessonCategoryLessons = lessonCategory.lessons.map((lesson: any) => {
                 return lesson
             })
+            
+            // Sort each lesson category by number
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.split(' ')[0]);
+                const numberB = parseInt(b.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         lessons = lessons.flat()
+        console.log(lessons, lessonName)
 
         // Grab the index of the course we're on
         let courseIndex = lessons.map((lesson: any, index: number) => {
@@ -67,11 +78,11 @@ export const courseProgress = async (courseName: string) => {
 
 
 export const prettifyUrl = (str: any) => {
-    return str.replace(/[0-9] /g, "").replaceAll(" ", "-")
+    return str.replace(/\d+ /g, "").replaceAll(" ", "-")
 } 
 
 export const prettifyString = (str: any) => {
-    return str.replace(/[0-9] /g, "").replace(".md", "")
+    return str.replace(/\d+ /g, "").replace(".md", "")
 } 
 
 export const markdownToHtml = async (markdown: string) => {
@@ -124,12 +135,11 @@ export const courseLocked = async (courseName: any, courseProgress: any, current
 export const nextLesson = async (course: any, lesson: any) => {
     try {
         const lessonFinished = await courseFinished(course, lesson)
-        console.log(lessonFinished)
 
         if (lessonFinished) {
             return "/"
         } else {
-            const lessonIndex = await fetchLessonIndex(course, lesson.lessonName)
+            const lessonIndex = await fetchLessonIndex(course, lesson.fullLessonName)
 
             // We grab the progression so that we only update the course progress if the lesson is the next one
             let courseProgression = await courseProgress(course.name)

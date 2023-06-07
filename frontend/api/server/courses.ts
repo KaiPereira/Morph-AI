@@ -101,6 +101,7 @@ export const getAllCourses = async () => {
 export const getLesson = async (courseName: string, lessonIndex: string) => {
     try {
         var lessonName;
+        var fullLessonName;
         var completedPercentage;
         var currentLessonIndex;
 
@@ -113,12 +114,21 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         let allCourseLessons: any = courseLessons.map((lessonCategoryName: string) => {
             const lessons = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
 
-            return lessons.map((lesson: string, index: any) => {
+            let lessonCategoryLessons = lessons.map((lesson: string, index: any) => {
                 return {
                     name: lesson,
                     category: lessonCategoryName
                 }
             })
+
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.name.split(' ')[0]);
+                const numberB = parseInt(b.name.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         allCourseLessons = allCourseLessons.flat()
@@ -127,6 +137,7 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         let lessonText: any = allCourseLessons.map((lesson: any, index: any) => {    
             if (index == lessonIndex) {
                 lessonName = prettifyString(lesson.name)
+                fullLessonName = lesson.name
                 // Completed percentage thing when you complete the lesson
                 completedPercentage = Math.round(((index + 1) / allCourseLessons.length) * 100)
 
@@ -167,6 +178,7 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
             hints: hintsFormatted,
             preset: preset,
             lessonName: lessonName,
+            fullLessonName: fullLessonName,
             completedPercentage: completedPercentage,
             currentLessonIndex: currentLessonIndex,
             courseName: courseNameNew
