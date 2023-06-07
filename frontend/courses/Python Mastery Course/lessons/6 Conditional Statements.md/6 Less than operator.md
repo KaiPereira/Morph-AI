@@ -18,10 +18,10 @@ if num < 10:
 
 # --hints--
 
-Use the less than operator to compare a and b using an if statement and return True if it's right.
+Use the less than operator to compare a and b using an if statement and return "A is less than b" if it's right.
 
 ```
-True if compare(5, 8) else False
+True if compare(5, 8) == "A is less than b" else False
 ```
 
 compare(12, 8) should return False
@@ -39,7 +39,7 @@ True if compare(13, 13) == None else False
 compare(3, 52) should return True
 
 ```
-True if compare(3, 52) else False
+True if compare(3, 52) == "A is less than b" else False
 ```
 
 compare(5, 5) should return None
