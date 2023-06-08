@@ -27,10 +27,10 @@ We use the insert method to add the element 10 at index 2. The resulting array i
 
 # --hints--
 
-Insert a "ferrari" into index 3 in the "cars" array
+Insert a new car into index 3 in the "cars" array
 
 ```
-True if cars[3] == "ferrari" else False
+True if cars[3] != "mercedez" else False
 ```
 
 # --preset--

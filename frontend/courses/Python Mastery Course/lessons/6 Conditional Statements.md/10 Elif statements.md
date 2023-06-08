@@ -34,22 +34,22 @@ If the num variable is not less than zero but equal to zero, the second conditio
 
 # --hints--
 
-Create an if statement to check if a person is under the age of 13. If they are, return "They are a child"
+Create an if statement to check if a person is under the age of 13. If they are, return "child"
 
 ```
-True if age_func(12) == "They are a child" else False
+True if age_func(12) == "child" else False
 ```
 
-Create an else if statement that returns "They are a teenager" if they are under the age of 18.
+Create an else if statement that returns "teenager" if they are under the age of 18.
 
 ```
-True if age_func(17) == "They are a teenager" else False
+True if age_func(17) == "teenager" else False
 ```
 
-Create another if else statement that returns "They are an adult" if they are over or equal to the age of 18.
+Create another if else statement that returns "adult" if they are over or equal to the age of 18.
 
 ```
-True if age_func(18) == "They are an adult" else False
+True if age_func(18) == "adult" else False
 ```
 
 # --preset--

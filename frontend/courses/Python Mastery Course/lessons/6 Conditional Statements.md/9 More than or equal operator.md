@@ -17,16 +17,16 @@ if x >= y:
 
 # --hints--
 
-Create a function that will check if a student got an A (86) using the argument "grade" and the more than or equal operator. Return "Student got an A" if true.
+Create a function that will check if a student got an **A (86)** using the argument "grade" and the more than or equal operator. Return "message" if true.
 
 ```
-True if final_grade(87) == "Student got an A" else False
+True if final_grade(87) == message else False
 ```
 
 final_grade(86) should return that the student got an A.
 
 ```
-True if final_grade(86) == "Student got an A" else False
+True if final_grade(86) == message else False
 ```
 
 final_grade(72) should not say that the student got an A.
@@ -44,6 +44,8 @@ True if final_grade(21) == None else False
 # --preset--
 
 ```
+message = "Student got an A"
+
 def final_grade(grade):
     # Put your if statement here
 ```

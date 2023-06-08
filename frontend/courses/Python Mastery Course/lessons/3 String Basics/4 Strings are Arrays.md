@@ -8,8 +8,7 @@ In Python, strings can be treated as arrays of characters. This means that you c
 
 Bracket notation is a way of getting a specific index/letter in a string.
 
-The counting doesn't start counting at 1 though, it starts at 0.
-
+**The counting doesn't start counting at 1 though, it starts at 0.** So 0, is equal to the first character.
 
 You can also use negative numbers to go from back to front. For example you can do string[-1] to grab the very last letter of "Hello World"
 

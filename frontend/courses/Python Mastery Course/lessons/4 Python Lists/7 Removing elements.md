@@ -17,13 +17,13 @@ print(fruits)
 
 # --hints--
 
-Remove broccoli from the "fruits" array using "remove()".
+Remove "broccoli" from the "fruits" array using "remove()".
 
 ```
 True if 'broccoli' not in fruits else False
 ```
 
-Remove peppers from the "fruits" array using "remove()".
+Remove "peppers" from the "fruits" array using "remove()".
 
 ```
 True if 'peppers' not in fruits else False

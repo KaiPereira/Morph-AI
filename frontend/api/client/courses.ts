@@ -30,7 +30,6 @@ export const fetchLessonIndex = async (
         })
 
         lessons = lessons.flat()
-        console.log(lessons, lessonName)
 
         // Grab the index of the course we're on
         let courseIndex = lessons.map((lesson: any, index: number) => {
@@ -194,22 +193,34 @@ export const getLessonName = async (courseName: any, lessonIndex: number) => {
 
 export const courseFinished = async (course: any, lesson: any) => {
     try {
-        console.log(course, courseProgress)
         let courses = course.lessons.map((lessonCategory: any) => {
-            return lessonCategory.lessons.map((lesson: any) => {
+            let lessonCategoryLessons = lessonCategory.lessons.map((lesson: any) => {
                 return lesson
             })
+
+            console.log(lessonCategoryLessons)
+            
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.split(' ')[0]);
+                const numberB = parseInt(b.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         courses = courses.flat()
 
         const courseFinished = lesson.currentLessonIndex == courses.length - 1
 
-        if (courseFinished) {
-            const finishedCourse = await axios.post(`${apiUrl}/courses/finished-course`, {
-                currentCourse: course
-            }, { withCredentials: true })
-        }
+        console.log(courses, lesson.currentLessonIndex, courses.length - 1)
+
+        // if (courseFinished) {
+        //     const finishedCourse = await axios.post(`${apiUrl}/courses/finished-course`, {
+        //         currentCourse: course
+        //     }, { withCredentials: true })
+        // }
 
         return courseFinished
     } catch (err) {

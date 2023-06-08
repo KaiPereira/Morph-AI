@@ -43,15 +43,17 @@ pattern = r"if a > b:"
 True if re.findall(pattern, code, re.MULTILINE) else False
 ```
 
-Return "A is bigger than b" if the "if statement" is true.
+Return "print_message" if the "if statement" is true.
 
 ```
-True if number_is_bigger(5, 3) == "A is bigger than b" else False
+True if number_is_bigger(5, 3) == return_message else False
 ```
 
 # --preset--
 
 ```
+return_message = "A is bigger than b"
+
 def number_is_bigger(a ,b):
     # Put your if statement here
 ```

@@ -35,7 +35,7 @@ Define another variable called "num3" and assign it the value 43
 True if num3 == 43 else False
 ```
 
-Store the result of num1, num2 and num3 in a variable called "result"
+Store the result of num1, num2 and num3, multipled in a variable called "result"
 
 ```
 True if result == num1 * num2 * num3 else False

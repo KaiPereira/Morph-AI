@@ -19,16 +19,16 @@ if x > y:
 
 # --hints--
 
-Use the more than operator to compare a and b using an if statement and return "A is more than b" if it's right.
+Use the more than operator to compare a and b using an if statement and return "message" if it's right.
 
 ```
-True if compare(8, 5) == "A is more than b" else False
+True if compare(8, 5) == message else False
 ```
 
 compare(15, 4) should return True
 
 ```
-True if compare(15, 4) == "A is more than b" else False
+True if compare(15, 4) == message else False
 ```
 
 compare(18, 18) should return None
@@ -40,7 +40,7 @@ True if compare(18, 18) == None else False
 compare(58, 47) should return True
 
 ```
-True if compare(58, 47) == "A is more than b" else False
+True if compare(58, 47) == message else False
 ```
 
 compare(1, 1) should return None
@@ -52,6 +52,8 @@ True if compare(1, 1) == None else False
 # --preset--
 
 ```
+message = "A is more than b"
+
 def compare(a, b):
     # Put the if statement here
     

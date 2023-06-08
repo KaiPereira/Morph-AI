@@ -21,10 +21,10 @@ else:
 
 # --hints--
 
-Use the equality operator to compare a and b using an if statement and return "A is equal to b" if it's right.
+Use the equality operator to compare a and b using an if statement and return "message" if it's right.
 
 ```
-True if compare(5, 5) == "A is equal to b" else False
+True if compare(5, 5) == message else False
 ```
 
 compare(6, 8) should return None
@@ -36,7 +36,7 @@ True if compare(6, 8) == None else False
 compare(10, 10) should return True
 
 ```
-True if compare(10, 10) == "A is equal to b" else False
+True if compare(10, 10) == message else False
 ```
 
 compare(9, 3) should return None
@@ -48,12 +48,14 @@ True if compare(9, 3) == None else False
 compare(28, 28) should return True
 
 ```
-True if compare(28, 28) == "A is equal to b" else False
+True if compare(28, 28) == message else False
 ```
 
 # --preset--
 
 ```
+message = "A is equal to b"
+
 def compare(a, b):
     # Put the if statement here
     

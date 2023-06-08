@@ -17,7 +17,7 @@ print(numbers)  # Output: [1, 2, 3, 4, 5]
 
 # --hints--
 
-Add a new fruit to the end of "fruit".
+Add a new fruit to the end of "fruits".
 
 ```
 True if len(fruits) == 5 else False

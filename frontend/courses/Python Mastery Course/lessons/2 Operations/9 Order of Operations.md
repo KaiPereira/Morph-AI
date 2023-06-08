@@ -58,7 +58,7 @@ Create a variable called "b" and give it the value of 16.
 True if b == 16 else False
 ```
 
-Create a variable called leg and assign it the value of "a squared" + "b squared"
+Create a variable called leg and assign it the value of "a squared" (a to the power of 2) + "b squared" (b to the power of 2)
 
 ```
 True if a^2 + b^2 else False

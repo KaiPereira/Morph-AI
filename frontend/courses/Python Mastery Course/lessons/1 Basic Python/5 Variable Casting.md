@@ -1,5 +1,7 @@
 # --exercise--
 
+# Variable casting
+
 If you want to specify the specific data type of a variable, you can do so using variable casting!
 
 You really don't need to specify the type but it is good for consistency.
@@ -40,7 +42,7 @@ True if isinstance(my_int, int) else False
 Name a variable called "my_float" and assign it an float value using casting.
 
 ```
-True if isinstance(my_float, float) else False
+True if (my_float == True) or (my_float == False) else False
 ```
 
 # --preset--

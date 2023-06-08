@@ -33,7 +33,7 @@ print(element)  # Output: "tesla"
 
 # --hints--
 
-Name a 2-dimensional array called "my_2d_array". The array should be a list of foods and their price. Ex: ["food", "price"].
+"my_2d_array" should be a list of foods and their price. Ex: ["food", "price"].
 
 ```
 True if isinstance(my_2d_array, list) else False
@@ -45,7 +45,7 @@ True if isinstance(my_2d_array, list) else False
 True if len(my_2d_array) >= 3 and all(len(row) >= 2 for row in my_2d_array) else False
 ```
 
-Access the third rows, first column using bracket notation and assign it to a variable called "third_row_first_column".
+Access the third rows, first column using bracket notation and assign it to a variable called "third_row_first_column". **Remember, arrays start at 0 index.**
 
 ```
 True if third_row_first_column == my_2d_array[2][0] else False
@@ -55,4 +55,5 @@ True if third_row_first_column == my_2d_array[2][0] else False
 
 ```
 # Put your multi-dimensional array here
+my_2d_array = []
 ```

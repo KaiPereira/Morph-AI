@@ -17,7 +17,7 @@ if (x > 3) or (y > 5):
 
 # --hints--
 
-Create an if statement that checks if someone is bigger or equal to the "minimum age" or their entry_pass is equal to "allowed_pass". Return "success_message" if True
+Create an if statement that checks if someone is bigger or equal to the "minimum_age" or their entry_pass is equal to "allowed_pass". Return "success_message" if True
 
 ```
 True if entry(16, "VIP") == success_message else False
@@ -51,11 +51,11 @@ True if entry(17, "None") == error_message else False
 
 ```
 minimum_age = 18
-pass = "VIP"
+allowed_pass = "VIP"
 
 success_message = "Allowed to enter"
 error_message = "Not allowed"
 
-def entry(age, pass):
+def entry(age, entry_pass):
     # Put your if statements here
 ```

@@ -50,7 +50,7 @@ Create a variable called "age" and assign it the **int** value of your age.
 True if isinstance(age, int) else False
 ```
 
-Create a variable called "sentence" and using format strings, assign it the value of "My name is {} and I am {} years old". With the blanks filled as your name and age using format strings.
+Create a variable called "sentence" and using **format strings**, assign it the value of "My name is {} and I am {} years old". With the blanks filled as your name and age using format strings.
 
 ```
 True if sentence == "My name is {} and I am {} years old".format(name, age) else False

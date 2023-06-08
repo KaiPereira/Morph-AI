@@ -19,16 +19,16 @@ if len(car_1) <= len(car_2): # True
 
 # --hints--
 
-The due date for a school project is day 32. Make an if statement that will check if you still have time left for the project based off of the argument "day". Return "Still time" if there is still time.
+**The due date for a school project is day *32*.** Make an if statement that will check if you still have time left for the project based off of the argument "day". Return "message" if there is still time.
 
 ```
-True if deadline(15) == "Still time" else False
+True if deadline(15) == message else False
 ```
 
 If it's day 18, there should still be time.
 
 ```
-True if deadline(15) == "Still time" else False
+True if deadline(15) == message else False
 ```
 
 If it's day 34, there shouldn't be any more time.
@@ -40,12 +40,14 @@ True if deadline(34) == None else False
 If it's day 32, there should still be time.
 
 ```
-True if deadline(32) == "Still time" else False
+True if deadline(32) == message else False
 ```
 
 # --preset--
 
 ```
+message = "Still time"
+
 def deadline(day):
     # Put your if statements here
 ```
