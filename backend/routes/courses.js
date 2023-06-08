@@ -87,7 +87,7 @@ router.post("/finished-course", verifyUserToken, async (req, res) => {
         const courses = req.user.courses;
         const currentCourse = req.body.currentCourse;
 
-        const course = courses.find((c) => c.title === currentCourse);
+        const course = courses.find((c) => c.title === currentCourse.name);
 
         // If we're on it return the lesson we're on
         if (course) {

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { 
     prettifyString, 
     courseLocked, 
-    courseProgress, 
+    onCourse, 
     prettifyUrl 
 } from "@/api/client/courses"
 
@@ -17,7 +17,8 @@ const CourseLesson = ({
     lessonCategory,
     lessons,
     profileDetails,
-    courseData
+    courseData,
+    lessonOn
 }: any) => {
     const [lessonElements, setLessonElements] = useState<any>()
     const [lessonOpen, setLessonOpen] = useState(false)
@@ -26,7 +27,6 @@ const CourseLesson = ({
     useEffect(() => {
         // Check if the lesson is locked and return the element
         const lessonPromise = Promise.all(lessons.map(async (lesson: any, index: any) => {
-            const { lessonOn } = await courseProgress(courseData.name);
             const lessonLocked = await courseLocked(courseData, lessonOn - 1, lesson);
 
             return {
@@ -100,22 +100,36 @@ const CoursePage = ({
     courseData
 }: CoursePageProps) => {
     const [courseLessons, setCourseLessons] = useState()
+    const [lessonOn, setLessonOn] = useState()
 
     useEffect(() => {
-        setCourseLessons(
-            courseData.lessons.map((lessonCategory: any, index: any) => {
-                return (
-                    <CourseLesson 
-                        lessonCategory={lessonCategory.lessonCategory}
-                        lessons={lessonCategory.lessons}
-                        profileDetails={profileDetails}
-                        courseData={courseData}
-                        key={index}
-                    />
-                )
-            })
-        )
+        const updateCourseDetails = async () => {
+            const { lessonOn } = await onCourse(courseData.name);
+
+            setLessonOn(lessonOn);
+        }
+
+        updateCourseDetails()
     }, [])
+
+    useEffect(() => {
+        if (typeof lessonOn == "number") {
+            setCourseLessons(
+                courseData.lessons.map((lessonCategory: any, index: any) => {
+                    return (
+                        <CourseLesson 
+                            lessonCategory={lessonCategory.lessonCategory}
+                            lessons={lessonCategory.lessons}
+                            profileDetails={profileDetails}
+                            courseData={courseData}
+                            key={index}
+                            lessonOn={lessonOn}
+                        />
+                    )
+                })
+            )
+        }
+    }, [lessonOn])
 
 
     return (

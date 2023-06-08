@@ -2,6 +2,9 @@
 import fs from 'fs';
 import path from 'path';
 
+// Functions
+import { prettifyString } from "../client/courses"
+
 
 // Server side function
 export const getCourseTime = async (courseName: string) => {
@@ -97,6 +100,11 @@ export const getAllCourses = async () => {
 // Server side function
 export const getLesson = async (courseName: string, lessonIndex: string) => {
     try {
+        var lessonName;
+        var fullLessonName;
+        var completedPercentage;
+        var currentLessonIndex;
+
         // Reformat the string from url to name
         const courseNameNew = courseName.replaceAll("-", " ")
 
@@ -106,12 +114,21 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         let allCourseLessons: any = courseLessons.map((lessonCategoryName: string) => {
             const lessons = fs.readdirSync(`courses/${courseNameNew}/lessons/${lessonCategoryName}`, "utf8")
 
-            return lessons.map((lesson: string, index: any) => {
+            let lessonCategoryLessons = lessons.map((lesson: string, index: any) => {
                 return {
                     name: lesson,
                     category: lessonCategoryName
                 }
             })
+
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.name.split(' ')[0]);
+                const numberB = parseInt(b.name.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         allCourseLessons = allCourseLessons.flat()
@@ -119,6 +136,13 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
         // We do this to grab the lesson
         let lessonText: any = allCourseLessons.map((lesson: any, index: any) => {    
             if (index == lessonIndex) {
+                lessonName = prettifyString(lesson.name)
+                fullLessonName = lesson.name
+                // Completed percentage thing when you complete the lesson
+                completedPercentage = Math.round(((index + 1) / allCourseLessons.length) * 100)
+
+                currentLessonIndex = index
+
                 const lessonText = fs.readFileSync(`courses/${courseNameNew}/lessons/${lesson.category}/${lesson.name}`, "utf8")
 
                 return lessonText
@@ -127,9 +151,38 @@ export const getLesson = async (courseName: string, lessonIndex: string) => {
 
         lessonText = lessonText.flat().join("")
 
-        return lessonText
+        // This will split the markdown into the exercise, instructions and preset
+        const sectionSplitRegex = /# --(\w+)--/g;
+        const matches = [...lessonText.split(sectionSplitRegex)];
 
-        // return lessonText
+        // We need to split the instructions into separate instructions
+        const hintsSplitRegex = /(```[\s\S]*?```)/
+        const hints = matches[4].split(hintsSplitRegex)
+        const hintsFormatted = [];
+
+        for (let i = 0; i < hints.length - 1; i += 2) {
+            const description = hints[i].trim();
+            let code = hints[i + 1].trim();
+            code = code.replaceAll("```", "")
+            
+            hintsFormatted.push({ description, code });
+        }
+
+        // Remove the codeblock backticks from the preset
+        let preset = matches[6].replaceAll("`", "")
+        // Trim whitespace from start and end
+        preset = preset.trim()
+
+        return {
+            exercise: matches[2],
+            hints: hintsFormatted,
+            preset: preset,
+            lessonName: lessonName,
+            fullLessonName: fullLessonName,
+            completedPercentage: completedPercentage,
+            currentLessonIndex: currentLessonIndex,
+            courseName: courseNameNew
+        }
     } catch (err) {
         throw err
     }

@@ -14,9 +14,19 @@ export const fetchLessonIndex = async (
     try {
         // Grab all of the courses
         let lessons = course.lessons.map((lessonCategory: any) => {
-            return lessonCategory.lessons.map((lesson: any) => {
+            let lessonCategoryLessons = lessonCategory.lessons.map((lesson: any) => {
                 return lesson
             })
+            
+            // Sort each lesson category by number
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.split(' ')[0]);
+                const numberB = parseInt(b.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         lessons = lessons.flat()
@@ -67,11 +77,11 @@ export const courseProgress = async (courseName: string) => {
 
 
 export const prettifyUrl = (str: any) => {
-    return str.replace(/[0-9] /g, "").replaceAll(" ", "-")
+    return str.replace(/\d+ /g, "").replaceAll(" ", "-")
 } 
 
 export const prettifyString = (str: any) => {
-    return str.replace(/[0-9] /g, "").replace(".md", "")
+    return str.replace(/\d+ /g, "").replace(".md", "")
 } 
 
 export const markdownToHtml = async (markdown: string) => {
@@ -121,27 +131,31 @@ export const courseLocked = async (courseName: any, courseProgress: any, current
     }
 }
 
-export const nextLesson = async (course: any, lessonName: any) => {
+export const nextLesson = async (course: any, lesson: any) => {
     try {
-        const lessonIndex = await fetchLessonIndex(course, lessonName)
+        const lessonFinished = await courseFinished(course, lesson)
 
-        // We grab the progression so that we only update the course progress if the lesson is the next one
-        let courseProgression = await courseProgress(course.name)
-        courseProgression = courseProgression.lessonOn
+        if (lessonFinished) {
+            return "/"
+        } else {
+            const lessonIndex = await fetchLessonIndex(course, lesson.fullLessonName)
 
-        console.log(courseProgression, lessonIndex)
+            // We grab the progression so that we only update the course progress if the lesson is the next one
+            let courseProgression = await courseProgress(course.name)
+            courseProgression = courseProgression.lessonOn
 
-        if (courseProgression === lessonIndex) {
-            const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
-                currentCourse: course.name,
-                onLesson: lessonIndex + 1
-            }, { withCredentials: true })
+            if (courseProgression === lessonIndex) {
+                const updateCurrentLesson = await axios.post(`${apiUrl}/courses/update-course-progress`, {
+                    currentCourse: course.name,
+                    onLesson: lessonIndex + 1
+                }, { withCredentials: true })
+            }
+
+
+            const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
+            
+            return lessonUrl
         }
-
-
-        const lessonUrl = `/courses/${prettifyUrl(course.name)}/${lessonIndex + 1}`
-        
-        return lessonUrl
     } catch (err) {
         throw err
     }
@@ -177,25 +191,36 @@ export const getLessonName = async (courseName: any, lessonIndex: number) => {
     }
 }
 
-export const courseFinished = async (courseName: any, courseProgress: number) => {
+export const courseFinished = async (course: any, lesson: any) => {
     try {
-        let courses = courseName.lessons.map((lessonCategory: any) => {
-            return lessonCategory.lessons.map((lesson: any) => {
+        let courses = course.lessons.map((lessonCategory: any) => {
+            let lessonCategoryLessons = lessonCategory.lessons.map((lesson: any) => {
                 return lesson
             })
+
+            console.log(lessonCategoryLessons)
+            
+            lessonCategoryLessons.sort((a: any, b: any) => {
+                const numberA = parseInt(a.split(' ')[0]);
+                const numberB = parseInt(b.split(' ')[0]);
+    
+                return numberA - numberB;
+            })
+
+            return lessonCategoryLessons
         })
 
         courses = courses.flat()
 
-        let courseProgressIndex = courses.map((course: any, index: number) => {
-            if (course.includes(courseProgress)) {
-                return index
-            }
-        })
+        const courseFinished = lesson.currentLessonIndex == courses.length - 1
 
-        courseProgressIndex = courseProgressIndex.filter((course: any) => course !== undefined)
+        console.log(courses, lesson.currentLessonIndex, courses.length - 1)
 
-        const courseFinished = courseProgressIndex[0] === courses.length - 1
+        // if (courseFinished) {
+        //     const finishedCourse = await axios.post(`${apiUrl}/courses/finished-course`, {
+        //         currentCourse: course
+        //     }, { withCredentials: true })
+        // }
 
         return courseFinished
     } catch (err) {
@@ -253,46 +278,55 @@ export const getUserCourses = async (allCourses: any, user: any) => {
     }
 }
 
-export const getDashboardStats = async (profileDetails: any) => {
+export const runLessonTest = async (editorCode: any, testCode: any) => {
     try {
-        // Grab all of the lessons completed by the user by adding one to lessonOn to each course
-        let lessonsCompleted = 0
-    
-        profileDetails.courses.map((course: any) => {
-            lessonsCompleted += course.lessonOn + 1
-        })
+        // We'll use this variable to check if our code is good
+        // Here, we're running editor code, setting editorCode to a variable too, then running our test on these
+        // We use the replaceAll in the editorCode in case that someone puts triple quotes inside of the editorCode
+        const codeVariable = `\ncode="""\n${editorCode.replaceAll('"""', '\\"""')}\n"""\n`
+        const fullCodeCheck = `
+${editorCode}${codeVariable}${testCode}
+        `
 
-        const points = lessonsCompleted * 25
-        const dayStreak = profileDetails.dayStreak
-        const dayStreakString = dayStreak === 1 ? `${dayStreak} day` : `${dayStreak} days`
+        const lessonTestWorker = new Worker(new URL('../../workers/runLessonTest', import.meta.url));
+        let resolveFn: (data: any) => void; // Promise resolve function
 
+        // Worker response
+        const resultPromise = new Promise((resolve) => {
+            resolveFn = resolve;
+            lessonTestWorker.onmessage = (event) => {
+                if (event.data.error) {
+                    console.log("ERROR MESSAGE RECEIVED FROM WORKER: ", event.data)
+                    resolve(false)
+                } else {
+                    console.log("SUCCESS MESSAGE RECEIVED FROM WORKER: ", event.data)
+                    resolve(event.data); // Resolve the promise with the worker data
+                }
+            };
+        });
+
+        // Worker error
+        lessonTestWorker.onerror = (event) => {
+            if (event instanceof Event) {
+                console.log('🍎 Error message received from worker: ', event);
+                throw event;
+            }
+
+            console.log('🍎 Unexpected error: ', event);
+            throw event;
+        };
+
+        lessonTestWorker.postMessage(fullCodeCheck);
+
+        const cleanup = () => {
+            lessonTestWorker.terminate();
+        };
 
         return {
-            points: points,
-            lessonsCompleted: lessonsCompleted,
-            dayStreak: dayStreakString
-        }
+            result: await resultPromise, // Wait for the promise to resolve
+            cleanup: cleanup // Return the cleanup function
+        };
     } catch (err) {
-        throw err
-    }
-}
-
-export const filterCourses = async (courses: any, filter: string) => {
-    try {
-        let filteredCourses: any = []
-
-        if (filter === "All") {
-            filteredCourses = courses
-        } else {
-            courses.map((course: any) => {
-                if (course.difficulty === filter) {
-                    filteredCourses.push(course)
-                }
-            })
-        }
-
-        return filteredCourses
-    } catch (err) {
-        throw err
+        throw err;
     }
 }

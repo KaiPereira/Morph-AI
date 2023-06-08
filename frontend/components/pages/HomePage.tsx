@@ -42,6 +42,7 @@ const HomePage = () => {
                         <p className="home-main-content-users-text">Explore our courses</p>
                     </div>
                 </div>
+                {/*googleoff: all*/}
                 <div className="home-main-animation">
                     <div className="home-main-animation-container">
                         <div style={{backgroundImage: "url(/images/ai_image1.png)"}}>
@@ -96,6 +97,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
+                {/*googleon: all*/}
             </div>
         </main>
     )

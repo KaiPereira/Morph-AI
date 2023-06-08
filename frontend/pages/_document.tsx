@@ -1,4 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
+
 
 export default function Document() {
   return (
@@ -8,6 +10,9 @@ export default function Document() {
         <meta name="description" content="Morph is the best place to learn machine learning. Our interactive machine learning courses with Python are meant for everyone regardless of any skill level!" />
         <meta name="keywords" content="AI/ML education, innovative learning platform, hands-on projects, project-based courses, AI/ML libraries, AI/ML languages, learn from scratch, self-paced learning, practical application of AI/ML, confidence building, beginner-friendly programming, experienced programmer training, Morph education platform, AI/ML programming skills, achieve your programming goals" />
         <meta name="author" content="Kai Pereira" />
+        <link rel="manifest" href="/manifest.json" />
+        <Script src="https://cdn.jsdelivr.net/pyodide/v0.23.2/full/pyodide.js"></Script>
+        <link rel="icon" type="image/x-icon" href="/branding/favicons/icon-512x512.png" />
         <meta name="google-site-verification" content="7unymZJOcMHrEjiCh1qz8oudMsDd0K40Z_bF3HDHYWM" />
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
