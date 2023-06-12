@@ -296,8 +296,8 @@ ${editorCode}${codeVariable}${testCode}
             resolveFn = resolve;
             lessonTestWorker.onmessage = (event) => {
                 if (event.data.error) {
-                    console.log("ERROR MESSAGE RECEIVED FROM WORKER: ", event.data)
-                    resolve(false)
+                    // console.log("ERROR MESSAGE RECEIVED FROM WORKER: ", event.data)
+                    resolve({error: event.data.error})
                 } else {
                     console.log("SUCCESS MESSAGE RECEIVED FROM WORKER: ", event.data)
                     resolve(event.data); // Resolve the promise with the worker data

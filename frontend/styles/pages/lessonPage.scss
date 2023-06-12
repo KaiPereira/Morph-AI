@@ -6,7 +6,6 @@
 }
 
 .lesson-content, .lesson-code-env {
-    border-radius: 10px;
     width: 100%;
 }
 
@@ -16,11 +15,46 @@
 }
 
 .lesson-code-env {
+    display: flex;
+    flex-flow: column;
+    gap: 14px;
     overflow: hidden;
     position: relative;
 
     .lesson-category-tab-content {
         padding: 0px;
+        height: 100%;
+    }
+
+    > div {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #1e1e1e;
+    }
+
+    > div:nth-child(1) {
+        height: 75%;
+    }
+
+    > div:nth-child(2) {
+        height: 25%;
+    }
+}
+
+.lesson-console {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    padding: 22px 26px;
+    height: calc(100% - 38px);
+    overflow-y: auto;
+
+    p {
+        color: #EC626D;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 22px;
     }
 }
 
@@ -217,7 +251,7 @@
 }
 
 .lesson-code-editor {
-    height: calc(100vh - 125px);
+    height: calc(100% - 38px);
 }
 
 .lesson-code-buttons {

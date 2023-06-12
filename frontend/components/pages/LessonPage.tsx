@@ -29,7 +29,7 @@ const LessonCategorySection = ({
     children
 }: lessonCategorySectionProps) => {
     return (
-        <>
+        <div>
             <div className={`lesson-category-tab lesson-category-tab-${mode} lesson-category-tab-${border}`}>
                 <i className={icon}></i>
                 <p>{text}</p>
@@ -37,7 +37,7 @@ const LessonCategorySection = ({
             <div className="lesson-category-tab-content">
                 {children}
             </div>
-        </>
+        </div>
     )
 }
 
@@ -114,9 +114,11 @@ type LessonInstructionProps = {
     lessonHintCompletedPosition: number,
     setLessonHintCompletedHandler: any,
     grabLessonHintCompleted: any,
-    setTestsRunning: any
+    setTestsRunning: any,
+    addErrorHandler: Function
 }
 
+// This is the component for each little lesson instruction that makes up the lesson
 const LessonInstruction = ({
     hint,
     codeAssertion,
@@ -125,7 +127,8 @@ const LessonInstruction = ({
     lessonHintCompletedPosition,
     setLessonHintCompletedHandler,
     grabLessonHintCompleted,
-    setTestsRunning
+    setTestsRunning,
+    addErrorHandler
 }: LessonInstructionProps) => {
     const [completed, setCompleted]= useState(grabLessonHintCompleted(lessonHintCompletedPosition))
     const [hintMarkdown, setHintMarkdown] = useState<any>(hint)
@@ -141,20 +144,42 @@ const LessonInstruction = ({
 
         async function test() {
             try {
-                const testResult = await runLessonTest(editorCode, codeAssertion)
+                const testResult: any = await runLessonTest(editorCode, codeAssertion)
 
-                setLessonHintCompletedHandler(lessonHintCompletedPosition, testResult.result)
+                // We want to put our errors into the error console
+                if (testResult.result.error) {
+                    addErrorHandler(testResult.result.error)
+                    setLessonHintCompletedHandler(lessonHintCompletedPosition, false)
+                    // Our loading
+                    setTestsRunning((prevStatus: any) => {
+                        const updatedStatus = [...prevStatus];
+                        updatedStatus[lessonHintCompletedPosition] = false; // Set the test status of the child to true
+                        return updatedStatus;
+                    });
 
-                // Our loading
+                    setCompleted(false)
+
+                } else {
+                    setLessonHintCompletedHandler(lessonHintCompletedPosition, testResult.result)
+
+                    // Our loading
+                    setTestsRunning((prevStatus: any) => {
+                        const updatedStatus = [...prevStatus];
+                        updatedStatus[lessonHintCompletedPosition] = false; // Set the test status of the child to true
+                        return updatedStatus;
+                    });
+
+                    setCompleted(testResult.result)
+                }
+            } catch (err) {
+                setLessonHintCompletedHandler(lessonHintCompletedPosition, false)
+
                 setTestsRunning((prevStatus: any) => {
                     const updatedStatus = [...prevStatus];
                     updatedStatus[lessonHintCompletedPosition] = false; // Set the test status of the child to true
                     return updatedStatus;
                 });
-
-                setCompleted(testResult.result)
-            } catch (err) {
-                setLessonHintCompletedHandler(lessonHintCompletedPosition, false)
+                
                 setCompleted(false)
             }
         }
@@ -184,6 +209,29 @@ const LessonInstruction = ({
     )
 }
 
+type LessonConsoleProps = {
+    consoleErrors: string[]
+}
+
+const LessonConsole = ({
+    consoleErrors
+}: LessonConsoleProps) => {
+    const [errorElements, setErrorElements] = useState<any>()
+
+    useEffect(() => {
+        setErrorElements(
+        consoleErrors.map((error: String, index: any) => {
+            return <p key={index}>{error}</p>
+        }))
+    }, [consoleErrors])
+
+    return (
+        <div className="lesson-console">
+            {errorElements}
+        </div>
+    )
+}
+
 
 const LessonPage = ({
     lessonData,
@@ -197,6 +245,8 @@ const LessonPage = ({
     const [editorCode, setEditorCode] = useState(lessonData.preset)
     const [runTestSwitch, setRunTestSwitch] = useState(false)
     const [modalState, setModalState] = useState(false)
+    // Use this to track all of the console errors in order...
+    const [consoleErrors, setConsoleErrors] = useState<any>([])
     // We're using this to keep track of all completed states of the hints
     const [lessonHintsCompleted, setLessonHintsCompleted] = useState<any>([])
     const [testsRunning, setTestsRunning] = useState<any>([])
@@ -204,6 +254,10 @@ const LessonPage = ({
 
     const runTestsIsLoading = testsRunning.length > 0 ? testsRunning.every((test: any) => test == true) : false
 
+    // Handle adding errors to the console
+    const addErrorHandler = (error: String) => {
+        setConsoleErrors((prevState: any) => [...prevState, error])
+    }
 
     const modalStateHandler = () => {
         setModalState(!modalState)
@@ -223,6 +277,8 @@ const LessonPage = ({
     }
 
     useEffect(() => {
+        // Reset the error console
+        setConsoleErrors([])
         // Tests don't run on first render so we don't want to set our loading to true
         isMounted.current && setTestsRunning(Array(lessonData.hints.length).fill(true));
 
@@ -246,6 +302,7 @@ const LessonPage = ({
                         setLessonHintCompletedHandler={setLessonHintCompletedHandler}
                         grabLessonHintCompleted={grabLessonHintCompleted}
                         setTestsRunning={setTestsRunning}
+                        addErrorHandler={addErrorHandler}
                     />
                 )
             })
@@ -313,6 +370,15 @@ const LessonPage = ({
                             defaultCode={lessonData.preset}
                             handleRunTests={handleRunTests}
                             runTestsIsLoading={runTestsIsLoading}
+                        />
+                    </LessonCategorySection>
+                    <LessonCategorySection 
+                        mode="dark"
+                        text="Console"
+                        icon="fa-solid fa-terminal"
+                    >
+                        <LessonConsole 
+                            consoleErrors={consoleErrors}
                         />
                     </LessonCategorySection>
                 </div>
