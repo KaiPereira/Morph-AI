@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 // Components
 import Button from "../subcomponents/Button"
 import Modal from "../subcomponents/Modal"
+import Loader from "../subcomponents/Loader"
 
 
 type lessonCategorySectionProps = {
@@ -95,7 +96,7 @@ const LessonCode = ({
                     onClick={handleRunTests}
                     disabled={runTestsIsLoading}
                 >
-                    Run Tests
+                    {!runTestsIsLoading ? "Run Tests" : <Loader className="lessonPageLoader" />}
                 </Button>
                 <button className="lesson-code-buttons-reset" onClick={() => handleEditorCodeChange(defaultCode)}>
                     <i className="fa-solid fa-undo"></i>
