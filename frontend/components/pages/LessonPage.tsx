@@ -219,8 +219,11 @@ const LessonConsole = ({
     const [errorElements, setErrorElements] = useState<any>()
 
     useEffect(() => {
+        // Remove console error duplicated
+        const uniqueErrors = [...new Set(consoleErrors)]
+
         setErrorElements(
-        consoleErrors.map((error: String, index: any) => {
+            uniqueErrors.map((error: String, index: any) => {
             return <p key={index}>{error}</p>
         }))
     }, [consoleErrors])
