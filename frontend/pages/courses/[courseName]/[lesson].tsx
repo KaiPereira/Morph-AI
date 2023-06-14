@@ -5,11 +5,18 @@ import LessonPage from "@/components/pages/LessonPage"
 // API functions
 import { getCourse, getLesson } from "@/api/server/courses"
 
+// Hooks
+import usePreventLoginByPass from "@/hooks/usePreventLoginByPass"
+
+
 
 const Lesson = ({
     lessonData,
-    courseData
+    courseData,
+    profileDetails
 }: any) => {
+    usePreventLoginByPass(profileDetails)
+
     return (
         <>
             <Nav 
