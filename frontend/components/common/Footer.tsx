@@ -33,7 +33,7 @@ const Footer = () => {
                             header="Product"
                         >
                             <Link href="/">Dashboard</Link>
-                            <Link href="/courses">Courses</Link>
+                            <Link href="/">Courses</Link>
                         </FooterColumn>
                         <FooterColumn 
                             header="Resources"
