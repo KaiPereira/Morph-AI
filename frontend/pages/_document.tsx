@@ -25,9 +25,9 @@ export default function Document() {
         <meta name="twitter:card" content="summary" />
 
         <Script src="https://cdn.jsdelivr.net/pyodide/v0.23.2/full/pyodide.js"></Script>
-        <link rel="apple-touch-icon" sizes="180x180" href="/branding/favicon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/branding/favicon.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/branding/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/branding/Favicon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/branding/Favicon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/branding/Favicon.png" />
         <meta name="google-site-verification" content="7unymZJOcMHrEjiCh1qz8oudMsDd0K40Z_bF3HDHYWM" />
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
