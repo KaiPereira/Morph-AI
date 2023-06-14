@@ -6,10 +6,16 @@ import CoursePage from "@/components/pages/CoursePage"
 // API Functions
 import { getCourse } from "@/api/server/courses"
 
+// Hooks
+import { useEffect } from "react"
+import usePreventLoginByPass from "@/hooks/usePreventLoginByPass"
+
 const Course = ({
     profileDetails,
     courseData
 }: any) => {
+    usePreventLoginByPass(profileDetails)
+
     return (
         <>
             <Nav />
