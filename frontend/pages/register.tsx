@@ -36,7 +36,9 @@ const Register = ({
           <Footer />
         </>
         :
-        <SignupSignin type="signup" />
+        <>
+          <SignupSignin type="signup" />
+        </>
       }
     </>
   )

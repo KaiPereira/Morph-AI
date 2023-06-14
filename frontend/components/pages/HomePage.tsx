@@ -14,8 +14,8 @@ const HomePage = () => {
         <main className="home-main">
             <div className="home-main-container">
                 <div className="home-main-content">
-                    <h1>Easily Learn AI/ML Programming</h1>
-                    <p className="home-main-content-description">Morph is the world’s best place to learn machine learning, easily. Our interactive machine learning courses with Python are meant for everyone regardless of any skill level.</p>
+                    <h1>Master Machine Learning Coding</h1>
+                    <p className="home-main-content-description">Morph is the world’s best place to master machine learning, easily. Our interactive machine learning courses with Python are meant for everyone regardless of any skill level.</p>
                     <div className="home-main-content-buttons">
                         <Button
                             arrow={true}
@@ -89,7 +89,7 @@ const HomePage = () => {
                             <div>Explainable AI Techniques</div>
                         </div>
                         <div style={{backgroundImage: "url(/images/ai_image7.png)"}}>
-                            <div>Acquire Programming Skills</div>
+                            <div>Acquire Coding Skills</div>
                         </div>
                         <div style={{backgroundImage: "url(/images/ai_image8.png)"}}>
                             <div>Master Advanced Techniques</div>

@@ -16,14 +16,14 @@ const Home = ({
         <>
             { profileDetails ?
                 <>
-                <Nav 
-                    type="small"
-                />
-                <Dashboard 
-                    profileDetails={profileDetails}
-                    courses={courses}
-                />
-                <Footer />
+                    <Nav 
+                        type="small"
+                    />
+                    <Dashboard 
+                        profileDetails={profileDetails}
+                        courses={courses}
+                    />
+                    <Footer />
                 </>
                 :
                 <>
@@ -31,6 +31,7 @@ const Home = ({
                         signedIn={false}
                     />
                     <HomePage />
+                    <Footer />
                 </>
             }
         </>

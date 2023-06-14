@@ -389,7 +389,7 @@ const LessonPage = ({
             </main>
             <main className="lesson-error">
                 <h1>We&apos;re sorry, please continue on a computer!</h1>
-                <p>Morph is currently unavailable on mobile as of this moment. Programming on a phone is really difficult too. Don&apos;t worry, we&apos;re currently working on making it available!</p>
+                <p>Morph is currently unavailable on mobile as of this moment. Coding on a phone is really difficult too. Don&apos;t worry, we&apos;re currently working on making it available!</p>
                 <img src="https://media4.giphy.com/media/CHSHxWaOEmlFwEVRmk/giphy.gif?cid=ecf05e47m8wokwyjrus956du5s9nwk8gt1nmle0yiomxzmga&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Kitty Giphy" />
             </main>
             <Modal 

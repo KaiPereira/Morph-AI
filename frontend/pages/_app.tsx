@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Morph - Learn AI/ML Programming Easily</title>
+        <title>Morph - Master Machine Learning Coding</title>
       </Head>
       { !loading &&
         <Component {...pageProps} 
